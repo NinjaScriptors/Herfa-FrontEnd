@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import SignUp from "./components/signup/signup";
+import React from 'react';
+import './styles';
+import Signin from "./components/signin/signin";
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+class App extends React.Component {
+  componentDidMount() {
+    // const user = getStore('user')
+    // if (user) {
+    //   this.props.dispatch(ActionCreators.login(user));
+    // }
+  }
+  render() {
+    return (
+      <>
+        <BrowserRouter>
+        <Route path="/sign-up" component={SignUp} >
+            </Route>
+            <Route path="/sign-in" component={Signin} >
+            </Route>
+        </BrowserRouter>
+      </>
+    );
+  }
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     profile: state.user.profile
+//   }
+// }
 
 export default App;
