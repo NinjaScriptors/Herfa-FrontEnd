@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import jQuery from 'jquery';
 import $ from 'jquery';
+
 // import { useEffect } from 'react';
 
 class Statistics extends React.Component {
