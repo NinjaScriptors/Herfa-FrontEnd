@@ -1,0 +1,120 @@
+@import './base.scss' ; 
+body {
+    background-color: #f5f5f5;
+    font-family: 'Handlee';
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 30px 30px;
+    background-color: #dfe2db;
+    z-index: 999;
+    text-decoration: none;
+    font-family: 'Handlee';
+
+
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.index-header, .transparent-header{
+    background-color: transparent;
+    color: #fff;
+
+}
+
+.index-header .nav-link, .transparent-header .nav-link {
+    color: #fff;
+    text-decoration: none;
+   
+   
+}
+.nav-bar{
+    margin-right: 35%;
+    font-size: 24px;
+}
+
+
+.nav-link:not(:last-child) {
+    margin-right: 20px;
+}
+
+.nav-link {
+    padding: 7px 15px;
+    color: #232323;
+  
+}
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.nav-dropdown:hover .nav-dropdown-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-dropdown-links {
+    background-color: transparent;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    left: 2px;
+    display: none;
+    min-width: 100%;
+    text-align: center;
+}
+
+.after-scroll .nav-dropdown-links .inner-div {
+    background-color: #C99A5C;
+    box-shadow: 0 7px 9px 0 rgba(0, 0, 0, 0.2)
+}
+
+.nav-link,
+.after-scroll .nav-link {
+    color: #232323;
+}
+
+.index-header .nav-link:hover, .transparent-header .nav-link:hover{
+    color: #C99A5C;
+}
+.index-header .login-btn:hover, .transparent-header .login-btn:hover{
+    background: transparent;
+    border: 1px solid #C99A5C;
+    color: #C99A5C;
+}
+
+.nav-link:hover,
+.after-scroll .nav-link:hover {
+    color: #6d6d6d
+}
+
+.search-input input:focus {
+    outline: 0;
+}
+
+.search-input input {
+    background-color: transparent;
+    border: 0;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    width: 100%;
+    color: #fff;
+      cursor: pointer;
+
+}
+
+.search-input input::placeholder {
+    color: #fff;
+}
+
+.search-butten .btn:focus, .search-butten .btn:hover{
+    outline: none;
+    border: 1px solid #FDCE00;
+    background-color: #FDCE00;
+    color: #232323;
+}

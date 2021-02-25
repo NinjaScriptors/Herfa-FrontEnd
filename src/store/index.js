@@ -1,18 +1,11 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import profile from "./reducers/profile"
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import categories from './categoriesStore/categoriesSlicer';
+import products from './productsStore/productsSlicer';
+import users from './userStore/userSlicer'
 
 
-const rootReducer = combineReducers({
-  user: profile
-});
+const reducers = combineReducers({ categories: categories, products: products, users: users })
+const store = configureStore({ reducer: reducers });
 
-
-
-const store = () => {
-  return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
-}
-
-
-export default store();
+export default store;

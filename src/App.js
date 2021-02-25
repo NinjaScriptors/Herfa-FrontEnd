@@ -1,28 +1,59 @@
-import './App.css';
-import SignUp from "./components/signup/signup";
+
 import React from 'react';
-import './styles';
+import './App.css';
+import Header from './components/Header'
+import StickyFooter from './components/Footer'
+import AboutUs from './components/About-us'
+import Product from './components/productsPage/products'
+import ActiveCategories from './components/categoriesPage/categories';
+import Details from './components/productsPage/ProductDetails'
+import User from './components/user/users';
+import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import Home from './components/home/home';
+import UserForm from './components/user/userForm';
+import UserDetails from './components/user/UserDetails';
+import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
-class App extends React.Component {
-  componentDidMount() {
-    // const user = getStore('user')
-    // if (user) {
-    //   this.props.dispatch(ActionCreators.login(user));
-    // }
-  }
-  render() {
-    return (
-      <>
-        <BrowserRouter>
+
+
+
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Header />
+        {/* <Home /> */}
+
+        <Route exact path="/user-details" component={UserDetails} >
+        </Route>
+        <Route exact path="/user-profile-update/:id" component={UserForm} >
+        </Route>
+        <Route exact path="/" component={Home}>
+        </Route>
+        {/* < Categories /> */}
+
+
+        <Route path="/about-us" component={AboutUs} >
+        </Route>
+        <Route exact path="/categories" component={ActiveCategories} >
+        </Route>
+        <Route exact path="/categories" component={Product} >
+
+        </Route>
+        <Route path="/details/:id" component={Details} >
+        </Route>
+
         <Route path="/sign-up" component={SignUp} >
-            </Route>
-            <Route path="/sign-in" component={Signin} >
-            </Route>
-        </BrowserRouter>
-      </>
-    );
-  }
+        </Route>
+        <Route path="/sign-in" component={Signin} >
+        </Route>
+
+        <StickyFooter />
+      </BrowserRouter>
+    </>
+
+  );
 }
 
 // const mapStateToProps = (state) => {
