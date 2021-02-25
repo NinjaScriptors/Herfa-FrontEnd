@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import base64 from 'base-64';
-import request from "superagent";
 const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
 
 export const getSignedUpUserInfo = ({ username, password }) => dispatch => {

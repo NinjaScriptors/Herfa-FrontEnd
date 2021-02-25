@@ -72,12 +72,14 @@ function SignUp(props) {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [name, setname] = useState("");
-
+    let [firstName, setFirstName] = useState("");
+    let [lastName, setLastName] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(email, password, name)
-        props.getUserInfo({ email, password, name })
+        let fullName = `${firstName} ${lastName}`;
+        console.log(email, password, name, fullName)
+        props.getUserInfo({ email, password, name, fullName })
 
     }
 
@@ -95,6 +97,14 @@ function SignUp(props) {
             let newPass = e.target.value;
             setPassword(newPass)
         }
+        if (e.target.name == "firstName") {
+            let newFirstName = e.target.value;
+            setFirstName(newFirstName)
+        }
+        if (e.target.name == "lastName") {
+            let newLastName = e.target.value;
+            setLastName(newLastName)
+        }
     }
     return (
         <Container className={useStyles.root} component="main" maxWidth="xs">
@@ -108,6 +118,30 @@ function SignUp(props) {
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="firstName"
+                                label="First Name"
+                                name="firstName"
+                                autoComplete="fname"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                onChange={handleChange}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="lastName"
+                                label="Last Name"
+                                name="lastName"
+                                autoComplete="lname"
+                            />
+                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
@@ -121,17 +155,7 @@ function SignUp(props) {
                                 autoFocus
                             />
                         </Grid>
-                        {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid> */}
+
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
