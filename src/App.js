@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         {/* <Home /> */}
 
         <Route exact path="/user-details" component={UserDetails} >

@@ -25,6 +25,7 @@ export const getUserInfo = ({ email, password, name, fullName }) => (dispatch) =
     }
   }).then(res => {
     console.log(res)
+    // localStorage.setItem()
     return dispatch(setSignUpInfo(res))
   })
 

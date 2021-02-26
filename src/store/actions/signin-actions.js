@@ -28,6 +28,7 @@ export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
             }).then(userinfo => {
                 // console.log(JSON.parse(userinfo.request.response).user._id)
                 let userId = JSON.parse(userinfo.request.response).user._id;
+                
                 return dispatch(setSigninInfo(userId))
             })
         })

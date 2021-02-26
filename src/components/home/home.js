@@ -15,7 +15,8 @@ import { connect } from 'react-redux';
 
 
 function Home(props) {
-console.log(props.state)
+    console.log(props.state)
+    console.log(JSON.parse(localStorage.getItem("userId")))
     return (
         <main>
 

@@ -23,8 +23,9 @@ const signingUserStore = createSlice({
       // console.log("pAyloAD>>>", action.payload)
       // void (state.id = action.payload);
       // console.log(state.id)
-        //   react-cookies + Cookie.load('auth')
-      return { ...state, id: action.payload}
+      //   react-cookies + Cookie.load('auth')
+      localStorage.setItem("userId", JSON.stringify(action.payload))
+      return { ...state, id: action.payload }
     },
     setSignUpInfo: (state, action) => {
       console.log("inside signup reducer",)
