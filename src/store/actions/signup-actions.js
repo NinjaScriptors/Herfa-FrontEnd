@@ -1,6 +1,8 @@
 
 import axios from "axios";
+import { setSignUpInfo } from "../reducers/profile"
 const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
+
 
 export const getUserInfo = ({ email, password, name, fullName }) => (dispatch) => {
   // i will search by the username and check if his password is the same one that came from the user object.
@@ -23,7 +25,7 @@ export const getUserInfo = ({ email, password, name, fullName }) => (dispatch) =
     }
   }).then(res => {
     console.log(res)
-    return dispatch(signup(res))
+    return dispatch(setSignUpInfo(res))
   })
 
 
@@ -31,13 +33,13 @@ export const getUserInfo = ({ email, password, name, fullName }) => (dispatch) =
 
 
 
-const signup = payload => {
-  console.log("in getAction@@@@@@@@@!!!!", payload)
-  return {
-    type: "SIGNUP",
-    payload: payload
-  }
-}
+// const signup = payload => {
+//   console.log("in getAction@@@@@@@@@!!!!", payload)
+//   return {
+//     type: "SIGNUP",
+//     payload: payload
+//   }
+// }
 
 
 

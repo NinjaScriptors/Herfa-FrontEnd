@@ -7,16 +7,21 @@ const categories = createSlice({
     name: "categories",
     initialState: {
         categories: [],
-        activeCategories: 'food'
+        activeCategories: 'food',
+        productList: [],
     },
     reducers: {
         active(state, action) {
+
             state.activeCategories = action.payload;
-            console.log('action from active =====>',state.activeCategories)
+            console.log('action from active =====>', state.activeCategories)
         },
         getcategories(state, action) {
             console.log('action from getcategories =====>', action.payload);
             state.categories = action.payload;
+        },
+        getMatchedProducts(state, action) {
+            state.productList = action.payload;
         },
     }
 });
@@ -29,6 +34,6 @@ export const getRemoteCategories = () => (dispatch) => {
     });
 }
 
-export const { active, getcategories } = categories.actions;
+export const { active, getcategories, getMatchedProducts } = categories.actions;
 
 export default categories.reducer;

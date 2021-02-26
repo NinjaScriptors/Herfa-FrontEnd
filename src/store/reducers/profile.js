@@ -1,63 +1,44 @@
-import { Types } from '../constant/actionTypes';
+import { createSlice } from "@reduxjs/toolkit";
+import { saveCookies } from "superagent";
 
-const initialState = {
-  profile: {
-    username: '',
-    password: '',
-    email: '',
-    isSeller: false,
-    isAdmin: false,
-    subscribenewsletter: false
+
+const signingUserStore = createSlice({
+  name: "signing-store",
+  initialState: {
+    profile: {
+      _id: "",
+      username: '',
+      password: '',
+      email: '',
+      isSeller: false,
+      isAdmin: false,
+      subscribenewsletter: false
+    },
+    id: ""
   },
-  formSubmitted: false
-}
-
-const reducer = (state = initialState, action) => {
-  let { payload, type } = action
-  console.log("inside reduceeeeeeeeeeeeeeeeeeeeeeeeer")
-  console.log(action)
-
-  switch (type) {
-    case "LOGIN":
-      console.log('login', payload)
+  reducers: {
+    setSigninInfo: (state, action) => {
+      // console.log("inside reduceeeeeeeeeeeeeeeeeeeeeeeeer")
+      // console.log("action>>>", action)
+      // console.log("pAyloAD>>>", action.payload)
+      // void (state.id = action.payload);
+      // console.log(state.id)
+        //   react-cookies + Cookie.load('auth')
+      return { ...state, id: action.payload}
+    },
+    setSignUpInfo: (state, action) => {
+      console.log("inside signup reducer",)
       return {
         ...state,
-        profile: payload,
+        profile: action.payload.data,
         formSubmitted: false // after update user formsubmition reset
       }
-
-
-    case "SIGNUP":
-      return {
-        ...state,
-        profile: payload,
-        formSubmitted: false // after update user formsubmition reset
-      }
-
-
-
-    case "EDIT_USER_INFO":
-      return {
-        ...state,
-        profile: payload,
-        formSubmitted: false // after update user formsubmition reset
-      }
-
-
-
-    case Types.UPDATE_PROFILE_PICTURE:
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          profileImage: action.payload.image
-        }
-      }
-
-
-    default:
-      return state;
+    }
   }
-}
 
-export default reducer;
+
+});
+
+
+export const { setSignUpInfo, setSigninInfo } = signingUserStore.actions
+export default signingUserStore.reducer;

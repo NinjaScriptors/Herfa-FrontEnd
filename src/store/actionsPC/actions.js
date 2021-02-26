@@ -1,6 +1,6 @@
 import superagent from 'superagent';
-
-
+import { setsearchProducts } from "../productsStore/productsSlicer"
+import axios from "axios"
 const api = 'https://herfa-app.herokuapp.com/api';
 
 
@@ -24,6 +24,22 @@ export const getDetailedObj = (id) => (dispatch) => {
         console.log("we got the data : data.body =", data.body)
         dispatch(getDetails(data.body))
     });
+}
+
+/// Moooooooooo edits 
+export const getSearchProducts = (name) => (dispatch) => {
+    axios({
+        method: 'get',
+        url: `${api}/products/search?name=${name}`,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        console.log(">>>>>>response             from the search Api         >>>>>>", res)
+        return dispatch(setsearchProducts(res))
+    })
 }
 
 const getAction = payload => {

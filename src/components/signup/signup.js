@@ -80,7 +80,7 @@ function SignUp(props) {
         let fullName = `${firstName} ${lastName}`;
         console.log(email, password, name, fullName)
         props.getUserInfo({ email, password, name, fullName })
-
+      
     }
 
     function handleChange(e) {

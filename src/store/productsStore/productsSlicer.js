@@ -9,7 +9,8 @@ const products = createSlice({
         products: [],
         filetredProduct: [],
         productsInCart: [],
-        productDetail: {}
+        productDetail: {},
+
     },
     reducers: {
         activeProduct(state, action) {
@@ -28,9 +29,12 @@ const products = createSlice({
             console.log('from the detailed object', action.payload)
             state.productDetail = action.payload;
         },
+        setsearchProducts(state, action) {
+            console.log("action payload in produc slicerrrrrrrrr",action.payload)
+            state.filetredProduct = action.payload.data.products
+        }
     },
 });
-
 
 
 
@@ -54,6 +58,15 @@ export const getDetailedObj = (id) => (dispatch) => {
     });
 }
 
-export const { setProducts, setProductDetails, activeProduct } = products.actions;
+// export const getSearchProducts = (name) => (dispatch) => {
+//     console.log("inside dispatch of getDetailedObj!!!! ")
+
+//     return superagent.get(`${api}/products/${name}`).then(data => {
+//         console.log("we got the data : data.body =", data.body)
+//         dispatch(setsearchProducts(data.body))
+//     });
+// }
+
+export const { setProducts, setProductDetails, activeProduct, setsearchProducts } = products.actions;
 
 export default products.reducer;

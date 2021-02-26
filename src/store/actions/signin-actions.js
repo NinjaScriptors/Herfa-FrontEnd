@@ -1,5 +1,5 @@
+import { setSigninInfo } from "../reducers/profile"
 import axios from "axios";
-
 import base64 from 'base-64';
 const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
 
@@ -27,8 +27,8 @@ export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
                 headers: { 'Authorization': `Bearer ${JSON.parse(res.request.response).token}` }
             }).then(userinfo => {
                 // console.log(JSON.parse(userinfo.request.response).user._id)
-                let userId =JSON.parse(userinfo.request.response).user._id;
-                return dispatch(signin(userId))
+                let userId = JSON.parse(userinfo.request.response).user._id;
+                return dispatch(setSigninInfo(userId))
             })
         })
 
@@ -39,9 +39,9 @@ export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
 
 
 
-const signin = (payload) => {
-    return {
-        type: "LOGIN",
-        payload: payload
-    }
-}
+// const signin = (payload) => {
+//     return {
+//         type: "LOGIN",
+//         payload: payload
+//     }
+// }

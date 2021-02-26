@@ -82,6 +82,8 @@ function SignInSide(props) {
     e.preventDefault();
     console.log(username, password)
     props.getSignedUpUserInfo({ username, password })
+    setTimeout(function(){console.log(props.userInfo)}, 4000);
+    
   }
 
   function handleChange(e) {

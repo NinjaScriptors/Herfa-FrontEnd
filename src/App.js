@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         {/* <Home /> */}
 
         <Route exact path="/user-details" component={UserDetails} >
@@ -46,11 +46,13 @@ function App() {
 
         <Route path="/sign-up" component={SignUp} >
         </Route>
+
         <Route path="/sign-in" component={Signin} >
         </Route>
 
         <StickyFooter />
       </BrowserRouter>
+      
     </>
 
   );

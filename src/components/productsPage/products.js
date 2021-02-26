@@ -58,6 +58,7 @@ const Product = props => {
         <Container>
             <section>
             <MDBRow style = {{ alignItems : "center", display : "flex",justifyContent : "space-between", alignItems : "center"}} >
+               {console.log(props.filetredProduct)}
                 {props.filetredProduct.map((product, idx) => {
                
                     return  <MDBCol md="4"> <MDBCard cascade style = {{fontFamily:"Handlee" }}>

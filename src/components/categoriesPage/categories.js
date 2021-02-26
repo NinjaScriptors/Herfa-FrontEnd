@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { active, getRemoteCategories } from "../../store/categoriesStore/categoriesSlicer";
 import { Link, Typography, Button } from '@material-ui/core'
-import { activeProduct } from '../../store/productsStore/productsSlicer'
+import { activeProduct, setsearchProducts } from '../../store/productsStore/productsSlicer'
 import * as actions from '../../store/actionsPC/actions';
 import { Card, CardDeck } from 'react-bootstrap'
 import about3 from '../../assets/about3.jpg'
@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { NavLink } from 'react-router-dom';
-
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,21 +56,39 @@ const ActiveCategories = props => {
         };
         fetchData();
     }, [dispatch]);
+
+    let [item, setSearchItem] = useState("");
+    function handlechange(e) {
+        console.log(e.target.value)
+        setSearchItem(e.target.value);
+        setsearchProducts(item)
+    }
+    function handleSearchBarClick(e) {
+        e.preventDefault();
+        props.getSearchProducts(item)
+    }
+
+
+
     return (
-        
+
         <>
-        
-            <Paper component="form" className={classes.root} style={{alignItems: "center" , margin: "auto"}}>
+
+            <Paper component="form" className={classes.root} style={{ alignItems: "center", margin: "auto" }}>
 
                 <InputBase
+                    onChange={handlechange}
+                    onSubmit={handleSearchBarClick}
                     className={classes.input}
                     placeholder="Search about?"
                     inputProps={{ 'aria-label': 'search google maps' }}
-                    style={{textAlign: "center" , margin: "auto"}}
+                    style={{ textAlign: "center", margin: "auto" }}
                 />
+
                 <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                    <SearchIcon />
+                    <SearchIcon onClick={handleSearchBarClick} />
                 </IconButton>
+
                 <Divider className={classes.divider} orientation="vertical" />
 
             </Paper>
@@ -98,6 +116,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = (dispatch, getState, string) => ({
     active: (string) => dispatch(active(string)),
-    activeProduct: (string) => dispatch(activeProduct(string))
+    activeProduct: (string) => dispatch(activeProduct(string)),
+    getSearchProducts: (name) => dispatch(actions.getSearchProducts(name))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ActiveCategories)
