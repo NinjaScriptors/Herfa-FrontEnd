@@ -12,7 +12,6 @@ const categories = createSlice({
     },
     reducers: {
         active(state, action) {
-
             state.activeCategories = action.payload;
             console.log('action from active =====>', state.activeCategories)
         },

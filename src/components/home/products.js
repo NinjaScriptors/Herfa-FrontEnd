@@ -10,7 +10,7 @@ function Products(){
     return (
         <section id="products-section">
         <Container>
-            <h3>المنتجات الأكثر مبيعاً</h3>
+            <h3>TOP SELLING PRODUCTS</h3>
             <hr />
             <div className={classes.root}>
                 <GridList cellHeight={300} spacing={15} className={classes.gridList}>

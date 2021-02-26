@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { saveCookies } from "superagent";
-
+import axios from "axios"
+const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
 
 const signingUserStore = createSlice({
   name: "signing-store",
@@ -17,14 +18,9 @@ const signingUserStore = createSlice({
     id: ""
   },
   reducers: {
-    setSigninInfo: (state, action) => {
-      // console.log("inside reduceeeeeeeeeeeeeeeeeeeeeeeeer")
-      // console.log("action>>>", action)
-      // console.log("pAyloAD>>>", action.payload)
-      // void (state.id = action.payload);
-      // console.log(state.id)
-      //   react-cookies + Cookie.load('auth')
-      localStorage.setItem("userId", JSON.stringify(action.payload))
+    setSigninInfo: async (state, action) => {
+      console.log("action>>>", action.payload)
+      localStorage.setItem("userInfo", JSON.stringify(action.payload))
       return { ...state, id: action.payload }
     },
     setSignUpInfo: (state, action) => {
