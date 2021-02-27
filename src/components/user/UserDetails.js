@@ -11,7 +11,7 @@ import {
     CardMedia,
     Button,
 } from "@material-ui/core";
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn,MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
 
 
@@ -62,24 +62,24 @@ const UserDetails = props => {
             </header>
             <main>
                 <Container style={{ display: "flex", alignItems: "center", marginTop: "30px" }}>
-                    <MDBCard style={{ maxWidth: '750px', margin:"auto" }}>
-                        <MDBRow className='g-0' style={{ display: "flex", alignItems: "center" , justifyContent: "space-around" , marginTop :"-42px",height : "350px"}}>
-                            <MDBCol style={{ marginLeft : -120}} md='4'>
-                                <MDBCardImage style = {{ boxShadow :" 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop : "-35px"}}src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
+                    <MDBCard style={{ maxWidth: '750px', margin: "auto" }}>
+                        <MDBRow className='g-0' style={{ display: "flex", alignItems: "center", justifyContent: "space-around", marginTop: "-42px", height: "350px" }}>
+                            <MDBCol style={{ marginLeft: -120 }} md='4'>
+                                <MDBCardImage style={{ boxShadow: " 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop: "-35px" }} src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
                             </MDBCol>
                             <MDBCol md='7'>
                                 <MDBCardBody>
-                                    <MDBCardTitle style= {{fontSize:"34px"}}>{props.user.name || "My Name"}</MDBCardTitle>
-                                    <MDBCardText style= {{fontSize:"20px"}}>
-                                        name: {props.user.name || "My Name"}
+                                    <MDBCardTitle style={{ fontSize: "34px" }}>{JSON.parse(localStorage.getItem("userInfo")).name || "My Name"}</MDBCardTitle>
+                                    <MDBCardText style={{ fontSize: "20px" }}>
+                                        name: {JSON.parse(localStorage.getItem("userInfo")).fullName || "My Name"}
                                     </MDBCardText>
-                                    <MDBCardText style= {{fontSize:"20px"}}>
-                                        email: {props.user.email || "user@user.com"}
+                                    <MDBCardText style={{ fontSize: "20px" }}>
+                                        email: {JSON.parse(localStorage.getItem("userInfo")).email || "user@user.com"}
                                     </MDBCardText>
-                                    <MDBCardText style= {{fontSize:"20px"}}>
-                                        Ratings: {props.user.seller ? props.user.seller.map(rev => rev.ratings) : 'No ratings yet'}
+                                    <MDBCardText style={{ fontSize: "20px" }}>
+                                        Ratings: {(localStorage.getItem("userInfo")).seller ? (localStorage.getItem("userInfo")).seller.map(rev => rev.ratings) : 'No ratings yet'}
                                     </MDBCardText>
-                                    <MDBCardText style= {{fontSize:"20px"}}>
+                                    <MDBCardText style={{ fontSize: "20px" }}>
                                         Number of reviews: {props.user.seller ? props.user.seller.map(rev => rev.numReviews) : 'No Reviews'}
                                     </MDBCardText>
 

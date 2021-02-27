@@ -119,7 +119,7 @@ export default function ButtonAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "#333" }} to="/user-details">{username}</NavLink></MenuItem>
+            <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "#333" }} to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
             {/* <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-profile-update/:id">Update Profile</NavLink></MenuItem> */}
         </Menu>
     );
@@ -137,7 +137,7 @@ export default function ButtonAppBar() {
     async function getUserInfo() {
         let result = await axios({
             method: 'get',
-            url: `${usersAPI}/${JSON.parse(localStorage.getItem("userId"))}`,
+            url: `${usersAPI}/${JSON.parse(localStorage.getItem("userInfo"))._id}`,
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
@@ -173,7 +173,7 @@ export default function ButtonAppBar() {
     return (
         <div className={classes.root}>
             <AppBar className={classes[navRef.current]} position="fixed" >
-                <Toolbar  >
+                <Toolbar>
                     <div>
                         <Typography className={classes.title} style={{ fontSize: "24px" }}>
                             H E R F A           </Typography>

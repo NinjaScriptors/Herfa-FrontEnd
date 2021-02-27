@@ -21,6 +21,10 @@ const signingUserStore = createSlice({
     setSigninInfo: async (state, action) => {
       console.log("action>>>", action.payload)
       localStorage.setItem("userInfo", JSON.stringify(action.payload))
+
+      // state.id = action.payload.id 
+    
+
       return { ...state, id: action.payload }
     },
     setSignUpInfo: (state, action) => {

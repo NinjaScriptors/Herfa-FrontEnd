@@ -15,16 +15,18 @@ import UserForm from './components/user/userForm';
 import UserDetails from './components/user/UserDetails';
 import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
-
+import ChatApp from "./components/chatApp/App/index"
 
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         {/* <Home /> */}
 
+        <Route exact path="/chat" component={ChatApp} >
+        </Route>
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
@@ -51,7 +53,7 @@ function App() {
 
         <StickyFooter />
       </BrowserRouter>
-      
+
     </>
 
   );
