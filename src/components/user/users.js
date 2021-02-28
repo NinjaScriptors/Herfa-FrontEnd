@@ -7,8 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { getRemoteData } from '../../store/productsStore/productsSlicer';
-// import { updateInstockdecrement, deleteProduct } from '../rtk-store/cartSlicer'
+import { getRemoteData } from '../../store/userStore/userSlicer';
 
 const useStyles = makeStyles({
 
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
 });
 
 
-const Product = props => {
+const User = props => {
     const classes = useStyles();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -42,16 +41,16 @@ const Product = props => {
     return (
         <>
             <section>
-                {props.filetredProduct.map((product, idx) => {
+                {props.filetredUser.map((user, idx) => {
                     return <Card className={classes.root} variant="outlined">
                         <CardContent>
                             <Typography className={classes.title} key={idx} color="textSecondary" gutterBottom>
-                                {product.name}
+                                {user.name}
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Link to={`/details/${product._id}`}>View Details</Link>
-                        </CardActions>
+                        {/* <CardActions>
+                            <Link to={`/user-details/${user._id}`}>View Details</Link>
+                        </CardActions> */}
                     </Card>
                 })}
             </section>
@@ -61,8 +60,8 @@ const Product = props => {
 
 
 const mapStateToProps = state => ({
-    myProducts: state.products.products,
-    filetredProduct: state.products.filetredProduct,
+    // myUsers: state.users.users,
+    filetredUser: state.users.users,
     // myProductsInCart: state.products.productsInCart,
 
 });
@@ -72,4 +71,4 @@ const mapStateToProps = state => ({
 //     update: (obj) => dispatch(updateInstockdecrement(obj))
 // })
 
-export default connect(mapStateToProps)(Product);
+export default connect(mapStateToProps)(User);

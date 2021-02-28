@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import superagent from "superagent";
 
-const api = 'https://herfah.herokuapp.com/api';
+const api = 'https://herfa-app.herokuapp.com/api';
 
 const categories = createSlice({
     name: "categories",
