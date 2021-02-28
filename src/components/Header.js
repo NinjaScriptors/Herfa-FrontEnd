@@ -102,10 +102,10 @@ export default function ButtonAppBar() {
                        <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
                                 <NavLink style={{ color: "white" }} to='/about-us'>Our Story</NavLink>
                            </div>
-                           <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
+                           {/* <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
 
-                                <a style={{ color: "white" }} href="/">Products</a>
-                           </div >
+                                <a style={{ color: "white" }} href="/products">Products</a>
+                           </div > */}
 
 
                        
@@ -113,7 +113,7 @@ export default function ButtonAppBar() {
                                     <div style={{ color: "white" }}>
                                         <NavLink
                                             style={{ color: "white" }}
-                                            to='/'
+                                            to='/categories'
                                             ref={anchorRef}
                                             aria-controls={open ? 'menu-list-grow' : undefined}
                                             aria-haspopup="true"

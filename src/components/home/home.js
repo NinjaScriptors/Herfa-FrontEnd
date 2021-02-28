@@ -7,7 +7,7 @@ import Categories from './cards';
 import OurStoryGrid from './grid';
 import SliderHome from './slider';
 import Products from './products';
-// import StatComp from './statisticsComp';
+import StatComp from './statisticsComp';
 import WhyUs from './whyUs';
 
 
@@ -20,12 +20,12 @@ function Home(props) {
 
             <SliderHome />
             <OurStoryGrid />
-            {/* <StatComp /> */}
+            <StatComp />
             <Categories />
             <Products />
             <WhyUs />
 
-            {/* <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> */}
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         </main>
     )
 

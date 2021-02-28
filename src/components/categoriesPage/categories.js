@@ -79,7 +79,7 @@ const ActiveCategories = props => {
                 <CardDeck style={{ width: "85%", margin: "auto" }}>
                     {props.activeOne.categories.map((category, idx) => {
 
-                        return <Card style={{ width: '550rem' }} onClick={() => { props.activeProduct(category) }}><Card.Body> <Card.Img variant="top" style={{ margin: 'auto', textAlign: 'center', cursor: "pointer" }} src={about3} /><Card.Text style={{ marginTop: "10px", textAlign: 'center', cursor: "pointer", fontFamily: "Handlee" }} key={idx} value={category} onClick={() => props.active(category)} href="#">{category.toUpperCase()} </Card.Text></Card.Body></Card>
+                        return <Card style={{ width: '550rem' }} onClick={() => { props.activeProduct(category) }}><Card.Body> <Card.Img variant="top" style={{ margin: 'auto', textAlign: 'center', cursor: "pointer" }} src={about3} /><Card.Text style={{ marginTop: "10px", textAlign: 'center', cursor: "pointer", fontFamily: "Handlee" }} key={idx} value={category} onClick={() => props.active(category)} href="/categories">{category.toUpperCase()} </Card.Text></Card.Body></Card>
                     })}
                 </CardDeck>
 
