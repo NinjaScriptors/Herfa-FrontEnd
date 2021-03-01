@@ -3,8 +3,8 @@ import superagent from "superagent";
 
 const api = 'https://herfa-app.herokuapp.com/api';
 
-const users = createSlice({
-    name: "users",
+const form = createSlice({
+    name: "form",
     initialState: {
         users: [],
         filetredUsers: [],
@@ -13,7 +13,7 @@ const users = createSlice({
     reducers: {
         activeProduct(state, action) {
             console.log('from product slicer', action.payload)
-            state.users= state.users.filter(user => {
+            state.users = state.users.filter(user => {
                 console.log('in activeProduct -->', user);
                 if (user.email == action.payload) {
                     return user;
@@ -27,7 +27,10 @@ const users = createSlice({
             console.log('from the detailed object', action.payload)
             state.userDetail = action.payload;
         },
-
+        updateUserDetails(state, action) {
+            console.log('from the detailed object', action.payload)
+            state.userDetail = action.payload;
+        },
     },
 });
 
@@ -37,7 +40,13 @@ const users = createSlice({
 export const getRemoteData = () => (dispatch) => {
     console.log("dispatch :", dispatch)
     console.log("inside dispatch of getRemoteData!!!! ")
-    return superagent.get(`${api}/users`).then(data => {
+
+    return superagent.get(`${api}/users`).set({
+        
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json'
+    }).then(data => {
         console.log("we got the data : data.body =", data.body)
         // console.log("we got the data : data.body.result =", data.body.results)
 
@@ -48,12 +57,33 @@ export const getRemoteData = () => (dispatch) => {
 export const getDetailedObj = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
-    return superagent.get(`${api}/users/${id}`).then(data => {
+    return superagent.get(`${api}/users/${id}`).set({
+       
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json'
+    }).then(data => {
         console.log("we got the data : data.body =", data.body)
         dispatch(setProductDetails(data.body))
     });
 }
 
-export const { setProducts, setProductDetails, activeProduct } = users.actions;
+export const updateDetailedObj = (obj) => (dispatch) => {
+    console.log("inside dispatch of getDetailedObj!!!! ")
 
-export default users.reducer;
+    return superagent.put(`${api}/users/${id}`).set({
+       
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json'
+    }).then(data => {
+        let newObj = { ...obj }
+        newObj = JSON.stringify(newObj);
+        console.log("we got the data : data.body =", data.body)
+        dispatch(updateUserDetails(data.body))
+    });
+}
+
+export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
+
+export default form.reducer;

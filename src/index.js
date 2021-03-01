@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import store from "./store/";
 import userStore from "./store/userStoreFile.js"
 ReactDOM.render(
-  <Provider store={store,userStore}>
-    <Provider store={userStore}>
+  <Provider store={store}>
+    {/* <Provider store={userStore}> */}
       <App />
-    </Provider>
+    {/* </Provider> */}
   </Provider>,
   document.getElementById('root')
 );

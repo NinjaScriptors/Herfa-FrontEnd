@@ -21,19 +21,20 @@ import Signin from "./components/signin/signin";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
+    <UserForm/>
+      {/* <BrowserRouter>
+        <Header /> */}
         {/* <Home /> */}
 
-        <Route exact path="/user-details" component={UserDetails} >
+        {/* <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
         </Route>
         <Route exact path="/" component={Home}>
-        </Route>
+        </Route> */}
         {/* < Categories /> */}
 
-
+{/* 
         <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route exact path="/categories" component={ActiveCategories} >
@@ -50,7 +51,7 @@ function App() {
         </Route>
 
         <StickyFooter />
-      </BrowserRouter>
+      </BrowserRouter> */}
     </>
 
   );
