@@ -9,6 +9,7 @@ const form = createSlice({
         users: [],
         filetredUsers: [],
         userDetail: {},
+        userForm:{}
     },
     reducers: {
         activeProduct(state, action) {
@@ -28,8 +29,8 @@ const form = createSlice({
             state.userDetail = action.payload;
         },
         updateUserDetails(state, action) {
-            console.log('from the detailed object', action.payload)
-            state.userDetail = action.payload;
+            console.log('from the updateUserDetails object', action.payload)
+            state.userForm = action.payload;
         },
     },
 });
@@ -42,48 +43,95 @@ export const getRemoteData = () => (dispatch) => {
     console.log("inside dispatch of getRemoteData!!!! ")
 
     return superagent.get(`${api}/users`).set({
-        
+
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'mode': 'no-cors'
     }).then(data => {
         console.log("we got the data : data.body =", data.body)
         // console.log("we got the data : data.body.result =", data.body.results)
 
         dispatch(setProducts(data.body))
     });
+    // axios({
+    //     method: 'get',
+    //     url: `${api}/users`,
+    //     mode: 'cors',
+    //     headers: {
+
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Credentials": true,
+    //         'Content-Type': 'application/json'
+    //     }.then(data => {
+    //         console.log("we got the data : data.body =", data.data)
+    //         return dispatch(setProducts(data.data))
+    //     })
+    // })
+
 }
 
 export const getDetailedObj = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
     return superagent.get(`${api}/users/${id}`).set({
-       
+
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'mode':'no-cors'
     }).then(data => {
         console.log("we got the data : data.body =", data.body)
         dispatch(setProductDetails(data.body))
     });
+
+    // axios({
+    //     method: 'get',
+    //     url: `${api}/users/${id}`,
+    //     mode: 'cors',
+    //     headers: {
+
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Credentials": true,
+    //         'Content-Type': 'application/json'
+    //     }.then(data => {
+    //         console.log("we got the data : data.body =", data.data)
+    //         return dispatch(setProductDetails(data.data))
+    //     })
+    // })
 }
 
-export const updateDetailedObj = (obj) => (dispatch) => {
-    console.log("inside dispatch of getDetailedObj!!!! ")
+    export const updateDetailedObj = (obj) => (dispatch) => {
+        console.log("inside dispatch of updateDetailedObj!!!! ")
 
-    return superagent.put(`${api}/users/${id}`).set({
-       
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json'
-    }).then(data => {
-        let newObj = { ...obj }
+        let newObj = { ...obj, isSeller:obj.isSeller }
         newObj = JSON.stringify(newObj);
-        console.log("we got the data : data.body =", data.body)
-        dispatch(updateUserDetails(data.body))
-    });
-}
+        return superagent.put(`${api}/users/${obj._id}`).set({
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            'Content-Type': 'application/json',
+            'mode': 'no-cors'
+        }).send(newObj).then(data => {
+            console.log("we got the data updateUserDetails : data.body =", data.body)
+            dispatch(updateUserDetails(data.body))
+        });
+        // axios({
+        //     method: 'put',
+        //     url: `${api}/users/${id}`,
+        //     mode: 'cors',
+        //     headers: {
 
-export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials": true,
+        //         'Content-Type': 'application/json'
+        //     }
+        //         .then(data => {
+        //             console.log("we got the data : data.body =", data.data)
+        //             return dispatch(updateUserDetails(data.data))
+        //         })
+        // })
+    }
 
-export default form.reducer;
+    export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = form.actions;
+
+    export default form.reducer;

@@ -71,4 +71,8 @@ const mapStateToProps = state => ({
 //     update: (obj) => dispatch(updateInstockdecrement(obj))
 // })
 
+// const mapDispatchToProps = (dispatch, getState) => ({
+//     getUserInfo: (userInfo) => dispatch(updateUserDetails(userInfo))
+// })
+
 export default connect(mapStateToProps)(User);
