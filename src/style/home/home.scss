@@ -6,10 +6,16 @@
 #hero-section{
     background-color: black;
     margin-bottom: 100px;
+    overflow: hidden;
+    
     img{
+        overflow: hidden;
         width: 100%;
         height: 500px;
         opacity: 0.5;
+        height: "100%",
+                    
+                
         
     }
 }

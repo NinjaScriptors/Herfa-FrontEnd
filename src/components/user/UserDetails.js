@@ -11,49 +11,19 @@ import {
     CardMedia,
     Button,
 } from "@material-ui/core";
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn,MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
 
 
-const useStyles = makeStyles({
-    root: {
-        marginTop: 100,
-        marginBottom: 100,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    title: {
-        textAlign: "center",
-        fontFamily: 'Courier New',
-        fontWeight: "bolder",
-        color: '#2E3B55'
-    },
-    card: {
-        marginTop: 50,
-        width: 600,
-        padding: 20,
-    },
-    media: {
-        height: 450,
-    },
-    content: {
-        display: "flex",
-        justifyContent: "space-between",
-    },
-    buttonStyle: {
-        marginTop: 20,
-        width: 600,
-        backgroundColor: "#2E3B55",
-        "&:hover": {
-            background: "#c25744",
-        },
-        color: "#fff",
-    },
-});
+
+
+
+
+
 
 const UserDetails = props => {
-    const classes = useStyles();
+
+
     // const { id } = props.match.params;
     // console.log('param', props.match.params)
 
@@ -68,32 +38,62 @@ const UserDetails = props => {
     return (
 
         <>
+            <header>
+                <section className="main-banner" style={{
+                    backgroundImage: "../../assets/home-banner2.jpg",
 
-            <Container className={classes.root}>
-                <Card className={classes.card}>
-                    <CardMedia
-                        title={props.user.name}
-                        className={classes.media}
-                        image={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'}
-                    />
-                    <CardContent className={classes.content}>
-                        <Typography gutterBottom variant="h5" component="h4">
-                            name: {props.user.name}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="h4">
-                            email: {props.user.email}
-                        </Typography>
-                    </CardContent>
+                    height: "100%",
+                    backgroundSize: "cover",
+                    position: "relative",
+                    backgroundAttachment: "fixed",
+                    backgroundPosition: "center",
+                    fontFamily: 'Handlee',
+                    fontWeight: "100",
+                    alignItems: "center"
+                }}>
+                    <div className="parallex">
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h1>User Details</h1>
+                        </div>
 
-                    <Typography gutterBottom variant="h5" component="h4">
-                        Ratings: {props.user.seller ? props.user.seller.map(rev => rev.ratings) : 'No ratings yet'}
-                    </Typography>
-                    <Typography gutterBottom variant="h5" component="h4">
-                        Number of reviews: {props.user.seller ? props.user.seller.map(rev => rev.numReviews) : 'No Reviews'}
-                    </Typography>
-                </Card>
-                <Button><NavLink to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></Button>
-            </Container>
+                    </div>
+                </section>
+            </header>
+            <main>
+                <Container style={{ display: "flex", alignItems: "center", marginTop: "30px" }}>
+                    <MDBCard style={{ maxWidth: '750px', margin:"auto" }}>
+                        <MDBRow className='g-0' style={{ display: "flex", alignItems: "center" , justifyContent: "space-around" , marginTop :"-42px",height : "350px"}}>
+                            <MDBCol style={{ marginLeft : -120}} md='4'>
+                                <MDBCardImage style = {{ boxShadow :" 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop : "-35px"}}src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
+                            </MDBCol>
+                            <MDBCol md='7'>
+                                <MDBCardBody>
+                                    <MDBCardTitle style= {{fontSize:"34px"}}>{props.user.name || "My Name"}</MDBCardTitle>
+                                    <MDBCardText style= {{fontSize:"20px"}}>
+                                        name: {props.user.name || "My Name"}
+                                    </MDBCardText>
+                                    <MDBCardText style= {{fontSize:"20px"}}>
+                                        email: {props.user.email || "user@user.com"}
+                                    </MDBCardText>
+                                    <MDBCardText style= {{fontSize:"20px"}}>
+                                        Ratings: {props.user.seller ? props.user.seller.map(rev => rev.ratings) : 'No ratings yet'}
+                                    </MDBCardText>
+                                    <MDBCardText style= {{fontSize:"20px"}}>
+                                        Number of reviews: {props.user.seller ? props.user.seller.map(rev => rev.numReviews) : 'No Reviews'}
+                                    </MDBCardText>
+
+                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink>
+                                    </Button>{' '}
+
+                                </MDBCardBody>
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBCard>
+
+                </Container>
+            </main>
         </>
 
     );
@@ -103,3 +103,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(UserDetails);
+
+{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }

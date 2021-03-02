@@ -66,9 +66,6 @@ const mapStateToProps = state => ({
 
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//     delete: () => dispatch(deleteProduct()),
-//     update: (obj) => dispatch(updateInstockdecrement(obj))
-// })
+
 
 export default connect(mapStateToProps)(User);

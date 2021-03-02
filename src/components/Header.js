@@ -15,6 +15,8 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Menu from '@material-ui/core/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 
@@ -57,6 +59,69 @@ export default function ButtonAppBar() {
 
         setOpen(false);
     };
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
+
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
+
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-details">My Profile</NavLink></MenuItem>
+            <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-profile-update/:id">Update Profile</NavLink></MenuItem>
+        </Menu>
+    );
 
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {
@@ -87,284 +152,107 @@ export default function ButtonAppBar() {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={classes[navRef.current]}  style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
+            <AppBar  className={classes[navRef.current]} position="fixed" >
                 <Toolbar  >
+        <div>
+                        <Typography className={classes.title} style={{ fontSize: "24px" }}>
+                            H E R F A           </Typography>
 
-                    <div >
-                    <Typography className={classes.title} style={{ fontSize: "24px" }}>
-                        H E R F A           </Typography>
-                       <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
+        </div>
+                    <div style={{display: "flex", justifyContent :"space-evenly" , margin :"auto", alignItems :"center", width: "93%", fontFamily : "Handlee"}}>
+                        <div>
 
-                                <a style={{ color: "white" }} href="/">Home</a>
-                          
+                            <a style={{ color: "white" }} href="/">Home</a>
 
-                       </div>
-                       <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
-                                <NavLink style={{ color: "white" }} to='/about-us'>Our Story</NavLink>
-                           </div>
-                           {/* <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
+
+                        </div>
+                        <div >
+                            <NavLink style={{ color: "white" }} to='/about-us'>Our Story</NavLink>
+                        </div>
+                        {/* <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
 
                                 <a style={{ color: "white" }} href="/products">Products</a>
                            </div > */}
 
 
-                       
-                                <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}  id="navDropdown">
-                                    <div style={{ color: "white" }}>
-                                        <NavLink
-                                            style={{ color: "white" }}
-                                            to='/categories'
-                                            ref={anchorRef}
-                                            aria-controls={open ? 'menu-list-grow' : undefined}
-                                            aria-haspopup="true"
-                                            onClick={handleToggle}
-                                        >
-                                            Categories
+
+                        <div id="navDropdown">
+                            <div style={{ color: "white" }}>
+                                <NavLink
+                                    style={{ color: "white" }}
+                                    to='/categories'
+                                    ref={anchorRef}
+                                    aria-controls={open ? 'menu-list-grow' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={handleToggle}
+                                >
+                                    Categories
                                  </NavLink>
-                                        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                                            {({ TransitionProps, placement }) => (
-                                                <Grow
-                                                    {...TransitionProps}
-                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                                                >
-                                                    <Paper>
-                                                        <ClickAwayListener onClickAway={handleClose}>
-                                                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                                                <MenuItem onClick={handleClose}>Food</MenuItem>
-                                                                <MenuItem onClick={handleClose}>Gift</MenuItem>
-                                                                <MenuItem onClick={handleClose}>Hand Craft</MenuItem>
-                                                            </MenuList>
-                                                        </ClickAwayListener>
-                                                    </Paper>
-                                                </Grow>
-                                            )}
-                                        </Popper>
-                                    </div>
-                                </div>
+                                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                                    {({ TransitionProps, placement }) => (
+                                        <Grow
+                                            {...TransitionProps}
+                                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                        >
+                                            <Paper>
+                                                <ClickAwayListener onClickAway={handleClose}>
+                                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                                        <MenuItem onClick={handleClose}>Food</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Gift</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Hand Craft</MenuItem>
+                                                    </MenuList>
+                                                </ClickAwayListener>
+                                            </Paper>
+                                        </Grow>
+                                    )}
+                                </Popper>
+                            </div>
+                        </div>
 
-                        
-                                <div  className={classes.search} >
-                                    <div className={classes.searchIcon}>
-                                        <SearchIcon />
-                                        <InputBase
-                                            placeholder="Search…"
-                                            classes={{
-                                                root: classes.inputRoot,
-                                                input: classes.inputInput,
-                                            }}
-                                            inputProps={{ 'aria-label': 'search' }}
-                                        />
-                                    </div>
-                                </div>
+                                        <div>
+                        <div className={classes.search} style={{border: "1px solid white" , borderRadius : "5px"}} >
+                            <div className={classes.searchIcon}>
+                                <SearchIcon style= {{marginRight:"4px", marginLeft:"3px"}}/>
+                                <InputBase style = {{color : "#f5f5f5"}}
+                                    placeholder="Search…"
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </div>
+                        </div>
+                        </div>
 
+                        <div>
 
+                            <IconButton
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </div>
                     </div>
+
+
+
+
 
 
                 </Toolbar>
             </AppBar>
+            {renderMobileMenu}
+            {renderMenu}
         </div >
     );
 }
 
-
-
-
-// import React from 'react';
-// import { fade, makeStyles } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Typography from '@material-ui/core/Typography';
-// import InputBase from '@material-ui/core/InputBase';
-// import Badge from '@material-ui/core/Badge';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Menu from '@material-ui/core/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import SearchIcon from '@material-ui/icons/Search';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-// import MailIcon from '@material-ui/icons/Mail';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
-// import MoreIcon from '@material-ui/icons/MoreVert';
-// import { NavLink } from "react-router-dom"
-// const useStyles = makeStyles((theme) => ({
-//     grow: {
-
-//         flexGrow: 1,
-//         justifyContent:"space-between", flexDirection:"row",
-//         backgroundColor: "transparent"
-//     },
-//     menuButton: {
-//         marginRight: theme.spacing(2),
-//     },
-//     title: {
-//         display: 'none',
-//         [theme.breakpoints.up('sm')]: {
-//             display: 'block',
-//         },
-//     },
-//     search: {
-//         position: 'relative',
-//         borderRadius: theme.shape.borderRadius,
-//         backgroundColor: fade(theme.palette.common.white, 0.15),
-//         '&:hover': {
-//             backgroundColor: fade(theme.palette.common.white, 0.25),
-//         },
-//         marginRight: theme.spacing(2),
-//         marginLeft: 0,
-//         width: '100%',
-//         [theme.breakpoints.up('sm')]: {
-//             marginLeft: theme.spacing(3),
-//             width: 'auto',
-//         },
-//     },
-//     searchIcon: {
-//         padding: theme.spacing(0, 2),
-//         height: '100%',
-//         position: 'absolute',
-//         pointerEvents: 'none',
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     inputRoot: {
-//         color: 'inherit',
-//     },
-//     inputInput: {
-//         padding: theme.spacing(1, 1, 1, 0),
-//         // vertical padding + font size from searchIcon
-//         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-//         transition: theme.transitions.create('width'),
-//         width: '100%',
-//         [theme.breakpoints.up('md')]: {
-//             width: '20ch',
-//         },
-//     },
-//     sectionDesktop: {
-//         backgroundColor: 'transparent',
-//         boxShadow: 'none',
-//         display: 'none',
-//         [theme.breakpoints.up('md')]: {
-//             display: 'flex',
-
-//         },
-//     },
-//     sectionMobile: {
-//         backgroundColor: 'transparent',
-//         boxShadow: 'none',
-//         display: 'flex',
-//         [theme.breakpoints.up('md')]: {
-//             display: 'none',
-//         },
-//     },
-// }));
-
-// export default function PrimarySearchAppBar() {
-//     const classes = useStyles();
-//     const [anchorEl, setAnchorEl] = React.useState(null);
-//     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-//     const isMenuOpen = Boolean(anchorEl);
-//     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-//     const handleProfileMenuOpen = (event) => {
-//         setAnchorEl(event.currentTarget);
-//     };
-
-//     const handleMobileMenuClose = () => {
-//         setMobileMoreAnchorEl(null);
-//     };
-
-//     const handleMenuClose = () => {
-//         setAnchorEl(null);
-//         handleMobileMenuClose();
-//     };
-
-//     const handleMobileMenuOpen = (event) => {
-//         setMobileMoreAnchorEl(event.currentTarget);
-//     };
-
-//     const menuId = 'primary-search-account-menu';
-//     const renderMenu = (
-//         <Menu
-//             anchorEl={anchorEl}
-//             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             id={menuId}
-//             keepMounted
-//             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             open={isMenuOpen}
-//             onClose={handleMenuClose}
-//         >
-//             <MenuItem onClick={handleMenuClose}>Food</MenuItem>
-//             <MenuItem onClick={handleMenuClose}>Gift</MenuItem>
-//         </Menu>
-//     );
-
-//     const mobileMenuId = 'primary-search-account-menu-mobile';
-//     const renderMobileMenu = (
-//         <Menu
-//             anchorEl={mobileMoreAnchorEl}
-//             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             id={mobileMenuId}
-//             keepMounted
-//             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-//             open={isMobileMenuOpen}
-//             onClose={handleMobileMenuClose}
-//         >
-
-//         </Menu>
-//     );
-
-//     return (
-//         <div className={classes.grow}>
-//             <AppBar  position="static" elevation={trigger ? 24 : 0}
-//         style={{
-//           backgroundColor: trigger ? "#fff" : "transparent",
-//           boxShadow: trigger
-//             ? "5px 0px 27px -5px rgba(0, 0, 0, 0.3) !important"
-//             : undefined
-//         }}>
-//                 <Toolbar>
-
-//                     <Typography className={classes.title} variant="h6" noWrap>
-//                         H E R F A           </Typography>
-
-//                         <div style={{display:'flex', alignItems:"center", justifyContent:"space-between" , margin: "auto", color :"#333"}} >
-//                             <a style = {{color: "#333"}}className="nav-link" href="/">Home</a>
-//                             <NavLink style = {{color: "#333"}} className="nav-link" to='/about-us'>Our Story</NavLink>
-//                             <a  style = {{color: "#333"}} className="nav-link" href="/">Products</a>
-//                             <div style = {{color: "#333"}} className="nav-dropdown" id="navDropdown" aria-label="show more"
-//                                     aria-controls={mobileMenuId}
-//                                     aria-haspopup="true"
-//                                     onClick={handleProfileMenuOpen}
-//                                     color="inherit">
-//                                 <a style = {{color: "#333"}} className="nav-link dropdown-title"  href="/">Categories</a>
-
-//                             </div>
-//                     <div className={classes.search} > 
-//                         <div className={classes.searchIcon}>
-//                             <SearchIcon />
-//                         </div>
-//                         <InputBase
-//                             placeholder="Search…"
-//                             classes={{
-//                                 root: classes.inputRoot,
-//                                 input: classes.inputInput,
-//                             }}
-//                             inputProps={{ 'aria-label': 'search' }}
-//                         />
-//                     </div>
-
-
-
-//                     </div>
-//                 </Toolbar>
-//             </AppBar>
-//             {renderMobileMenu}
-//             {renderMenu}
-//         </div>
-//     );
-// }
 
 
 

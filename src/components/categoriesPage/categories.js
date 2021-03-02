@@ -57,31 +57,57 @@ const ActiveCategories = props => {
         fetchData();
     }, [dispatch]);
     return (
-        
+
         <>
-        
-            <Paper component="form" className={classes.root} style={{alignItems: "center" , margin: "auto"}}>
+            <header>
 
-                <InputBase
-                    className={classes.input}
-                    placeholder="Search about?"
-                    inputProps={{ 'aria-label': 'search google maps' }}
-                    style={{textAlign: "center" , margin: "auto"}}
-                />
-                <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-                <Divider className={classes.divider} orientation="vertical" />
+            <section className="main-banner" style={{
+                    backgroundImage: "../../assets/home-banner2.jpg",
 
-            </Paper>
+                    height: "100%",
+                    backgroundSize: "cover",
+                    position: "relative",
+                    backgroundAttachment: "fixed",
+                    backgroundPosition: "center",
+                    fontWeight: "100",
+                    alignItems: "center"
+                }}>
+                    <div className="parallex">
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h1>Categories</h1>
+                        </div>
+
+                    </div>
+                <Paper component="form" className={classes.root} style={{ alignItems: "center", marginBottom: "340px" ,backgroundColor : "transparent" , border : "1px solid white"}}>
+
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search about?"
+                        inputProps={{ 'aria-label': 'search google maps' }}
+                        style={{ textAlign: "center"}}
+                        />
+                    <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                    <Divider className={classes.divider} orientation="vertical" />
+
+                </Paper>
+                        </section>
+            </header>
             <br />
-            <section>
-                <CardDeck style={{ width: "85%", margin: "auto" }}>
-                    {props.activeOne.categories.map((category, idx) => {
+            <section style={{ width: "75%", display: "flex", justifyContent: "space-around", margin: "auto" }}>
+                {props.activeOne.categories.map((category, idx) => {
+                    return <div className="card w-25" >
+                        <div style={{ textAlign: "center" }} key={idx} value={category} onClick={() => { props.activeProduct(category) }} href="/categories" class="card-body">
+                            <h5 className="card-title">{category.toUpperCase()} </h5>
 
-                        return <Card style={{ width: '550rem' }} onClick={() => { props.activeProduct(category) }}><Card.Body> <Card.Img variant="top" style={{ margin: 'auto', textAlign: 'center', cursor: "pointer" }} src={about3} /><Card.Text style={{ marginTop: "10px", textAlign: 'center', cursor: "pointer", fontFamily: "Handlee" }} key={idx} value={category} onClick={() => props.active(category)} href="/categories">{category.toUpperCase()} </Card.Text></Card.Body></Card>
-                    })}
-                </CardDeck>
+                            <a style={{ backgroundColor: '#C99A5C' }} href="#" className="btn">More</a>
+                        </div>
+                        <div className="card-footer text-muted">#Buy_Local</div>
+                    </div>
+                })}
 
             </section>
 

@@ -9,12 +9,13 @@ import SliderHome from './slider';
 import Products from './products';
 import StatComp from './statisticsComp';
 import WhyUs from './whyUs';
+import { connect } from 'react-redux';
 
 
 
 
 function Home(props) {
-
+console.log(props.state)
     return (
         <main>
 
@@ -31,4 +32,9 @@ function Home(props) {
 
 }
 
-export default Home;
+
+const mapStateToProps = state => ({
+    state: state
+})
+
+export default connect(mapStateToProps)(Home);

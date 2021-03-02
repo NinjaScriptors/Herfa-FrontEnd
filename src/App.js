@@ -13,6 +13,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Home from './components/home/home';
 import UserForm from './components/user/userForm';
 import UserDetails from './components/user/UserDetails';
+import SignUp from "./components/signup/signup";
+import Signin from "./components/signin/signin";
 
 
 
@@ -34,7 +36,7 @@ function App() {
 
         <Route path="/about-us" component={AboutUs} >
         </Route>
-        <Route  exact path="/categories" component={ActiveCategories} >
+        <Route exact path="/categories" component={ActiveCategories} >
         </Route>
         <Route exact path="/categories" component={Product} >
 
@@ -42,6 +44,10 @@ function App() {
         <Route path="/details/:id" component={Details} >
         </Route>
 
+        <Route path="/sign-up" component={SignUp} >
+        </Route>
+        <Route path="/sign-in" component={Signin} >
+        </Route>
 
         <StickyFooter />
       </BrowserRouter>
@@ -49,5 +55,11 @@ function App() {
 
   );
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     profile: state.user.profile
+//   }
+// }
 
 export default App;
