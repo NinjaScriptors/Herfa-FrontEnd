@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import superagent from "superagent";
+import cookie from 'react-cookies';
+import axios from 'axios';
 
 const api = 'https://herfa-app.herokuapp.com/api';
 
@@ -79,22 +81,46 @@ export const addProduct = (obj) => dispatch => {
     })
 }
 
-export const updateDetaileProductdObj = (obj) => (dispatch) => {
+export const updateDetaileProductdObj = (obj) => async(dispatch) => {
+   
     console.log("inside dispatch of updateDetailedObj!!!! ")
-
-    let newObj = { ...obj}
-    newObj = JSON.stringify(newObj);
-    return superagent.put(`${api}/products/${obj._id}`).set({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json'
-    }).send(newObj).then(data => {
-        console.log("we got the data updateProductDetails : data.body =", data.body)
-        if(data.body){
-            
-            dispatch(getDetailedObj(`${obj._id}`))
+    
+    console.log("obj._id",`${obj._id}`)
+    
+    const data = await axios({
+        
+        method: 'put',
+        url: `${api}/products/${obj._id}`,
+        mode: 'cors',
+        data: JSON.stringify(obj),
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie.load('auth')}`
         }
-    });
+        
+        // .then(data => {
+        //         console.log("we got the data updateUserDetails : data.body =", data.data)
+        //         return dispatch(updateUserDetails(data.data))
+        //     })
+        })
+        console.log("we got the data updateUserDetails : data.body =", data.data)
+        return dispatch(updateProductDetails(data.data))
+
+    // let newObj = { ...obj}
+    // newObj = JSON.stringify(newObj);
+    // return superagent.put(`${api}/products/${obj._id}`).set({
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Credentials": true,
+    //     'Content-Type': 'application/json'
+    // }).send(newObj).then(data => {
+    //     console.log("we got the data updateProductDetails : data.body =", data.body)
+    //     if(data.body){
+            
+    //         dispatch(getDetailedObj(`${obj._id}`))
+    //     }
+    // });
 }
 
 // export const getSearchProducts = (name) => (dispatch) => {

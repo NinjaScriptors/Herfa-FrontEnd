@@ -36,12 +36,12 @@ const UserForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateDetailedObj({_id:props.user._id, fullName, email:props.user.email, name:props.user.name, password, isSeller }))
+        dispatch(updateDetailedObj({_id:props.user._id, fullName, name, email, password, isSeller}))
         // dispatch(getDetailedObj("603bfe782d208700158ebecd"));
         dispatch(getRemoteData());
         // let fullName = `${firstName} ${lastName}`;
         // console.log('handleSubmit >>>>',password, isSeller, fullName)
-        // props.updateDetailedObj({ fullName, email, name, password, isSeller })
+        // props.updateDetailedObj(props.user)
         console.log('handleSubmit >>>>', fullName, email, name, password, isSeller)
 
     }
@@ -86,7 +86,7 @@ const UserForm = props => {
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj("603bfe782d208700158ebecd"));
+            await dispatch(getDetailedObj(props.user._id));
             // await dispatch(updateDetailedObj(props.user));
 
         };

@@ -42,7 +42,7 @@ const ProductForm = props => {
         e.preventDefault();
         // let fullName = `${firstName} ${lastName}`;
         console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description, rating, numReviews)
-        props.addProductInfo({name, price, image, category, brand, countInStock, description, rating, numReviews})
+        props.addProductInfo({_id:props.product._id,name, price, image, category, brand, countInStock, description, rating, numReviews})
 
     }
 

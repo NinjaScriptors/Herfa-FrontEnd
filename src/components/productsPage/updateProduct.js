@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
-import { getDetailedObj, updateProductDetails } from "../../store/productsStore/productsSlicer";
+import { getDetailedObj, updateProductDetails, updateDetaileProductdObj } from "../../store/productsStore/productsSlicer";
 
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -40,8 +40,9 @@ const ProductFormUpdate = props => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description, rating, numReviews)
-        props.updateProductInfo({name, price, image, category, brand, countInStock, description, rating, numReviews})
+        dispatch(updateDetaileProductdObj({_id:props.product._id, name, price, category, brand, countInStock, description}));
+        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description)
+        dispatch(getRemoteData());
 
     }
 
@@ -78,9 +79,13 @@ const ProductFormUpdate = props => {
 
 
     useEffect(() => {
+
+        // const { id } = props.match.params;
+    // console.log('param', props.match.params)
+
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj("603e3b8c865c5300150ffd09"));
+            await dispatch(getDetailedObj(props.product._id));
         };
         fetchData();
     }, [dispatch]);
@@ -94,8 +99,8 @@ const ProductFormUpdate = props => {
             <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' }}>
 
                 <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} />
-                <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} />
+                {/* <TextField onChange={handleChange} name="rating" id="rating-disabled" label="Rating" value={props.product.rating} /> */}
+                {/* <TextField onChange={handleChange} name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} /> */}
                 <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
                 <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
                 <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
@@ -115,8 +120,8 @@ const mapStateToProps = (state) => ({
     product: state.products.productDetail,
 });
 
-const mapDispatchToProps = (dispatch, getState) => ({
-    updateProductInfo: (productInfo) => dispatch(updateProductDetails(productInfo))
-})
+// const mapDispatchToProps = (dispatch, getState) => ({
+//     updateProductInfo: (productInfo) => dispatch(updateProductDetails(productInfo))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductFormUpdate);
+export default connect(mapStateToProps)(ProductFormUpdate);

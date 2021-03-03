@@ -26,46 +26,47 @@ function App() {
   return (
     <>
     {/* <ProductForm/> */}
-    {/* <ProductFormUpdate/> */}
-    {/* <BrowserRouter> */}
+
       <BrowserRouter>
-        <Header />
+    <ProductFormUpdate/>
+        {/* <Header /> */}
 
         {/* <Home /> */}
         {/* <UserForm/> */}
 
-        <Route exact path="/chat" component={ChatApp} >
+        {/* <Route exact path="/chat" component={ChatApp} >
         </Route>
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
-        </Route>
+        </Route> */}
         <Route exact path="/" component={Home}>
         </Route> 
 
         {/* < Categories /> */}
 
-
+{/* 
         <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route path="/our-team" component={TeamPage} >
-        </Route>
+        </Route> */}
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
         <Route exact path="/categories" component={Product} >
 
         </Route>
-        <Route path="/details/:id" component={Details} >
+      
+        {/* <Route path="/details/:id" component={Details} >
         </Route>
 
         <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
-        </Route>
-         {/* <Route path="/sign-in" component={Signin} >
-        </Route>  */}
+        </Route> */}
+         <Route path="/sign-in" component={Signin} >
+        </Route> 
 
-        <StickyFooter />
+        {/* <StickyFooter /> */}
       </BrowserRouter>
 
     </>

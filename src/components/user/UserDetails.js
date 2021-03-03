@@ -119,7 +119,7 @@ const UserDetails = props => {
     );
 }
 const mapStateToProps = (state) => ({
-    user: state.users.userDetail,
+    userInfo: state.users.userDetail,
 });
 
 export default connect(mapStateToProps)(UserDetails);
