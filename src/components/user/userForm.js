@@ -2,10 +2,12 @@ import { Container } from '@material-ui/core';
 import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
+import { getDetailedObj, getRemoteData } from "../../store/userStore/userSlicer";
+import { updateUserDetails, updateDetailedObj } from "../../store/userStore/userSlicer";
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
+
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
 
@@ -34,9 +36,13 @@ const UserForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(updateDetailedObj({_id:props.user._id, fullName, email:props.user.email, name:props.user.name, password, isSeller }))
+        // dispatch(getDetailedObj("603bfe782d208700158ebecd"));
+        dispatch(getRemoteData());
         // let fullName = `${firstName} ${lastName}`;
-        console.log('handleSubmit >>>>',password, isSeller, fullName)
-        props.updateUserInfo({fullName, email, name, password, isSeller})
+        // console.log('handleSubmit >>>>',password, isSeller, fullName)
+        // props.updateDetailedObj({ fullName, email, name, password, isSeller })
+        console.log('handleSubmit >>>>', fullName, email, name, password, isSeller)
 
     }
 
@@ -46,13 +52,13 @@ const UserForm = props => {
             let newEmail = e.target.value;
             setEmail(newEmail);
         }
+        if (e.target.name == "name") {
+            let newname = e.target.value;
+            setName(newname);
+        }
         if (e.target.name == "isSeller") {
             let newSel = e.target.value;
             setname(newSel);
-        }
-        if (e.target.name == "name") {
-            let newname = e.target.value;
-            setname(newname);
         }
         if (e.target.name == "password") {
             let newPass = e.target.value;
@@ -81,26 +87,29 @@ const UserForm = props => {
         const fetchData = async () => {
             setState(!state);
             await dispatch(getDetailedObj("603bfe782d208700158ebecd"));
+            // await dispatch(updateDetailedObj(props.user));
+
         };
         fetchData();
     }, [dispatch]);
 
 
     return (
-      
+
         <Container>
             <h1>Inside User Form</h1>
 
-            <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
                 <TextField onChange={handleChange} name="fullName" id="name-input" label="Name" defaultValue="" />
-                <TextField disabled name="email" id="email-disabled" label="Email" defaultValue={props.user.email} />
-                <TextField disabled name="name" id="username-disabled" label="Username" defaultValue={props.user.name} />
+                <TextField onChange={handleChange}  name="email" id="email-disabled" label="Email" />
+                {console.log("props.user.email ",props.user.email)}
+                <TextField onChange={handleChange}  name="name" id="username-disabled" label="Username"  />
                 <TextField onChange={handleChange} name="password" id="passowrd-input" label="Password" defaultValue="" />
                 <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" />
                 <Button type="submit">Submit</Button>
             </form>
         </Container>
-      
+
     )
 }
 
@@ -109,8 +118,8 @@ const mapStateToProps = (state) => ({
     user: state.users.userDetail,
 });
 
-const mapDispatchToProps = (dispatch, getState) => ({
-    updateUserInfo: (userInfo) => dispatch(updateUserDetails(userInfo))
-})
+// const mapDispatchToProps = (dispatch, getState) => ({
+//     updateUserInfo: (userInfo) => dispatch(updateUserDetails(userInfo))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
+export default connect(mapStateToProps)(UserForm);

@@ -32,7 +32,7 @@ const form = createSlice({
         updateUserDetails(state, action) {
             console.log('from the updateUserDetails object', action.payload)
             state.userDetail = action.payload;
-            console.log('state', state);
+            console.log('state.userDetail', state.userDetail);
         },
     },
 });
@@ -103,38 +103,43 @@ export const getDetailedObj = (id) => (dispatch) => {
     // })
 }
 
-    export const updateDetailedObj = (obj) => (dispatch) => {
+    export const updateDetailedObj = (obj) => async (dispatch) => {
     //     console.log("inside dispatch of updateDetailedObj!!!! ")
 
-    //     let newObj = { ...obj}
-    //     newObj = JSON.stringify(newObj);
-    //     return superagent.put(`${api}/users/${obj._id}`).set({
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Credentials": true,
-    //         'Content-Type': 'application/json'
-    //     }).send(newObj).then(data => {
-    //         console.log("we got the data updateUserDetails : data.body =", data.body)
-    //         if(data.body){
+        // let newObj = { ...obj}
+        // newObj = JSON.stringify(newObj);
+        // return superagent.put(`${api}/users/${obj._id}`).set({
+        //     "Access-Control-Allow-Origin": "*",
+        //     "Access-Control-Allow-Credentials": true,
+        //     'Content-Type': 'application/json'
+        // }).send(newObj).then(data => {
+        //     console.log("we got the data updateUserDetails : data.body =", data.body)
+        //     if(data.body){
                 
-    //             dispatch(updateUserDetails(data.body))
-    //         }
-    //     });
+        //         dispatch(updateUserDetails(data.body))
+        //     }
+        // });
 
-        axios({
+        console.log("obj._id",`${obj._id}`)
+
+        const data = await axios({
+
             method: 'put',
             url: `${api}/users/${obj._id}`,
             mode: 'cors',
+            data: JSON.stringify(obj),
             headers: {
-
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
                 'Content-Type': 'application/json'
             }
-                .then(data => {
-                    console.log("we got the data : data.body =", data.data)
-                    return dispatch(updateUserDetails(data.data))
-                })
+            
+                // .then(data => {
+                //     console.log("we got the data updateUserDetails : data.body =", data.data)
+                //     return dispatch(updateUserDetails(data.data))
+                // })
         })
+        return dispatch(updateUserDetails(data.data))
     }
 
     export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = form.actions;

@@ -24,7 +24,8 @@ function App() {
   return (
     <>
     {/* <ProductForm/> */}
-    <ProductFormUpdate/>
+    {/* <ProductFormUpdate/> */}
+    <BrowserRouter>
       {/* <BrowserRouter>
         <Header /> */}
 
@@ -55,9 +56,11 @@ function App() {
         </Route>
         <Route path="/sign-in" component={Signin} >
         </Route> */}
+         <Route path="/sign-in" component={Signin} >
+        </Route> 
 
-        {/* <StickyFooter />
-      </BrowserRouter> */}
+        {/* <StickyFooter /> */}
+      </BrowserRouter>
       
     </>
 
