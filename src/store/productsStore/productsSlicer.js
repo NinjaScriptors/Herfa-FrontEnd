@@ -32,7 +32,17 @@ const products = createSlice({
         setsearchProducts(state, action) {
             console.log("action payload in produc slicerrrrrrrrr",action.payload)
             state.filetredProduct = action.payload.data.products
-        }
+        },
+        // addProduct(state, action) {
+        //     console.log('from the updateUserDetails object', action.payload)
+        //     state.userForm = action.payload;
+        //     console.log('state', state);
+        // },
+        updateProductDetails(state, action) {
+            console.log('from the updateProductDetails object', action.payload)
+            state.productDetail = action.payload;
+            console.log('state', state);
+        },
     },
 });
 
@@ -58,6 +68,35 @@ export const getDetailedObj = (id) => (dispatch) => {
     });
 }
 
+export const addProduct = (obj) => dispatch => {
+    return superagent.post(`${api}/products`).set({"Access-Control-Allow-Origin": "*",
+    'Content-Type': 'application/json',}).send(JSON.stringify(obj)).then(data => {
+        if(data.body){
+
+            dispatch(getRemoteData());
+        }
+        console.log("we got the data addProduct : data.body =", data.body)
+    })
+}
+
+export const updateDetaileProductdObj = (obj) => (dispatch) => {
+    console.log("inside dispatch of updateDetailedObj!!!! ")
+
+    let newObj = { ...obj}
+    newObj = JSON.stringify(newObj);
+    return superagent.put(`${api}/products/${obj._id}`).set({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json'
+    }).send(newObj).then(data => {
+        console.log("we got the data updateProductDetails : data.body =", data.body)
+        if(data.body){
+            
+            dispatch(getDetailedObj(`${obj._id}`))
+        }
+    });
+}
+
 // export const getSearchProducts = (name) => (dispatch) => {
 //     console.log("inside dispatch of getDetailedObj!!!! ")
 
@@ -67,6 +106,6 @@ export const getDetailedObj = (id) => (dispatch) => {
 //     });
 // }
 
-export const { setProducts, setProductDetails, activeProduct, setsearchProducts } = products.actions;
+export const { setProducts, setProductDetails, activeProduct, setsearchProducts, updateProductDetails } = products.actions;
 
 export default products.reducer;

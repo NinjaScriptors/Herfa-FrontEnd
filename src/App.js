@@ -6,35 +6,42 @@ import StickyFooter from './components/Footer'
 import AboutUs from './components/About-us'
 import Product from './components/productsPage/products'
 import ActiveCategories from './components/categoriesPage/categories';
-import Details from './components/productsPage/ProductDetails'
+import Details from './components/productsPage/ProductDetails';
 import User from './components/user/users';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Home from './components/home/home';
 import UserForm from './components/user/userForm';
+import ProductForm from './components/productsPage/productForm';
 import UserDetails from './components/user/UserDetails';
 import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
+import ProductFormUpdate from './components/productsPage/updateProduct'
 
 
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        {/* <Home /> */}
+    {/* <ProductForm/> */}
+    <ProductFormUpdate/>
+      {/* <BrowserRouter>
+        <Header /> */}
 
-        <Route exact path="/user-details" component={UserDetails} >
+        {/* <Home /> */}
+        <UserForm/>
+
+        {/* <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
         </Route>
         <Route exact path="/" component={Home}>
-        </Route>
+        </Route> */}
+
         {/* < Categories /> */}
 
 
-        <Route path="/about-us" component={AboutUs} >
+        {/* <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
@@ -47,10 +54,10 @@ function App() {
         <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
-        </Route>
+        </Route> */}
 
-        <StickyFooter />
-      </BrowserRouter>
+        {/* <StickyFooter />
+      </BrowserRouter> */}
       
     </>
 

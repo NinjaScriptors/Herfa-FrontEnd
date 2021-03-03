@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardDeck } from 'react-bootstrap';
 import { Container, Button } from '@material-ui/core';
-import { map } from 'jquery';
+// import { map } from 'jquery';
 import { connect } from 'react-redux';
 
 
