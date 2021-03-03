@@ -19,7 +19,7 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </section>
-               
+               <main className= "main-about">
                 <section className="about-us">
                     <div className="about-card">
                         <div className="about-img">
@@ -38,7 +38,7 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </section>
-                <div className="reverse-sec">
+               
                     <section className="about-us">
                         <div className="about-card">
                             <div className="about-desc">
@@ -60,7 +60,7 @@ class AboutUs extends React.Component {
 
                     </section>
 
-                </div>
+               
                 <section className="about-us">
                     <div className="about-card">
                         <div className="about-img">
@@ -79,7 +79,7 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </section>
-
+                </main>
 
 
             </>

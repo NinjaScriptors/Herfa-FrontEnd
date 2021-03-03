@@ -36,10 +36,9 @@ const UserDetails = props => {
     }, [dispatch]);
 
     return (
-
         <>
             <header>
-                <section className="main-banner" style={{
+                {/* <section className="main-banner" style={{
                     backgroundImage: "../../assets/home-banner2.jpg",
                     height: "100%",
                     backgroundSize: "cover",
@@ -56,10 +55,32 @@ const UserDetails = props => {
                         <div className="title">
                             <h1>User Details</h1>
                         </div>
+                    </div>
+                </section> */}
+                <section className="main-banner" style={{
+                    backgroundImage: "../../assets/home-banner2.jpg",
 
+                    height: "100%",
+                    backgroundSize: "cover",
+                    position: "relative",
+                    backgroundAttachment: "fixed",
+                    fontFamily: "Roboto",
+                    backgroundPosition: "center",
+                    fontWeight: "100",
+                    alignItems: "center", flexDirection: "column"
+                }}>
+                    <div className="parallex">
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h1>User Details</h1>
+                        </div>
                     </div>
                 </section>
             </header>
+
+
+
             <main>
                 <Container style={{ display: "flex", alignItems: "center", marginTop: "30px" }}>
                     <MDBCard style={{ maxWidth: '750px', margin: "auto" }}>
@@ -103,4 +124,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(UserDetails);
 
+{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }
 {/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }

@@ -19,6 +19,7 @@ import Signin from "./components/signin/signin";
 import ProductFormUpdate from './components/productsPage/updateProduct'
 
 import ChatApp from "./components/chatApp/App/index"
+import TeamPage from "./components/team";
 
 
 function App() {
@@ -26,12 +27,12 @@ function App() {
     <>
     {/* <ProductForm/> */}
     {/* <ProductFormUpdate/> */}
-    <BrowserRouter>
-      {/* <BrowserRouter>
-        <Header /> */}
+    {/* <BrowserRouter> */}
+      <BrowserRouter>
+        <Header />
 
         {/* <Home /> */}
-        <UserForm/>
+        {/* <UserForm/> */}
 
         <Route exact path="/chat" component={ChatApp} >
         </Route>
@@ -45,7 +46,9 @@ function App() {
         {/* < Categories /> */}
 
 
-        {/* <Route path="/about-us" component={AboutUs} >
+        <Route path="/about-us" component={AboutUs} >
+        </Route>
+        <Route path="/our-team" component={TeamPage} >
         </Route>
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
@@ -58,11 +61,11 @@ function App() {
         <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
-        </Route> */}
-         <Route path="/sign-in" component={Signin} >
-        </Route> 
+        </Route>
+         {/* <Route path="/sign-in" component={Signin} >
+        </Route>  */}
 
-        {/* <StickyFooter /> */}
+        <StickyFooter />
       </BrowserRouter>
 
     </>
