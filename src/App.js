@@ -15,7 +15,7 @@ import UserForm from './components/user/userForm';
 import UserDetails from './components/user/UserDetails';
 import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
-
+import TeamPage from "./components/team";
 
 
 function App() {
@@ -35,6 +35,8 @@ function App() {
 
 
         <Route path="/about-us" component={AboutUs} >
+        </Route>
+        <Route path="/our-team" component={TeamPage} >
         </Route>
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>

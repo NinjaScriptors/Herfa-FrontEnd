@@ -5,11 +5,11 @@ import { Container, Grid, Button } from '@material-ui/core';
 function OurStoryGrid() {
     return (
         <section id="our-story-section">
-            <Container>
-                <Grid container item xs={12} spacing={2}>
-                    <Grid item xs={6}><img src="https://cdn.shopify.com/s/files/1/0070/7032/files/crafting-workshop-sell-handmade-goods-online.jpg?v=1555616932" /></Grid>
-                    <Grid item xs={3}>
-                        <h3>Why Buy Local ?</h3>
+            <Container >
+                <Grid container item xs={10} spacing={2} style = {{margin: "auto"}}>
+                    <Grid item xs={7}><img style={{  boxShadow: "0 0 25px #232323"}} src="https://i1.wp.com/cdn-9.tubefollow.com/photos/l/1444776793352608939/queenrania-love-jo-1444776793352608939.jpg" /></Grid>
+                    <Grid item xs={5}>
+                        <h3 style={{fontWeight : "400"}}>Why Buy Local ?</h3>
                         <hr />
                         <p>
                             <b>Quality</b> Nothing compares to fresh local produce and locally crafted goods.

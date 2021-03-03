@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {navLink} from "react-router-dom"
-
+import "../../style/product.scss"
 
 import {
     MDBBtn,
@@ -92,23 +92,12 @@ const Details = props => {
     return (
         <>
             <header>
-                <section className="main-banner" style={{
-                    backgroundImage: "../../assets/home-banner2.jpg",
-
-                    height: "100%",
-                    backgroundSize: "cover",
-                    position: "relative",
-                    backgroundAttachment: "fixed",
-                    backgroundPosition: "center",
-                    fontFamily: 'Handlee',
-                    fontWeight: "100",
-                    alignItems: "center"
-                }}>
+                <section className="main-product" >
                     <div className="parallex">
                     </div>
                     <div className="row">
                         <div className="title">
-                            <h1>Products Details</h1>
+                            <h1>Product Details</h1>
                         </div>
 
                     </div>
@@ -119,7 +108,7 @@ const Details = props => {
                 <Row style={{ margin: "auto", alignItems: "center", display: "flex", justifyContent: "space-around" }}>
                     <Col xs={6} md={4} >
                         <div style={{ display: "flex", flexDirection: "column " }}>
-                            <Image src="https://images.unsplash.com/photo-1541944743827-e04aa6427c33?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=926&q=80" rounded style={{ overflow: "hidden", height: 300, paddingTop: "15px" }} />
+                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 300, paddingTop: "15px" }} />
                             <span style={{ display: "flex", flexDirection: "row", fontFamily: "Handlee", marginTop: 3 }}>
                                 <Rating
                                     name="hover-feedback"
@@ -147,7 +136,7 @@ const Details = props => {
 
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div>
-                            <navLink to="/reviews"> <MDBIcon icon="comments" className="mr-1" /></navLink>
+                          <MDBIcon icon="comments" className="mr-1" />
                                 {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
                                 
                             </div>
@@ -172,9 +161,9 @@ const Details = props => {
                     </Jumbotron>
                 </Row>
             </Container>
-            <div className={classRev.root} style={{ margin: 'auto' }}>
-                <SnackbarContent style={{ backgroundColor: "#929FBA", fontFamily: "Handlee", color: "#333" }} action={action}
-                    message={props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "}
+            <div className={classRev.root} style={{ margin: 'auto', paddingBottom : "20px" }}>
+                <SnackbarContent style={{ backgroundColor: "#C99A5C", fontFamily: "Handlee", color: "#333" }} action={action}
+                    message={props.product.reviews ? props.product.reviews.map(rev => rev.comment):"No Comment Yet !"}
                 />
             </div>
 
