@@ -25,10 +25,10 @@ import TeamPage from "./components/team";
 function App() {
   return (
     <>
-    {/* <ProductForm/> */}
+      {/* <ProductForm/> */}
 
       <BrowserRouter>
-    <ProductFormUpdate/>
+        <ProductFormUpdate />
         {/* <Header /> */}
 
         {/* <Home /> */}
@@ -41,11 +41,11 @@ function App() {
         <Route exact path="/user-profile-update/:id" component={UserForm} >
         </Route> */}
         <Route exact path="/" component={Home}>
-        </Route> 
+        </Route>
 
         {/* < Categories /> */}
 
-{/* 
+        {/* 
         <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route path="/our-team" component={TeamPage} >
@@ -55,7 +55,7 @@ function App() {
         <Route exact path="/categories" component={Product} >
 
         </Route>
-      
+
         {/* <Route path="/details/:id" component={Details} >
         </Route>
 
@@ -63,8 +63,8 @@ function App() {
         </Route>
         <Route path="/sign-in" component={Signin} >
         </Route> */}
-         <Route path="/sign-in" component={Signin} >
-        </Route> 
+        <Route path="/sign-in" component={Signin} >
+        </Route>
 
         {/* <StickyFooter /> */}
       </BrowserRouter>

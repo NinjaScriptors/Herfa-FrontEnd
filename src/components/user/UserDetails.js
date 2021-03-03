@@ -124,5 +124,3 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(UserDetails);
 
-{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }
-{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }

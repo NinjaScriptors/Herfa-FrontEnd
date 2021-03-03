@@ -23,8 +23,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductFormUpdate = props => {
-    const dispatch = useDispatch();
     const classes = useStyles();
+    const dispatch = useDispatch();
+    // const { id } = props.match.params;
+
+    useEffect(() => {
+
+    // console.log('param', props.match.params)
+
+        const fetchData = async () => {
+            setState(!state);
+            await dispatch(getDetailedObj(props.product._id));
+        };
+        fetchData();
+    }, [dispatch]);
+
 
     const [state, setState] = useState(false);
     const [category, setCategory] = useState("");
@@ -40,8 +53,8 @@ const ProductFormUpdate = props => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(updateDetaileProductdObj({_id:props.product._id, name, price, category, brand, countInStock, description}));
-        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description)
+        dispatch(updateDetaileProductdObj({_id:props.product._id, seller:props.product.seller, category, countInStock, brand, description, price,name}));
+        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description,props)
         dispatch(getRemoteData());
 
     }
@@ -59,10 +72,10 @@ const ProductFormUpdate = props => {
             let newname = e.target.value;
             setName(newname);
         }
-        if (e.target.name == "image") {
-            let newPass = e.target.value;
-            setImage(newPass)
-        }
+        // if (e.target.name == "image") {
+        //     let newPass = e.target.value;
+        //     setImage(newPass)
+        // }
         if (e.target.name == "brand") {
             let newFirstName = e.target.value;
             setBrand(newFirstName)
@@ -78,17 +91,7 @@ const ProductFormUpdate = props => {
     }
 
 
-    useEffect(() => {
-
-        // const { id } = props.match.params;
-    // console.log('param', props.match.params)
-
-        const fetchData = async () => {
-            setState(!state);
-            await dispatch(getDetailedObj(props.product._id));
-        };
-        fetchData();
-    }, [dispatch]);
+    
 
 
     return (

@@ -10,7 +10,6 @@ const products = createSlice({
     initialState: {
         products: [],
         filetredProduct: [],
-        productsInCart: [],
         productDetail: {},
 
     },
@@ -32,18 +31,26 @@ const products = createSlice({
             state.productDetail = action.payload;
         },
         setsearchProducts(state, action) {
-            console.log("action payload in produc slicerrrrrrrrr",action.payload)
+            console.log("action payload in produc slicerrrrrrrrr", action.payload)
             state.filetredProduct = action.payload.data.products
         },
-        // addProduct(state, action) {
-        //     console.log('from the updateUserDetails object', action.payload)
-        //     state.userForm = action.payload;
-        //     console.log('state', state);
-        // },
-        updateProductDetails(state, action) {
-            console.log('from the updateProductDetails object', action.payload)
+        addProduct(state, action) {
+            console.log('from the updateUserDetails object', action.payload)
+            // state.userForm = action.payload;
             state.productDetail = action.payload;
             console.log('state', state);
+        },
+        updateProductDetails(state, action) {
+            state.productDetail = state.products.find(e=>{
+              return   e._id == action.payload._id
+            })
+            // state.productDetail = action.payload;
+            // if (!exist && action.payload.inStock > 0) {
+            //     state.productsUp.push(action.payload);
+            // }
+            // console.log('from the updateProductDetails object', action.payload)
+            // state.productDetail = action.payload;
+            // console.log('state.productDetail', state.productDetail);
         },
     },
 });
@@ -70,27 +77,15 @@ export const getDetailedObj = (id) => (dispatch) => {
     });
 }
 
-export const addProduct = (obj) => dispatch => {
-    return superagent.post(`${api}/products`).set({"Access-Control-Allow-Origin": "*",
-    'Content-Type': 'application/json',}).send(JSON.stringify(obj)).then(data => {
-        if(data.body){
-
-            dispatch(getRemoteData());
-        }
-        console.log("we got the data addProduct : data.body =", data.body)
-    })
-}
-
-export const updateDetaileProductdObj = (obj) => async(dispatch) => {
-   
+export const addProduct = (obj) => async (dispatch) => {
     console.log("inside dispatch of updateDetailedObj!!!! ")
-    
-    console.log("obj._id",`${obj._id}`)
-    
+
+    // console.log("obj._id", `${obj._id}`)
+
     const data = await axios({
-        
-        method: 'put',
-        url: `${api}/products/${obj._id}`,
+
+        method: 'post',
+        url: `${api}/products`,
         mode: 'cors',
         data: JSON.stringify(obj),
         headers: {
@@ -99,14 +94,55 @@ export const updateDetaileProductdObj = (obj) => async(dispatch) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${cookie.load('auth')}`
         }
-        
+
+       
+    })
+    console.log("we got the data updateUserDetails : data.body =", data.data)
+    // return dispatch(updateProductDetails(data.data))
+    if (data.data) {
+
+        dispatch(getRemoteData());
+    }
+
+}
+// export const addProduct = (obj) => dispatch => {
+//     return superagent.post(`${api}/products`).set({"Access-Control-Allow-Origin": "*",
+//     'Content-Type': 'application/json',}).send(JSON.stringify(obj)).then(data => {
+//         if(data.body){
+
+//             dispatch(getRemoteData());
+//         }
+//         console.log("we got the data addProduct : data.body =", data.body)
+//     })
+// }
+
+export const updateDetaileProductdObj = (obj) => async (dispatch) => {
+    console.log("obj", `${obj}`)
+
+    console.log("obj._id", `${obj._id}`)
+    console.log("inside dispatch of updateDetailedObj!!!! ")
+
+
+    const data = await axios({
+
+        method: 'put',
+        url: `${api}/products/${obj._id}`,
+        mode: 'no-cors',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie.load('auth')}`
+        },
+        data: JSON.stringify(obj),
+
         // .then(data => {
-        //         console.log("we got the data updateUserDetails : data.body =", data.data)
-        //         return dispatch(updateUserDetails(data.data))
-        //     })
-        })
-        console.log("we got the data updateUserDetails : data.body =", data.data)
-        return dispatch(updateProductDetails(data.data))
+        //     console.log("we got the data updateUserDetails : data.data =", data.data)
+        //     return dispatch(updateProductDetails(data.data))
+        // }).catch(err => { console.log(err) })
+    })
+    console.log("we got the data updateUserDetails : data.body =", data)
+    return dispatch(updateProductDetails(data.data));
 
     // let newObj = { ...obj}
     // newObj = JSON.stringify(newObj);
@@ -117,7 +153,7 @@ export const updateDetaileProductdObj = (obj) => async(dispatch) => {
     // }).send(newObj).then(data => {
     //     console.log("we got the data updateProductDetails : data.body =", data.body)
     //     if(data.body){
-            
+
     //         dispatch(getDetailedObj(`${obj._id}`))
     //     }
     // });

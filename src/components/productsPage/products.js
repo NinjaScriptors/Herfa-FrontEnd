@@ -40,8 +40,6 @@ const useStyles = makeStyles({
 });
 
 
-// import { updateInstockdecrement, deleteProduct } from '../rtk-store/cartSlicer'
-
 
 const Product = props => {
     const classes = useStyles();
