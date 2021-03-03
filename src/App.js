@@ -18,6 +18,7 @@ import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
 import ProductFormUpdate from './components/productsPage/updateProduct'
 
+import ChatApp from "./components/chatApp/App/index"
 
 
 function App() {
@@ -32,12 +33,14 @@ function App() {
         {/* <Home /> */}
         <UserForm/>
 
-        {/* <Route exact path="/user-details" component={UserDetails} >
+        <Route exact path="/chat" component={ChatApp} >
+        </Route>
+        <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
         </Route>
         <Route exact path="/" component={Home}>
-        </Route> */}
+        </Route> 
 
         {/* < Categories /> */}
 
@@ -61,7 +64,7 @@ function App() {
 
         {/* <StickyFooter /> */}
       </BrowserRouter>
-      
+
     </>
 
   );

@@ -146,8 +146,8 @@ function SignInSide(props) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <NavLink to='/' variant="body2">
-            <Button
+            {/* <NavLink to='/' variant="body2"> */}
+            <Button 
               type="submit"
               fullWidth
               variant="contained"
@@ -156,7 +156,7 @@ function SignInSide(props) {
             >
               Sign In
             </Button >
-            </NavLink>
+            {/* </NavLink> */}
 
             <Grid container>
               <Grid item xs>

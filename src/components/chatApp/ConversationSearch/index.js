@@ -3,6 +3,7 @@ import './ConversationSearch.css';
 
 export default function ConversationSearch() {
     return (
+      // left bar >> search messages
       <div className="conversation-search">
         <input
           type="search"

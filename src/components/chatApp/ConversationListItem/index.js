@@ -11,6 +11,7 @@ export default function ConversationListItem(props) {
     const { photo, name, text } = props.data;
 
     return (
+      // for the left bar >> image, name, and ...
       <div className="conversation-list-item">
         <img className="conversation-photo" src={photo} alt="conversation" />
         <div className="conversation-info">
