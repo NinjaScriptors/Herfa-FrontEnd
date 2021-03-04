@@ -41,16 +41,16 @@ const products = createSlice({
             console.log('state', state);
         },
         updateProductDetails(state, action) {
-            state.productDetail = state.products.find(e=>{
-              return   e._id == action.payload._id
-            })
+            // state.productDetail = state.products.find(e=>{
+            //   return   e._id == action.payload._id
+            // })
             // state.productDetail = action.payload;
             // if (!exist && action.payload.inStock > 0) {
             //     state.productsUp.push(action.payload);
             // }
-            // console.log('from the updateProductDetails object', action.payload)
-            // state.productDetail = action.payload;
-            // console.log('state.productDetail', state.productDetail);
+            console.log('from the updateProductDetails object', action.payload)
+            state.productDetail = action.payload;
+            console.log('state.productDetail', state.productDetail);
         },
     },
 });
@@ -117,9 +117,11 @@ export const addProduct = (obj) => async (dispatch) => {
 // }
 
 export const updateDetaileProductdObj = (obj) => async (dispatch) => {
+    // cookie.load('pro-id');
+   
+    console.log("obj._id", `${obj._id}`)
     console.log("obj", `${obj}`)
 
-    console.log("obj._id", `${obj._id}`)
     console.log("inside dispatch of updateDetailedObj!!!! ")
 
 
@@ -127,7 +129,7 @@ export const updateDetaileProductdObj = (obj) => async (dispatch) => {
 
         method: 'put',
         url: `${api}/products/${obj._id}`,
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,

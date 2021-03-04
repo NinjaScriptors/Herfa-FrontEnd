@@ -17,7 +17,9 @@ import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {navLink} from "react-router-dom"
-import "../../style/product.scss"
+import "../../style/product.scss";
+import { Link } from 'react-router-dom';
+
 
 import {
     MDBBtn,
@@ -31,6 +33,8 @@ import {
     MDBIcon,
 } from "mdbreact";
 import { CenterFocusStrong } from "@material-ui/icons";
+import { saveCookies } from "superagent";
+import cookie from 'react-cookies';
 
 const labels = {
     0.5: 'Useless',
@@ -78,6 +82,7 @@ const Details = props => {
     const classRev = useStyleReview();
 
     const { id } = props.match.params;
+    // cookie.save('pro-id',id);
     console.log('param', props.match.params)
 
     const dispatch = useDispatch();
@@ -159,6 +164,7 @@ const Details = props => {
 
                     </Jumbotron>
                 </Row>
+                <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-update/${props.product._id}`}>Update Details</Link>
             </Container>
             <div className={classRev.root} style={{ margin: 'auto', paddingBottom : "20px" }}>
                 <SnackbarContent style={{ backgroundColor: "#C99A5C", fontFamily: "Handlee", color: "#333" }} action={action}

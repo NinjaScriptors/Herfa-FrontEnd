@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const ProductFormUpdate = props => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    // const { id } = props.match.params;
+    const { id } = props.match.params;
 
     useEffect(() => {
 
@@ -33,7 +33,7 @@ const ProductFormUpdate = props => {
 
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj(props.product._id));
+            await dispatch(getDetailedObj(id));
         };
         fetchData();
     }, [dispatch]);
@@ -119,7 +119,8 @@ const ProductFormUpdate = props => {
 }
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+    // proId: ownProps.match.params.id,
     product: state.products.productDetail,
 });
 

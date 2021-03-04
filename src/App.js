@@ -28,7 +28,7 @@ function App() {
       {/* <ProductForm/> */}
 
       <BrowserRouter>
-        <ProductFormUpdate />
+        {/* <ProductFormUpdate /> */}
         {/* <Header /> */}
 
         {/* <Home /> */}
@@ -40,8 +40,8 @@ function App() {
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
         </Route> */}
-        <Route exact path="/" component={Home}>
-        </Route>
+        {/* <Route exact path="/" component={Home}>
+        </Route> */}
 
         {/* < Categories /> */}
 
@@ -56,10 +56,13 @@ function App() {
 
         </Route>
 
-        {/* <Route path="/details/:id" component={Details} >
+        <Route path="/details/:id" component={Details} >
         </Route>
 
-        <Route path="/sign-up" component={SignUp} >
+        <Route path="/details-update/:id" component={ProductFormUpdate} >
+        </Route>
+
+        {/* <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
         </Route> */}
