@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
-import { getDetailedObj } from "../../store/productsStore/productsSlicer";
+import { getDetailedObj, addProduct } from "../../store/productsStore/productsSlicer";
 
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import { PinDropSharp } from '@material-ui/icons';
 import { getRemoteData } from '../../store/productsStore/productsSlicer';
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
-
+import "../../style/productForm.scss"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,7 +42,7 @@ const ProductForm = props => {
         e.preventDefault();
         // let fullName = `${firstName} ${lastName}`;
         console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description, rating, numReviews)
-        props.addProductInfo({name, price, image, category, brand, countInStock, description, rating, numReviews})
+        dispatch(addProduct({seller:props.product.seller, name, price, category, brand, countInStock, description}))
 
     }
 
@@ -81,7 +81,7 @@ const ProductForm = props => {
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
-            // await dispatch(getDetailedObj());
+            // await dispatch(getDetailedObj(props.product._id));
             await dispatch(getRemoteData());
 
         };
@@ -90,15 +90,24 @@ const ProductForm = props => {
 
 
     return (
-     
-        <Container>
-            <h1>Inside Add Product Form</h1>
 
-            <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' }}>
+
+        <section className="main-product-form">
+                <div className="parallex">
+                </div>
+                <div className="row">
+                    <div className="title">
+                        {/* <h1>Update Profile</h1> */}
+                    </div>
+                </div>
+        <Container className="main-product-form">
+            <h1>Add Product</h1>
+
+            <form onSubmit={handleSubmit }style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "330px" , color: "white"}}>
 
                 <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} />
-                <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} />
+                {/* <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} /> */}
+                {/* <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} /> */}
                 <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
                 <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
                 <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
@@ -106,9 +115,10 @@ const ProductForm = props => {
                 <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
                 {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>
             </form>
         </Container>
+        </section>
     
     )
 }
@@ -118,8 +128,8 @@ const mapStateToProps = (state) => ({
     product: state.products.productDetail,
 });
 
-const mapDispatchToProps = (dispatch, getState) => ({
-    addProductInfo: () => dispatch(getRemoteData())
-})
+// const mapDispatchToProps = (dispatch, getState) => ({
+//     addProductInfo: () => dispatch(getRemoteData())
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);
+export default connect(mapStateToProps)(ProductForm);

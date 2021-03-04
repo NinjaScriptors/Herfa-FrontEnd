@@ -40,8 +40,6 @@ const useStyles = makeStyles({
 });
 
 
-// import { updateInstockdecrement, deleteProduct } from '../rtk-store/cartSlicer'
-
 
 const Product = props => {
     const classes = useStyles();
@@ -113,11 +111,9 @@ const Product = props => {
 const mapStateToProps = state => ({
     myProducts: state.products.products,
     filetredProduct: state.products.filetredProduct,
-    myProductsInCart: state.products.productsInCart,
+  
 
 });
 
 
 export default connect(mapStateToProps)(Product);
-
-                

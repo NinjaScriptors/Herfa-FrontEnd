@@ -25,27 +25,27 @@ import TeamPage from "./components/team";
 function App() {
   return (
     <>
-    {/* <ProductForm/> */}
-    {/* <ProductFormUpdate/> */}
-    {/* <BrowserRouter> */}
+      {/* <ProductForm/> */}
+
       <BrowserRouter>
+        {/* <ProductFormUpdate /> */}
         <Header />
 
         {/* <Home /> */}
         {/* <UserForm/> */}
 
-        <Route exact path="/chat" component={ChatApp} >
-        </Route>
+        {/* <Route exact path="/chat" component={ChatApp} >
+        </Route> */}
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
-        </Route>
-        <Route exact path="/" component={Home}>
         </Route> 
-
-        {/* < Categories /> */}
-
-
+       <Route exact path="/" component={Home}>
+        </Route>
+        <Route exact path="/add-product" component={ProductForm}>
+        </Route> 
+        
+        
         <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route path="/our-team" component={TeamPage} >
@@ -55,15 +55,21 @@ function App() {
         <Route exact path="/categories" component={Product} >
 
         </Route>
+
         <Route path="/details/:id" component={Details} >
+        </Route>
+
+         <Route path="/details-update/:id" component={ProductFormUpdate} >
+        </Route> 
+        {/* <Route path="/details-delete/:id" component={ActiveCategories} >
         </Route>
 
         <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
-        </Route>
-         {/* <Route path="/sign-in" component={Signin} >
-        </Route>  */}
+        </Route> 
+        {/* <Route path="/sign-in" component={Signin} >
+        </Route> */}
 
         <StickyFooter />
       </BrowserRouter>

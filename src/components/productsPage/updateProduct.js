@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
-import { getDetailedObj, updateProductDetails } from "../../store/productsStore/productsSlicer";
+import { getDetailedObj, updateProductDetails, updateDetaileProductdObj } from "../../store/productsStore/productsSlicer";
 
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import { PinDropSharp } from '@material-ui/icons';
 import { getRemoteData } from '../../store/productsStore/productsSlicer';
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
-
+import "../../style/updatePro.scss"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,8 +23,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductFormUpdate = props => {
-    const dispatch = useDispatch();
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const { id } = props.match.params;
+
+    useEffect(() => {
+
+    // console.log('param', props.match.params)
+
+        const fetchData = async () => {
+            setState(!state);
+            await dispatch(getDetailedObj(id));
+        };
+        fetchData();
+    }, [dispatch]);
+
 
     const [state, setState] = useState(false);
     const [category, setCategory] = useState("");
@@ -40,8 +53,9 @@ const ProductFormUpdate = props => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description, rating, numReviews)
-        props.updateProductInfo({name, price, image, category, brand, countInStock, description, rating, numReviews})
+        dispatch(updateDetaileProductdObj({_id:props.product._id, seller:props.product.seller, category, countInStock, brand, description, price,name}));
+        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description,props)
+        dispatch(getRemoteData());
 
     }
 
@@ -58,10 +72,10 @@ const ProductFormUpdate = props => {
             let newname = e.target.value;
             setName(newname);
         }
-        if (e.target.name == "image") {
-            let newPass = e.target.value;
-            setImage(newPass)
-        }
+        // if (e.target.name == "image") {
+        //     let newPass = e.target.value;
+        //     setImage(newPass)
+        // }
         if (e.target.name == "brand") {
             let newFirstName = e.target.value;
             setBrand(newFirstName)
@@ -77,25 +91,27 @@ const ProductFormUpdate = props => {
     }
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setState(!state);
-            await dispatch(getDetailedObj("603e3b8c865c5300150ffd09"));
-        };
-        fetchData();
-    }, [dispatch]);
+    
 
 
     return (
-     
-        <Container>
-            <h1>Inside Update Product Form</h1>
 
-            <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' }}>
+        <section className="main-update-pro">
+        <div className="parallex">
+        </div>
+        <div className="row">
+            <div className="title">
+            </div>
+        </div>
+
+        <Container  className="main-update-pro">
+            <h1>Update Product</h1>
+
+            <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "400px" , color: "white"}}>
 
                 <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} />
-                <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} />
+                {/* <TextField onChange={handleChange} name="rating" id="rating-disabled" label="Rating" value={props.product.rating} /> */}
+                {/* <TextField onChange={handleChange} name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} /> */}
                 <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
                 <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
                 <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
@@ -103,20 +119,22 @@ const ProductFormUpdate = props => {
                 <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
                 {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>
             </form>
         </Container>
+        </section>
        
     )
 }
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+    // proId: ownProps.match.params.id,
     product: state.products.productDetail,
 });
 
-const mapDispatchToProps = (dispatch, getState) => ({
-    updateProductInfo: (productInfo) => dispatch(updateProductDetails(productInfo))
-})
+// const mapDispatchToProps = (dispatch, getState) => ({
+//     updateProductInfo: (productInfo) => dispatch(updateProductDetails(productInfo))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductFormUpdate);
+export default connect(mapStateToProps)(ProductFormUpdate);

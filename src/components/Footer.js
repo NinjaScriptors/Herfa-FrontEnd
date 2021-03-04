@@ -16,7 +16,7 @@ const FooterPage = () => {
       <MDBContainer  fluid className="text-center text-md-left" style={{display : "flex" , justifyContent: "space-between"}} >
         <MDBRow style={{height :"140px", width: "100%" , margin:"auto"}}>
           <MDBCol md="3" style={{marginTop:"-20px"}}>
-            <h7 style = {{fontSize: "34px"}}className="title">H E R F A</h7>
+            <h7 style = {{fontSize: "33px"}}className="title">H E R F A</h7>
            
           </MDBCol>
           <MDBCol md="3" style={{marginTop:"-50px"}}>
@@ -50,7 +50,7 @@ const FooterPage = () => {
             </ul>
           </MDBCol>
           <MDBCol md="3" style={{marginTop:"-20px"}}>
-            <h7 style = {{fontSize: "24px"}}className="title">Get in touch with us</h7>
+            <h7 style = {{fontSize: "22px"}}className="title">Get in touch with us</h7>
             <MDBCol style={{display : "flex" , justifyContent : "space-around", marginTop:"12px"}}>
             <InstagramIcon />
             <FacebookIcon />

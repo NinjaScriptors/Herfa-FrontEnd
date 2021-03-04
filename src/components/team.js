@@ -25,10 +25,10 @@ const TeamPage = () => {
           <MDBCol lg="3" md="6" className="mb-lg-0 mb-5">
             <img src="https://ca.slack-edge.com/TNGRRLUMA-U01AZ8XBTM1-7afbfb5b2ba6-512" className="img-fluid z-depth-1 rounded-circle" alt="" />
               <h5 className="font-weight-bold mt-4 mb-3">Hana'a Al-Ghazzi</h5>
-              <p className="text-uppercase black-text">Photographer</p>
+              <p className="text-uppercase black-text">Web Developer</p>
               <p className="grey-text">
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim est fugiat nulla id eu laborum.
+              Hello, My name is Hana'a, I am 23 and I have graduated from Zarqa' university with a bachelor's degree of pharmacy.
+                            I'm here to merge between medical field with software development.
               </p>
               <ul className="list-unstyled mb-0">
               <a href="#!" className="p-2 fa-lg">
@@ -70,8 +70,7 @@ const TeamPage = () => {
               <h5 className="font-weight-bold mt-4 mb-3">Fatima Atieh</h5>
               <p className="text-uppercase black-text">Web Developer</p>
               <p className="grey-text">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                ipsa accusantium doloremque rem laudantium totam aperiam.
+              Hard-working recent university graduate with a Software Engineering bachelor degree, frequently praised as focused and motivated to take challenges by my peers.
               </p>
               <ul className="list-unstyled mb-0">
               <a href="#!" className="p-2 fa-lg">

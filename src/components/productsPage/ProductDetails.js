@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDetailedObj } from "../../store/productsStore/productsSlicer"
-import { getDetailedUser } from "../../store/userStore/userSlicer";
 
 import { Card, CardDeck } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,7 +18,9 @@ import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { navLink } from "react-router-dom"
-import "../../style/product.scss"
+import "../../style/product.scss";
+import { Link } from 'react-router-dom';
+
 
 import {
     MDBBtn,
@@ -33,6 +34,8 @@ import {
     MDBIcon,
 } from "mdbreact";
 import { CenterFocusStrong } from "@material-ui/icons";
+import { saveCookies } from "superagent";
+import cookie from 'react-cookies';
 
 const labels = {
     0.5: 'Useless',
@@ -80,13 +83,13 @@ const Details = props => {
     const classRev = useStyleReview();
 
     const { id } = props.match.params;
+    cookie.save('pro-id', id);
     console.log('param', props.match.params)
 
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getDetailedObj(id));
-            dispatch(getDetailedUser(props.user._id));
 
         };
         fetchData();
@@ -139,8 +142,15 @@ const Details = props => {
                             Count in Stock: {props.product.countInStock}
 
 
+                      
+                        <div>
+                            <i class="far fa-edit" style={{margin :"2px"}}>
+                                <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`}>Update</Link>
+                            </i>
+                        </div>
                         </div>
                         <br />
+
 
 
                         <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
@@ -160,6 +170,11 @@ const Details = props => {
 
                     </Col>
                 </Row>
+                {/* update */}
+
+                {/* delete */}
+                {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
+
             </Container>
             <Container>
                 {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
@@ -181,7 +196,7 @@ const Details = props => {
                                 </div>
                             </div>
                         </li>
-                        
+
                     }) : " "}
 
                 </ul>

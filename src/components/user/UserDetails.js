@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { getDetailedUser } from "../../store/userStore/userSlicer";
+import { getDetailedObj } from "../../store/userStore/userSlicer";
 import { NavLink } from 'react-router-dom';
 import {
     Typography,
@@ -30,7 +30,7 @@ const UserDetails = props => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getDetailedUser(props.user._id));
+            await dispatch(getDetailedObj(JSON.parse(localStorage.getItem("userInfo"))._id));
         };
         fetchData();
     }, [dispatch]);
@@ -68,7 +68,7 @@ const UserDetails = props => {
                     <MDBCard style={{ maxWidth: '750px', margin: "auto" }}>
                         <MDBRow className='g-0' style={{ display: "flex", alignItems: "center", justifyContent: "space-around", marginTop: "-42px", height: "350px" }}>
                             <MDBCol style={{ marginLeft: -120 }} md='4'>
-                                <MDBCardImage style={{ boxShadow: " 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop: "-35px" }} src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
+                                <MDBCardImage style={{ boxShadow: " 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop: "-35px" }} src={JSON.parse(localStorage.getItem("userInfo")).image ? JSON.parse(localStorage.getItem("userInfo")).image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
                             </MDBCol>
                             <MDBCol md='7'>
                                 <MDBCardBody>
@@ -79,16 +79,17 @@ const UserDetails = props => {
                                     <MDBCardText style={{ fontSize: "20px" }}>
                                         email: {JSON.parse(localStorage.getItem("userInfo")).email || "user@user.com"}
                                     </MDBCardText>
-                                    <MDBCardText style={{ fontSize: "20px" }}>
+                                    {/* <MDBCardText style={{ fontSize: "20px" }}>
                                         Ratings: {(localStorage.getItem("userInfo")).seller ? (localStorage.getItem("userInfo")).seller.map(rev => rev.ratings) : 'No ratings yet'}
-                                    </MDBCardText>
-                                    <MDBCardText style={{ fontSize: "20px" }}>
+                                    </MDBCardText> */}
+                                    {/* <MDBCardText style={{ fontSize: "20px" }}>
                                         Number of reviews: {props.user.seller ? props.user.seller.map(rev => rev.numReviews) : 'No Reviews'}
-                                    </MDBCardText>
+                                    </MDBCardText> */}
 
-                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink>
+                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Edit Profile</NavLink>
                                     </Button>{' '}
-
+                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/add-product`}>Add Products</NavLink>
+                                    </Button>{' '}
                                 </MDBCardBody>
                             </MDBCol>
                         </MDBRow>
@@ -101,10 +102,8 @@ const UserDetails = props => {
     );
 }
 const mapStateToProps = (state) => ({
-    user: state.users.userDetail,
+    userInfo: state.users.userDetail
 });
 
 export default connect(mapStateToProps)(UserDetails);
 
-{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }
-{/* <MDBBtn style= {{ backgroundColor: '#C99A5C', color: "white" }} ><NavLink style={{textDecoration :"none" , color: "white"}} to={`/user-profile-update/${props.user._id}`}>Edit Profile</NavLink></MDBBtn> */ }

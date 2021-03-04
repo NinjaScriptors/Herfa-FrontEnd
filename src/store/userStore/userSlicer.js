@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import superagent from "superagent";
 import axios from "axios";
+import cookie from 'react-cookies';
 
 
 const api = 'https://herfa-app.herokuapp.com/api';
@@ -10,7 +11,8 @@ const users = createSlice({
     initialState: {
         users: [],
         filetredUsers: [],
-        userDetail: {}
+        userDetail: {},
+        
     },
     reducers: {
         activeProduct(state, action) {
@@ -51,7 +53,7 @@ export const getRemoteData = () => (dispatch) => {
     });
 }
 
-export const getDetailedUser = (id) => (dispatch) => {
+export const getDetailedObj = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
     return superagent.get(`${api}/users/${id}`).then(data => {
@@ -75,34 +77,42 @@ export const updateDetailedObj = (obj) => async (dispatch) => {
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie.load('auth')}`
         }
 
         // .then(data => {
-        //     console.log("we got the data updateUserDetails : data.body =", data.data)
-        //     return dispatch(updateUserDetails(data.data))
-        // })
-    })
-    console.log("we got the data updateUserDetails : data.body =", data.data)
-    return dispatch(updateUserDetails(data.data))
-
-
-
-    // let newObj = { ...obj}
-    // newObj = JSON.stringify(newObj);
-    // return superagent.put(`${api}/users/${obj._id}`).set({
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Credentials": true,
-    //     'Content-Type': 'application/json'
-    // }).send(newObj).then(data => {
-    //     console.log("we got the data updateUserDetails : data.body =", data.body)
-    //     if(data.body){
-
-    //         dispatch(updateUserDetails(data.body))
-    //     }
-    // });
-}
-
-export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
-
+            //         console.log("we got the data updateUserDetails : data.body =", data.data)
+            //         return dispatch(updateUserDetails(data.data))
+            //     })
+        })
+        // localStorage.clear()
+        // localStorage.setItem("userInfo", data.data)
+        console.log("we got the data updateUserDetails : data.body------------------------------ =", data.data)
+        return dispatch(updateUserDetails(data.data))
+        
+        
+        // let data = JSON.stringify(obj );
+        // console.log('data', data)
+        
+        // const response = await axios.put(`${api}/users/${obj._id}`,data,{headers:{"Content-Type" : "application/json"}});
+        // console.log("we got the data updateUserDetails : data.data =", response.data)
+        
+                // let newObj = { ...obj}
+                // newObj = JSON.stringify(newObj);
+                // return superagent.put(`${api}/users/${obj._id}`).set({
+                //     "Access-Control-Allow-Origin": "*",
+                //     "Access-Control-Allow-Credentials": true,
+                //     'Content-Type': 'application/json'
+                // }).send(newObj).then(data => {
+                //     console.log("we got the data updateUserDetails : data.body =", data.body)
+                //     if(data.body){
+                        
+                //         dispatch(updateUserDetails(data.body))
+                //     }
+                // });
+    }
+    
+    export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
+    
 export default users.reducer;

@@ -60,16 +60,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
-
-
-
-
-
-
-
 function SignInSide(props) {
   const classes = useStyles();
 
@@ -97,11 +87,6 @@ function SignInSide(props) {
       setPassword(newPass)
     }
   }
-
-
-
-
-
 
 
 
