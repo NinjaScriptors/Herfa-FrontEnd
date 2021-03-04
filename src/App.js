@@ -17,7 +17,6 @@ import UserDetails from './components/user/UserDetails';
 import SignUp from "./components/signup/signup";
 import Signin from "./components/signin/signin";
 import ProductFormUpdate from './components/productsPage/updateProduct'
-
 import ChatApp from "./components/chatApp/App/index"
 import TeamPage from "./components/team";
 
