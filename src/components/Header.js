@@ -84,35 +84,6 @@ export default function ButtonAppBar() {
         handleMobileMenuClose();
     };
 
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-            style ={{ backgroundColor :"transparent"}}
-        >
-
-            <MenuItem onClick={handleProfileMenuOpen}   style ={{ backgroundColor :"transparent"}}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -126,8 +97,7 @@ export default function ButtonAppBar() {
             onClose={handleMenuClose}
           
         >
-            <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "#333" }} to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
-            {/* <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-profile-update/:id">Update Profile</NavLink></MenuItem> */}
+            <MenuItem onClick={handleMenuClose}><NavLink to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
         </Menu>
     );
 
@@ -171,8 +141,8 @@ export default function ButtonAppBar() {
                 setNavBackground('appBarTransparent')
             }
         }
+        document.addEventListener('scroll', handleScroll)
         return () => {
-            document.addEventListener('scroll', handleScroll)
             document.removeEventListener('scroll', handleScroll)
         }
     }, [])
@@ -205,18 +175,19 @@ export default function ButtonAppBar() {
                                 >
                                     Categories
                                  </NavLink>
-                                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal className={classes[navRef.current]}>
                                     {({ TransitionProps, placement }) => (
                                         <Grow
                                             {...TransitionProps}
-                                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom', backgroundColor :"transparent" , color:"white"}}
+                                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                            className={classes[navRef.current]}
                                         >
-                                            <Paper>
-                                                <ClickAwayListener onMouseOver={handleClose}>
+                                            <Paper className={classes[navRef.current]}>
+                                                <ClickAwayListener onMouseOver={handleClose} >
                                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                                         <MenuItem onClick={handleClose}>Food</MenuItem>
-                                                        <MenuItem onClick={handleClose}>Gift</MenuItem>
-                                                        <MenuItem onClick={handleClose}>Hand Craft</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Clothes</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Handicraft</MenuItem>
                                                     </MenuList>
                                                 </ClickAwayListener>
                                             </Paper>
@@ -234,27 +205,17 @@ export default function ButtonAppBar() {
                         <div >
                             <NavLink style={{ color: "white" }} to='/our-team'>Our Team</NavLink>
                         </div>
-                        {/* <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
-
-                                <a style={{ color: "white" }} href="/products">Products</a>
-                           </div > */}
-
-
-
-
-                                      
-                       
-
-                        <div >
-
+                
+                        <div  className={classes[navRef.current]}>
                             <IconButton
                                 edge="end"
                                 aria-label="account of current user"
                                 aria-controls={menuId}
                                 aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
+                                onMouseOver={handleProfileMenuOpen}
+                                className={classes[navRef.current]}
                                 color="inherit"
-                                className={classes.largeIcon}
+                               
                                
                             >
                                 <AccountCircle className={classes.largeIcon} />
@@ -269,7 +230,7 @@ export default function ButtonAppBar() {
 
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {/* {renderMobileMenu} */}
             {renderMenu}
         </div >
     );

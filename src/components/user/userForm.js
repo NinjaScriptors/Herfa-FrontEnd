@@ -2,7 +2,7 @@ import { Container } from '@material-ui/core';
 import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getDetailedObj, getRemoteData } from "../../store/userStore/userSlicer";
+import { getDetailedUser, getRemoteData } from "../../store/userStore/userSlicer";
 import { updateUserDetails, updateDetailedObj } from "../../store/userStore/userSlicer";
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -86,7 +86,7 @@ const UserForm = props => {
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj("603bfe782d208700158ebecd"));
+            await dispatch(getDetailedUser("603bfe782d208700158ebecd"));
             // await dispatch(updateDetailedObj(props.user));
 
         };

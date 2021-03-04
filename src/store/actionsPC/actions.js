@@ -28,7 +28,17 @@ export const getDetailedObj = (id) => (dispatch) => {
 
 /// Moooooooooo edits 
 export const getSearchProducts = (name) => (dispatch) => {
+    // let url = name && !categories ? `name=${name}` : "" || categories && !name?`category=${categories}` : "" ||  name && categories?`name=${name}&category=${categories}` : ""
+    // let url ; 
+    // if (name && !categories) {
+    //     url = `name=${name}`
+    // }if(categories && !name) {
+    //     url=   `category=${categories}`;
+    // } if (name && categories) {
+    //     url=`name=${name}&category=${categories}`
+    // }
     axios({
+
         method: 'get',
         url: `${api}/products/search?name=${name}`,
         headers: {

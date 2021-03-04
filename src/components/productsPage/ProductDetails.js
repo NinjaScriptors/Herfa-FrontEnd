@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDetailedObj } from "../../store/productsStore/productsSlicer"
+import { getDetailedUser } from "../../store/userStore/userSlicer";
+
 import { Card, CardDeck } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import {Rating} from '@material-ui/lab';
+import { Rating } from '@material-ui/lab';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -16,7 +18,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import {navLink} from "react-router-dom"
+import { navLink } from "react-router-dom"
 import "../../style/product.scss"
 
 import {
@@ -84,9 +86,12 @@ const Details = props => {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getDetailedObj(id));
+            dispatch(getDetailedUser(props.user._id));
+
         };
         fetchData();
     }, [dispatch]);
+
 
     return (
         <>
@@ -107,64 +112,80 @@ const Details = props => {
                 <Row style={{ margin: "auto", alignItems: "center", display: "flex", justifyContent: "space-around" }}>
                     <Col xs={6} md={4} >
                         <div style={{ display: "flex", flexDirection: "column " }}>
-                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 300, paddingTop: "15px" }} />
-                            <span style={{ display: "flex", flexDirection: "row", fontFamily: "Handlee", marginTop: 3 }}>
-                                <Rating
-                                    name="hover-feedback"
-                                    value={props.product.rating}
-                                    precision={0.5}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                    onChangeActive={(event, newHover) => {
-                                        setHover(newHover);
-                                    }}
-                                />
-                                {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
-                            </span>
+                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 325, boxShadow: "0 0 20px #232323" }} />
+
                         </div>
                     </Col>
-                    <Jumbotron style={{ width: 380, height: 305, fontFamily: "Handlee" }}>
+                    <Col style={{ width: 380, height: 305, fontFamily: "Roboto" }}>
                         <h1>{props.product.name}</h1>
                         <hr />
-                        <p>
+                        <div>
+
+                            <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price}</h3>
+                        </div>
+                        <p style={{ fontSize: "18px" }}>
                             {props.product.description}
                         </p>
 
+                        <br />
 
-
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div>
-                          <MDBIcon icon="comments" className="mr-1" />
+                        <div style={{ display: "flex", justifyContent: "space-between", width: "60%" }}>
+                            <div style={{ color: "#252525" }}>
+                                <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
                                 {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
-                                
+
                             </div>
 
-                            <div>
-                                <MDBIcon icon="dollar-sign" className="mr-1" />
-                                {props.product.price}
-                            </div>
+                            Count in Stock: {props.product.countInStock}
+
+
                         </div>
                         <br />
-                        <div>
-                            Count in Stock: {props.product.countInStock}
+
+
+                        <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
+                            <Rating
+                                name="hover-feedback"
+                                value={props.product.rating}
+                                precision={0.5}
+                                onChange={(event, newValue) => {
+                                    setValue(newValue);
+                                }}
+                                onChangeActive={(event, newHover) => {
+                                    setHover(newHover);
+                                }}
+                            />
+                            {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
                         </div>
 
-
-
-
-
-
-
-
-                    </Jumbotron>
+                    </Col>
                 </Row>
             </Container>
-            <div className={classRev.root} style={{ margin: 'auto', paddingBottom : "20px" }}>
-                <SnackbarContent style={{ backgroundColor: "#C99A5C", fontFamily: "Handlee", color: "#333" }} action={action}
-                    message={props.product.reviews ? props.product.reviews.map(rev => rev.comment):"No Comment Yet !"}
-                />
-            </div>
+            <Container>
+                {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
+                <ul id="comments-list" class="comments-list" style={{ margin: "auto" }}>
+                    {props.product.reviews ? props.product.reviews.map(rev => {
+
+                        console.log("props.user ---> !!", props.user)
+                        return <li style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                            <div class="comment-main-level" >
+                                <div class="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="comment-content">
+                                        {rev.comment}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                    }) : " "}
+
+                </ul>
+            </Container>
 
         </>
 
@@ -174,8 +195,16 @@ const Details = props => {
 
 const mapStateToProps = (state) => ({
     product: state.products.productDetail,
+    user: state.users.userDetail
 });
 
 export default connect(mapStateToProps)(Details);
 
 
+
+
+{/* <div className={classRev.root} style={{ margin: 'auto', paddingBottom : "20px" }}>
+                <SnackbarContent style={{ backgroundColor: "#C99A5C", fontFamily: "Handlee", color: "#333" }} action={action}
+                    message={props.product.reviews ? props.product.reviews.map(rev => rev.comment):"No Comment Yet !"}
+                />
+            </div> */}

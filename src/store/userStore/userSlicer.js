@@ -15,7 +15,7 @@ const users = createSlice({
     reducers: {
         activeProduct(state, action) {
             console.log('from product slicer', action.payload)
-            state.users= state.users.filter(user => {
+            state.users = state.users.filter(user => {
                 console.log('in activeProduct -->', user);
                 if (user.email == action.payload) {
                     return user;
@@ -51,7 +51,7 @@ export const getRemoteData = () => (dispatch) => {
     });
 }
 
-export const getDetailedObj = (id) => (dispatch) => {
+export const getDetailedUser = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
     return superagent.get(`${api}/users/${id}`).then(data => {
@@ -62,12 +62,12 @@ export const getDetailedObj = (id) => (dispatch) => {
 
 
 export const updateDetailedObj = (obj) => async (dispatch) => {
-        console.log("inside dispatch of updateDetailedObj!!!! ")
-    
-    console.log("obj._id",`${obj._id}`)
-    
+    console.log("inside dispatch of updateDetailedObj!!!! ")
+
+    console.log("obj._id", `${obj._id}`)
+
     const data = await axios({
-        
+
         method: 'put',
         url: `${api}/users/${obj._id}`,
         mode: 'cors',
@@ -77,32 +77,32 @@ export const updateDetailedObj = (obj) => async (dispatch) => {
             "Access-Control-Allow-Credentials": true,
             'Content-Type': 'application/json'
         }
-        
+
         // .then(data => {
-            //     console.log("we got the data updateUserDetails : data.body =", data.data)
-            //     return dispatch(updateUserDetails(data.data))
-            // })
-        })
-        console.log("we got the data updateUserDetails : data.body =", data.data)
-        return dispatch(updateUserDetails(data.data))
+        //     console.log("we got the data updateUserDetails : data.body =", data.data)
+        //     return dispatch(updateUserDetails(data.data))
+        // })
+    })
+    console.log("we got the data updateUserDetails : data.body =", data.data)
+    return dispatch(updateUserDetails(data.data))
 
 
-        
-                // let newObj = { ...obj}
-                // newObj = JSON.stringify(newObj);
-                // return superagent.put(`${api}/users/${obj._id}`).set({
-                //     "Access-Control-Allow-Origin": "*",
-                //     "Access-Control-Allow-Credentials": true,
-                //     'Content-Type': 'application/json'
-                // }).send(newObj).then(data => {
-                //     console.log("we got the data updateUserDetails : data.body =", data.body)
-                //     if(data.body){
-                        
-                //         dispatch(updateUserDetails(data.body))
-                //     }
-                // });
-    }
-    
-    export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
-    
+
+    // let newObj = { ...obj}
+    // newObj = JSON.stringify(newObj);
+    // return superagent.put(`${api}/users/${obj._id}`).set({
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Credentials": true,
+    //     'Content-Type': 'application/json'
+    // }).send(newObj).then(data => {
+    //     console.log("we got the data updateUserDetails : data.body =", data.body)
+    //     if(data.body){
+
+    //         dispatch(updateUserDetails(data.body))
+    //     }
+    // });
+}
+
+export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
+
 export default users.reducer;

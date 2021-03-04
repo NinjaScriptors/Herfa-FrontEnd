@@ -60,6 +60,7 @@ const ActiveCategories = props => {
     }, [dispatch]);
 
     let [item, setSearchItem] = useState("");
+ 
     function handlechange(e) {
         console.log(e.target.value)
         setSearchItem(e.target.value);
@@ -69,6 +70,8 @@ const ActiveCategories = props => {
         e.preventDefault();
         props.getSearchProducts(item)
     }
+
+    
 
 
 
@@ -90,13 +93,15 @@ const ActiveCategories = props => {
                         <Paper component="form" className={classes.root} style={{ alignItems: "center", backgroundColor: "transparent", border: "1px solid white", marginTop: "-140px" }}>
 
                             <InputBase
+                                  onChange={handlechange}
+                                  onSubmit={handleSearchBarClick}
                                 className={classes.input}
                                 placeholder="Search about?"
                                 inputProps={{ 'aria-label': 'search google maps' }}
                                 style={{ textAlign: "center" }}
                             />
                             <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                                <SearchIcon />
+                                <SearchIcon onClick={handleSearchBarClick}/>
                             </IconButton>
                             <Divider className={classes.divider} orientation="vertical" />
 
@@ -107,7 +112,7 @@ const ActiveCategories = props => {
                         {props.activeOne.categories.map((category, idx) => {
 
                             return <div className="radiogroup">
-                              <input className="state" type="radio" name="app" id={idx} key={idx} value={category}  onClick={() => { props.activeProduct(category) }} href="/categories" />
+                              <input className="state" type="radio" name="app" id={idx} key={idx} value={category}  onChange={() => { props.activeProduct(category) }}  href="/categories"  />
                               <label className="label" for={idx}>
                                 <div className="indicator"></div>
                                 <span className="text">{category.toUpperCase()}</span>

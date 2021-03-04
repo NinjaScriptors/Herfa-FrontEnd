@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { getDetailedObj } from "../../store/userStore/userSlicer";
+import { getDetailedUser } from "../../store/userStore/userSlicer";
 import { NavLink } from 'react-router-dom';
 import {
     Typography,
@@ -30,7 +30,7 @@ const UserDetails = props => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getDetailedObj(props.user._id));
+            await dispatch(getDetailedUser(props.user._id));
         };
         fetchData();
     }, [dispatch]);
@@ -38,25 +38,7 @@ const UserDetails = props => {
     return (
         <>
             <header>
-                {/* <section className="main-banner" style={{
-                    backgroundImage: "../../assets/home-banner2.jpg",
-                    height: "100%",
-                    backgroundSize: "cover",
-                    position: "relative",
-                    backgroundAttachment: "fixed",
-                    backgroundPosition: "center",
-                    fontFamily: 'Handlee',
-                    fontWeight: "100",
-                    alignItems: "center"
-                }}>
-                    <div className="parallex">
-                    </div>
-                    <div className="row">
-                        <div className="title">
-                            <h1>User Details</h1>
-                        </div>
-                    </div>
-                </section> */}
+        
                 <section className="main-banner" style={{
                     backgroundImage: "../../assets/home-banner2.jpg",
 

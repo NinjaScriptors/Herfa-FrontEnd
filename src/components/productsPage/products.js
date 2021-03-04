@@ -60,7 +60,7 @@ const Product = props => {
             <MDBRow >
                 {props.filetredProduct.map((product, idx) => {
                
-                    return  <MDBCol md="4"> <MDBCard cascade style = {{fontFamily:"Roboto" }}>
+                    return  <MDBCol md="4"> <MDBCard cascade style = {{fontFamily:"Roboto", marginTop : "12px" }}>
                         <MDBCardImage
                             cascade
                             className="img-fluid"
@@ -117,19 +117,7 @@ const mapStateToProps = state => ({
 
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//     delete: () => dispatch(deleteProduct()),
-//     update: (obj) => dispatch(updateInstockdecrement(obj))
-// })
 
 export default connect(mapStateToProps)(Product);
 
-                // <CardDeck style= {{ marginTop: "30px" , width: "75%", margin: "auto"}}>
-
-                // {props.filetredProduct.map((product, idx) => {
-                //     return <Card style={{display: "flex", flexDirection: "column" , justifyContent :"space-between", marginTop: "20px"}}><Card.Body>
-                //         <Card.Text style={{ textAlign: 'center', fontFamily: "Handlee" , color:"#333" , fontSize:"24px" }}>{product.name}</Card.Text></Card.Body><Card.Footer>
-                //             <small className="text-muted" style= {{textAlign:"center", alignItems:"center"}}>  <Link style ={{cursor: "pointer", fontFamily: "Handlee",textAlign:"center", alignItems:"center" }} to={`/details/${product._id}`}>View Details</Link></small>
-                //         </Card.Footer></Card>
-                // })}
-                // </CardDeck>
+                
