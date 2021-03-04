@@ -10,7 +10,8 @@ function Products(){
     return (
         <section id="products-section">
         <Container>
-            <h3>TOP SELLING PRODUCTS</h3>
+            <h3 style ={{    fontWeight: "400",
+    fontSize:"34px"}}>TOP SELLING PRODUCTS</h3>
             <hr />
             <div className={classes.root}>
                 <GridList cellHeight={300} spacing={15} className={classes.gridList}>

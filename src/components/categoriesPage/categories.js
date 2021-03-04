@@ -14,12 +14,14 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { NavLink } from 'react-router-dom';
 import { useState } from "react";
+import "./input.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
+        margin: "auto",
         width: 550,
         color: "white",
         backgroundColor: "#333333",
@@ -58,6 +60,7 @@ const ActiveCategories = props => {
     }, [dispatch]);
 
     let [item, setSearchItem] = useState("");
+ 
     function handlechange(e) {
         console.log(e.target.value)
         setSearchItem(e.target.value);
@@ -68,40 +71,62 @@ const ActiveCategories = props => {
         props.getSearchProducts(item)
     }
 
+    
+
 
 
     return (
 
         <>
+            <header>
 
-            <Paper component="form" className={classes.root} style={{ alignItems: "center", margin: "auto" }}>
+                <section className="main-categories" >
+                    <div className="parallex">
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h1>Categories</h1>
+                        </div>
 
-                <InputBase
-                    onChange={handlechange}
-                    onSubmit={handleSearchBarClick}
-                    className={classes.input}
-                    placeholder="Search about?"
-                    inputProps={{ 'aria-label': 'search google maps' }}
-                    style={{ textAlign: "center", margin: "auto" }}
-                />
+                    </div>
+                    <div >
+                        <Paper component="form" className={classes.root} style={{ alignItems: "center", backgroundColor: "transparent", border: "1px solid white", marginTop: "-140px" }}>
 
-                <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                    <SearchIcon onClick={handleSearchBarClick} />
-                </IconButton>
+                            <InputBase
+                                  onChange={handlechange}
+                                  onSubmit={handleSearchBarClick}
+                                className={classes.input}
+                                placeholder="Search about?"
+                                inputProps={{ 'aria-label': 'search google maps' }}
+                                style={{ textAlign: "center" }}
+                            />
+                            <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                                <SearchIcon onClick={handleSearchBarClick}/>
+                            </IconButton>
+                            <Divider className={classes.divider} orientation="vertical" />
 
-                <Divider className={classes.divider} orientation="vertical" />
+                        </Paper>
+                    </div>
+                    <section style={{ width: "52%", display: "flex", justifyContent: "space-evenly", margin: "auto", color: "white", marginTop: "-80px" }}>
 
-            </Paper>
+                        {props.activeOne.categories.map((category, idx) => {
+
+                            return <div className="radiogroup">
+                              <input className="state" type="radio" name="app" id={idx} key={idx} value={category}  onChange={() => { props.activeProduct(category) }}  href="/categories"  />
+                              <label className="label" for={idx}>
+                                <div className="indicator"></div>
+                                <span className="text">{category.toUpperCase()}</span>
+                              </label>
+                            </div>
+    
+                        })}
+
+
+                    </section>
+                </section>
+            </header>
             <br />
-            <section>
-                <CardDeck style={{ width: "85%", margin: "auto" }}>
-                    {props.activeOne.categories.map((category, idx) => {
 
-                        return <Card style={{ width: '550rem' }} onClick={() => { props.activeProduct(category) }}><Card.Body> <Card.Img variant="top" style={{ margin: 'auto', textAlign: 'center', cursor: "pointer" }} src={about3} /><Card.Text style={{ marginTop: "10px", textAlign: 'center', cursor: "pointer", fontFamily: "Handlee" }} key={idx} value={category} onClick={() => props.active(category)} href="/categories">{category.toUpperCase()} </Card.Text></Card.Body></Card>
-                    })}
-                </CardDeck>
-
-            </section>
 
 
         </>

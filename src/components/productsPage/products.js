@@ -40,8 +40,6 @@ const useStyles = makeStyles({
 });
 
 
-// import { updateInstockdecrement, deleteProduct } from '../rtk-store/cartSlicer'
-
 
 const Product = props => {
     const classes = useStyles();
@@ -57,27 +55,27 @@ const Product = props => {
         <>
         <Container>
             <section>
-            <MDBRow style = {{ alignItems : "center", display : "flex",justifyContent : "space-between", alignItems : "center"}} >
-               {console.log(props.filetredProduct)}
+            <MDBRow >
                 {props.filetredProduct.map((product, idx) => {
                
-                    return  <MDBCol md="4"> <MDBCard cascade style = {{fontFamily:"Handlee" }}>
+                    return  <MDBCol md="4"> <MDBCard cascade style = {{fontFamily:"Roboto", marginTop : "12px" }}>
                         <MDBCardImage
                             cascade
                             className="img-fluid"
                             overlay="white-light"
                             hover
+                            style={{height: "200px" , width:"100%" , overflow : "hidden"}}
                             src={product.image}
                         />
-                        <MDBCardBody cascade style={{ fontFamily: "Handlee" }}>
-                            <MDBCardTitle fontFamily= "Handlee">{product.name}</MDBCardTitle>
+                        <MDBCardBody cascade style={{ fontFamily: "Roboto" }}>
+                            <MDBCardTitle fontFamily= "Roboto">{product.name}</MDBCardTitle>
                             <hr />
-                            <MDBCardText>
+                            <MDBCardText style ={{height:"50px"}}>
                                 {product.description}
                             </MDBCardText>
                         </MDBCardBody>
-                        <div className="rounded-bottom mdb-color lighten-3 text-center pt-3">
-                            <ul className="list-unstyled list-inline font-small">
+                        <div  style={{backgroundColor : "#252525" }} className="rounded-bottom text-center pt-3">
+                            <ul className="list-unstyled list-inline font-small" style= {{ color: "white"}}>
 
                                 <li className="list-inline-item pr-2">
                                     <a href="#!" className="white-text">
@@ -94,8 +92,8 @@ const Product = props => {
                                 </li>
 
                             </ul>
-                            <Card.Footer >
-                         <small className="text-muted" style= {{textAlign:"center", alignItems:"center", color: "#333" , }}>  <Link style ={{cursor: "pointer", fontFamily: "Handlee",textAlign:"center", alignItems:"center",  color: "#333", fontSize: "18px" }} to={`/details/${product._id}`}>View Details</Link></small>
+                            <Card.Footer  style ={{ backgroundColor:"#C99A5C" , color: "white" }}>
+                         <small className="text-muted" style= {{textAlign:"center", alignItems:"center", color: "white" }}>  <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "white" , fontSize: "18px" ,}} to={`/details/${product._id}`}>View Details</Link></small>
                         </Card.Footer>
                         </div>
                     </MDBCard>
@@ -113,23 +111,9 @@ const Product = props => {
 const mapStateToProps = state => ({
     myProducts: state.products.products,
     filetredProduct: state.products.filetredProduct,
-    myProductsInCart: state.products.productsInCart,
+  
 
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//     delete: () => dispatch(deleteProduct()),
-//     update: (obj) => dispatch(updateInstockdecrement(obj))
-// })
 
 export default connect(mapStateToProps)(Product);
-
-                // <CardDeck style= {{ marginTop: "30px" , width: "75%", margin: "auto"}}>
-
-                // {props.filetredProduct.map((product, idx) => {
-                //     return <Card style={{display: "flex", flexDirection: "column" , justifyContent :"space-between", marginTop: "20px"}}><Card.Body>
-                //         <Card.Text style={{ textAlign: 'center', fontFamily: "Handlee" , color:"#333" , fontSize:"24px" }}>{product.name}</Card.Text></Card.Body><Card.Footer>
-                //             <small className="text-muted" style= {{textAlign:"center", alignItems:"center"}}>  <Link style ={{cursor: "pointer", fontFamily: "Handlee",textAlign:"center", alignItems:"center" }} to={`/details/${product._id}`}>View Details</Link></small>
-                //         </Card.Footer></Card>
-                // })}
-                // </CardDeck>

@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Herfa
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An e-commerce application built using Node.js, Express.js, MongoDB, Socket.io
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Index
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Demo](#Demo)
+- [Overview](#Overview)
+- [Software Requirements and User Stories](#Software-Requirements-and-User-Stories)
+- [Wireframe, Domain Modeling and ERD](#Wireframe,-Domain-Modeling-and-ERD)
+- [Features](#Features)
+- [Installation](#Installation)
+- [How it works](#How-it-works)
+- [Manual Test](#Manual-Test)
+- [Jest Test](#Jest-Test)
+- [Postman Test](#Postman-Test)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Overview
 
-### `npm run build`
+In this website there are three types of user: Admin, Seller and Buyer. The Admin can manage the users and products, the Seller has a store connected to the seller id, and seller can add/update products of her/his own only, while the Buyer can add comments/ratings for products, view products categories and have a chat with the Seller.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Software Requirements and User Stories
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You can see the Requirements and User Stories of our application from [here](./requirements.md)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Wireframe, Domain Modeling and ERD
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can see the Wireframe and Domain Modeling of our application from [here](./wireframe.md)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Features
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Uses `Express` as the application Framework.
+- Authenticates via username, password and email using `Bearer Authentication`.
+- Passwords are hashed using `bcrypt` nodejs package.
+- Social Authentication via Facebook and Google using `OAuth`
+- Real-time communication between a client and a server using `Socket.io`.
+- Uses `MongoDB` and `Mongoose` for storing and querying data.

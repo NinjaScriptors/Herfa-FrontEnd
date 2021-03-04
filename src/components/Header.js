@@ -40,7 +40,12 @@ const useStyles = makeStyles((theme) => ({
     appBarSolid: {
         backgroundColor: '#C99A5C',
         color: "white"
-    }
+    }, largeIcon: {
+          width: 40,
+          height: 40,
+       
+      
+      }
 }));
 
 export default function ButtonAppBar() {
@@ -79,34 +84,6 @@ export default function ButtonAppBar() {
         handleMobileMenuClose();
     };
 
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -118,6 +95,7 @@ export default function ButtonAppBar() {
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMenuOpen}
             onClose={handleMenuClose}
+          
         >
             <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "#333" }} to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
             {/* <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-profile-update/:id">Update Profile</NavLink></MenuItem> */}
@@ -164,8 +142,8 @@ export default function ButtonAppBar() {
                 setNavBackground('appBarTransparent')
             }
         }
+        document.addEventListener('scroll', handleScroll)
         return () => {
-            document.addEventListener('scroll', handleScroll)
             document.removeEventListener('scroll', handleScroll)
         }
     }, [])
@@ -178,24 +156,14 @@ export default function ButtonAppBar() {
                         <Typography className={classes.title} style={{ fontSize: "24px" }}>
                             H E R F A           </Typography>
 
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-evenly", margin: "auto", alignItems: "center", width: "93%", fontFamily: "Handlee" }}>
+        </div>
+                    <div style={{display: "flex", justifyContent :"space-around" , margin :"auto", alignItems :"center", width: "93%", fontFamily : "Roboto" , fontSize: "20px"}}>
                         <div>
 
                             <a style={{ color: "white" }} href="/">Home</a>
 
 
                         </div>
-                        <div >
-                            <NavLink style={{ color: "white" }} to='/about-us'>Our Story</NavLink>
-                        </div>
-                        {/* <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between", margin:"auto" , flexDirection: "row"}}>
-
-                                <a style={{ color: "white" }} href="/products">Products</a>
-                           </div > */}
-
-
-
                         <div id="navDropdown">
                             <div style={{ color: "white" }}>
                                 <NavLink
@@ -204,22 +172,23 @@ export default function ButtonAppBar() {
                                     ref={anchorRef}
                                     aria-controls={open ? 'menu-list-grow' : undefined}
                                     aria-haspopup="true"
-                                    onClick={handleToggle}
+                                    onMouseOver={handleToggle}
                                 >
                                     Categories
                                  </NavLink>
-                                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal className={classes[navRef.current]}>
                                     {({ TransitionProps, placement }) => (
                                         <Grow
                                             {...TransitionProps}
                                             style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                            className={classes[navRef.current]}
                                         >
-                                            <Paper>
-                                                <ClickAwayListener onClickAway={handleClose}>
+                                            <Paper className={classes[navRef.current]}>
+                                                <ClickAwayListener onMouseOver={handleClose} >
                                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                                         <MenuItem onClick={handleClose}>Food</MenuItem>
-                                                        <MenuItem onClick={handleClose}>Gift</MenuItem>
-                                                        <MenuItem onClick={handleClose}>Hand Craft</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Clothes</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Handicraft</MenuItem>
                                                     </MenuList>
                                                 </ClickAwayListener>
                                             </Paper>
@@ -229,33 +198,28 @@ export default function ButtonAppBar() {
                             </div>
                         </div>
 
-                        <div>
-                            <div className={classes.search} style={{ border: "1px solid white", borderRadius: "5px" }} >
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon style={{ marginRight: "4px", marginLeft: "3px" }} />
-                                    <InputBase style={{ color: "#f5f5f5" }}
-                                        placeholder="Search…"
-                                        classes={{
-                                            root: classes.inputRoot,
-                                            input: classes.inputInput,
-                                        }}
-                                        inputProps={{ 'aria-label': 'search' }}
-                                    />
-                                </div>
-                            </div>
+
+                        <div >
+                            <NavLink style={{ color: "white" }} to='/about-us'>About Us</NavLink>
                         </div>
 
-                        <div>
-
+                        <div >
+                            <NavLink style={{ color: "white" }} to='/our-team'>Our Team</NavLink>
+                        </div>
+                
+                        <div  className={classes[navRef.current]}>
                             <IconButton
                                 edge="end"
                                 aria-label="account of current user"
                                 aria-controls={menuId}
                                 aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
+                                onMouseOver={handleProfileMenuOpen}
+                                className={classes[navRef.current]}
                                 color="inherit"
+                               
+                               
                             >
-                                <AccountCircle />
+                                <AccountCircle className={classes.largeIcon} />
                             </IconButton>
                         </div>
                     </div>
@@ -267,7 +231,7 @@ export default function ButtonAppBar() {
 
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {/* {renderMobileMenu} */}
             {renderMenu}
         </div >
     );
