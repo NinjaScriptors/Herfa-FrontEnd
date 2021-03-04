@@ -97,7 +97,8 @@ export default function ButtonAppBar() {
             onClose={handleMenuClose}
           
         >
-            <MenuItem onClick={handleMenuClose}><NavLink to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
+            <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "#333" }} to="/user-details">{JSON.parse(localStorage.getItem("userInfo")).name}</NavLink></MenuItem>
+            {/* <MenuItem onClick={handleMenuClose}><NavLink  style={{ color: "#333" }} to="/user-profile-update/:id">Update Profile</NavLink></MenuItem> */}
         </Menu>
     );
 

@@ -22,6 +22,7 @@ export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
         }
     })
         .then(res => { // res is the token i received from the basic Auth
+            cookie.save("auth", res.data.token)
             console.log("Basic Auth Tooooken>>", res)
             cookie.save('auth',res.data.token);
             axios({

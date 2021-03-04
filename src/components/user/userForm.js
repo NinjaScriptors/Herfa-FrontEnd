@@ -105,7 +105,7 @@ const UserForm = props => {
 
                 <Container className="main-user-form" style= {{color:"white" }}>
                         <h1>Update Profile</h1>
-
+            
 
              
 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "750px" , color: "white"}}>

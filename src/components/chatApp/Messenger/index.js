@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ConversationList from '../ConversationList';
 import MessageList from '../MessageList';
 import './Messenger.css';
 import Toolbar from "../Toolbar/"
 import ToolbarButton from "../ToolbarButton/"
+// import { io } from "socket.io-client";
 
 export default function Messenger(props) {
+
+  let [roomId, setRoomId] = useState();
+  let handleSubmit = (e) => {
+    console.log(e.target.id)
+    setRoomId(e.target.id)
+  }
+  let _changeRoomKIdInListMessages = () => {
+    return roomId;
+  }
+
+
   return (
     <div className="messenger">
       {/* <Toolbar
@@ -28,11 +40,11 @@ export default function Messenger(props) {
       /> */}
 
       <div className="scrollable sidebar">
-        <ConversationList />
+        <ConversationList handleClickedConversation={handleSubmit} />
       </div>
 
       <div className="scrollable content">
-        <MessageList />
+        <MessageList sellerId={_changeRoomKIdInListMessages} />
       </div>
     </div>
   );

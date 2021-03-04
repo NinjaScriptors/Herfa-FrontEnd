@@ -34,8 +34,8 @@ function App() {
         {/* <Home /> */}
         {/* <UserForm/> */}
 
-        {/* <Route exact path="/chat" component={ChatApp} >
-        </Route> */}
+        <Route exact path="/chat" component={ChatApp} >
+        </Route>
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >

@@ -49,8 +49,7 @@ const TeamPage = () => {
               <h5 className="font-weight-bold mt-4 mb-3">Mohammad Almoqdad </h5>
               <p className="text-uppercase black-text">Graphic designer</p>
               <p className="grey-text">
-                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                consectetur, adipisci sed quia non numquam modi tempora eius.
+              beginner photographer with a lot of passion in programming and photography. I love Arabic language and aim to participate in it's technical revival
               </p>
               <ul className="list-unstyled mb-0">
                 <a href="#!" className="p-2 fa-lg">
