@@ -1,6 +1,9 @@
 import { setSigninInfo } from "../reducers/profile"
 import axios from "axios";
 import base64 from 'base-64';
+import cookie from 'react-cookies';
+
+
 const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
 
 export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
@@ -20,6 +23,7 @@ export const getSignedUpUserInfo = ({ username, password }) => dispatch => {
         }
     })
         .then(res => { // res is the token i received from the basic Auth
+            cookie.save("auth", res.data.token)
             console.log("Basic Auth Tooooken>>", res)
             axios({
                 method: 'post',
