@@ -22,7 +22,7 @@ export default function ConversationList(props) {
   const getConversations = async () => {
     console.log("inside get conversations")
     // console.log(JSON.parse(localStorage.getItem("userInfo")).token)
-    axios(`http://localhost:4000/room/userRooms/${JSON.parse(localStorage.getItem("userInfo"))._id}`, {
+    axios(`https://herfa-server.herokuapp.com/room/userRooms/${JSON.parse(localStorage.getItem("userInfo"))._id}`, {
       method: "get",
       headers: {
         "Access-Control-Allow-Origin": "*",

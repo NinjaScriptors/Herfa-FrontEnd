@@ -9,7 +9,7 @@ import cookie from 'react-cookies';
 import { io } from "socket.io-client";
 import './MessageList.css';
 
-const MY_USER_ID = 'apple';
+
 
 
 
@@ -17,9 +17,8 @@ export default function MessageList(props) {
   const [messages, setMessages] = useState([])
   let [roomidd, setRoomId] = useState("");
   let [generalSellerId, setSellerId] = useState("");
-  // useEffect(() => {
-  //   getMessages();
-  // }, [])
+  let myId = JSON.parse(localStorage.getItem("userInfo"))._id
+
 
 
 
@@ -28,7 +27,7 @@ export default function MessageList(props) {
     if (sellerId) { // to avoid hitting the API when there is no conversation clicked 
       let userRooms = await axios({
         method: 'get',
-        url: `http://localhost:4000/room/userRooms/${sellerId}`,
+        url: `https://herfa-server.herokuapp.com/room/userRooms/${sellerId}`,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -38,7 +37,6 @@ export default function MessageList(props) {
         }
       })
 
-      let myId = JSON.parse(localStorage.getItem("userInfo"))._id
       let room = userRooms.data.filter(ele => {
         console.log(ele.userIds)
         if (ele.userIds.includes(sellerId) && ele.userIds.includes(myId)) return true;
@@ -46,9 +44,10 @@ export default function MessageList(props) {
 
       console.log("roooom of these two sweet users", room[0]._id);
       setRoomId(room[0]._id)
+
       let userConversation = await axios({
         method: 'get',
-        url: `http://localhost:4000/room/${room[0]._id}`,
+        url: `https://herfa-server.herokuapp.com/room/${room[0]._id}`,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -59,16 +58,13 @@ export default function MessageList(props) {
       })
       let tempMessages = [];
       let msgs = userConversation.data.conversation.map((message, idx) => {
-        // auther = 
-        tempMessages.push({ id: message._id, message: message.message.messageText, auther: myId, timestamp: new Date().getTime() })
+        // auther = message.postedByUser == myId ? myId : "otheruser";
+        tempMessages.push({ id: message._id, message: message.message.messageText, auther: message.postedByUser, timestamp: new Date().getTime() })
         return message
       })
-      setTimeout(() => {
-
-        setMessages([...tempMessages])
-        // console.log(tempMessages)
-        // console.log(msgs)
-      }, 2000)
+      
+      setMessages([...tempMessages])
+     
       // if (!userRooms) {
       //   let userRooms = await axios({
       //     method: 'post',
@@ -94,7 +90,7 @@ export default function MessageList(props) {
   }
 
   let socket;
-  socket = io("http://localhost:4000")
+  socket = io("https://herfa-server.herokuapp.com")
   socket.on("connect", () => {
     console.log("conneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeected")
   })
@@ -192,7 +188,11 @@ export default function MessageList(props) {
       let previous = messages[i - 1];
       let current = messages[i];
       let next = messages[i + 1];
-      let isMine = current.author === JSON.parse(localStorage.getItem("userInfo"))._id;
+      console.log(typeof current.auther) // message.postedByUser
+      console.log(typeof myId)
+
+      let isMine = current.auther == myId ? true : false
+      console.log(isMine)
       let currentMoment = moment(current.timestamp);
       let prevBySameAuthor = false;
       let nextBySameAuthor = false;
@@ -244,7 +244,7 @@ export default function MessageList(props) {
 
   let postMessage = async (message) => {
     console.log("messssssssssssssaaaaaaaaaaaaaaaaaggggggggge", message)
-    let postnewmessage = await fetch(`http://localhost:4000/room/${roomidd}/message`, {
+    let postnewmessage = await fetch(`https://herfa-server.herokuapp.com/room/${roomidd}/message`, {
       method: 'post',
       mode: "cors",
       body: JSON.stringify({ messageText: message }),
