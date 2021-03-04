@@ -61,6 +61,8 @@ function App() {
 
         <Route path="/details-update/:id" component={ProductFormUpdate} >
         </Route>
+        <Route path="/details-delete/:id" component={ActiveCategories} >
+        </Route>
 
         {/* <Route path="/sign-up" component={SignUp} >
         </Route>

@@ -164,7 +164,12 @@ const Details = props => {
 
                     </Jumbotron>
                 </Row>
+                {/* update */}
                 <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-update/${props.product._id}`}>Update Details</Link>
+
+                 {/* delete */}
+                <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link>
+                
             </Container>
             <div className={classRev.root} style={{ margin: 'auto', paddingBottom : "20px" }}>
                 <SnackbarContent style={{ backgroundColor: "#C99A5C", fontFamily: "Handlee", color: "#333" }} action={action}

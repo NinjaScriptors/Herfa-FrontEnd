@@ -41,16 +41,15 @@ const products = createSlice({
             console.log('state', state);
         },
         updateProductDetails(state, action) {
-            // state.productDetail = state.products.find(e=>{
-            //   return   e._id == action.payload._id
-            // })
-            // state.productDetail = action.payload;
-            // if (!exist && action.payload.inStock > 0) {
-            //     state.productsUp.push(action.payload);
-            // }
             console.log('from the updateProductDetails object', action.payload)
             state.productDetail = action.payload;
             console.log('state.productDetail', state.productDetail);
+        },
+        deleteProduct(state, action) {
+            console.log('from the deleteProductDetails object', action.payload)
+            // state.userForm = action.payload;
+            state.productDetail = action.payload;
+            console.log('state', state);
         },
     },
 });
@@ -161,6 +160,50 @@ export const updateDetaileProductdObj = (obj) => async (dispatch) => {
     // });
 }
 
+export const deleteProductdObj = (obj) => async (dispatch) => {
+    // cookie.load('pro-id');
+   
+    console.log("obj._id", `${obj._id}`)
+    console.log("obj", `${obj}`)
+
+    console.log("inside dispatch of updateDetailedObj!!!! ")
+
+
+    const data = await axios({
+
+        method: 'delete',
+        url: `${api}/products/${obj._id}`,
+        mode: 'cors',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie.load('auth')}`
+        },
+        data: JSON.stringify(obj),
+
+        // .then(data => {
+        //     console.log("we got the data updateUserDetails : data.data =", data.data)
+        //     return dispatch(updateProductDetails(data.data))
+        // }).catch(err => { console.log(err) })
+    })
+    console.log("we got the data updateUserDetails : data.body =", data)
+    return dispatch(deleteProduct(data.data));
+
+    // let newObj = { ...obj}
+    // newObj = JSON.stringify(newObj);
+    // return superagent.put(`${api}/products/${obj._id}`).set({
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Credentials": true,
+    //     'Content-Type': 'application/json'
+    // }).send(newObj).then(data => {
+    //     console.log("we got the data updateProductDetails : data.body =", data.body)
+    //     if(data.body){
+
+    //         dispatch(getDetailedObj(`${obj._id}`))
+    //     }
+    // });
+}
 // export const getSearchProducts = (name) => (dispatch) => {
 //     console.log("inside dispatch of getDetailedObj!!!! ")
 
@@ -170,6 +213,6 @@ export const updateDetaileProductdObj = (obj) => async (dispatch) => {
 //     });
 // }
 
-export const { setProducts, setProductDetails, activeProduct, setsearchProducts, updateProductDetails } = products.actions;
+export const { setProducts, setProductDetails, activeProduct, setsearchProducts, updateProductDetails,deleteProduct } = products.actions;
 
 export default products.reducer;
