@@ -27,19 +27,19 @@ function App() {
     <>
       {/* <ProductForm/> */}
 
-      <BrowserRouter>
         {/* <ProductFormUpdate /> */}
+      <BrowserRouter>
         {/* <Header /> */}
 
         {/* <Home /> */}
         {/* <UserForm/> */}
 
         {/* <Route exact path="/chat" component={ChatApp} >
-        </Route>
+        </Route> */}
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
-        </Route> */}
+        </Route>
         {/* <Route exact path="/" component={Home}>
         </Route> */}
 
@@ -64,12 +64,12 @@ function App() {
         <Route path="/details-delete/:id" component={ActiveCategories} >
         </Route>
 
-        {/* <Route path="/sign-up" component={SignUp} >
+        <Route path="/sign-up" component={SignUp} >
         </Route>
         <Route path="/sign-in" component={Signin} >
+        </Route>
+        {/* <Route path="/sign-in" component={Signin} >
         </Route> */}
-        <Route path="/sign-in" component={Signin} >
-        </Route>
 
         {/* <StickyFooter /> */}
       </BrowserRouter>
