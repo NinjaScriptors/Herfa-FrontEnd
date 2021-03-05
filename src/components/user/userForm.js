@@ -2,7 +2,7 @@ import { Container } from '@material-ui/core';
 import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getDetailedObj, getRemoteData } from "../../store/userStore/userSlicer";
+import { getDetailedUserObj, getRemoteData } from "../../store/userStore/userSlicer";
 import { updateUserDetails, updateDetailedObj } from "../../store/userStore/userSlicer";
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -17,15 +17,16 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
             width: '25ch',
-            color:'white'
+            color: 'white'
         },
     },
 }));
 
 const UserForm = props => {
+    console.log("usreidddddddddddddd", props.user)
+
     const dispatch = useDispatch();
     const classes = useStyles();
-
     const [state, setState] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,10 +36,10 @@ const UserForm = props => {
     const [fullName, setFullName] = useState("");
     const [name, setName] = useState("");
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let fullName = `${firstName} ${lastName}`;
-        dispatch(updateDetailedObj({ _id: props.user._id, fullName, name, email, password, isSeller }))
+        dispatch(updateDetailedObj({ _id: JSON.parse(localStorage.getItem("userInfo"))._id, fullName, name, email, password, isSeller }))
         // dispatch(getDetailedObj("603bfe782d208700158ebecd"));
         dispatch(getRemoteData());
         // console.log('handleSubmit >>>>',password, isSeller, fullName)
@@ -80,11 +81,11 @@ const UserForm = props => {
     }
 
 
-
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj(props.user._id));
+            await dispatch(getDetailedUserObj(JSON.parse(localStorage.getItem("userInfo"))._id));
+            // await dispatch(updateDetailedObj(props.user));
 
         };
         fetchData();
@@ -103,30 +104,31 @@ const UserForm = props => {
                 </div>
 
 
-                <Container className="main-user-form" style= {{color:"white" }}>
-                        <h1>Update Profile</h1>
-            
+                <Container className="main-user-form" style={{ color: "white" }}>
+                    <h1>Update Profile</h1>
 
-             
-<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "750px" , color: "white"}}>
-    <TextField  style ={{color: "white"}} onChange={handleChange} name="fullName" id="name-input" label="Name" defaultValue="" />
-    {/* <TextField onChange={handleChange} name="email" id="email-disabled" label="Email" />
-    <TextField onChange={handleChange} name="name" id="username-disabled" label="Username" /> */}
-    <TextField onChange={handleChange} name="password" id="passowrd-input" label="Password" defaultValue="" />
-    <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" />
-                  <Button style={{borderBottom: "1px solid #555"}} type="submit">Submit</Button>
-</form>
 
-</Container>
+
+
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: "30%", marginLeft: "750px", color: "white" }}>
+                        <TextField onChange={handleChange} name="fullName" id="name-input" label="Name" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).fullName}`} />
+                        <TextField onChange={handleChange} disabled name="email" id="email-disabled" label="Email" value={`${JSON.parse(localStorage.getItem("userInfo")).email}`} />
+                        {console.log("props.user.email ", JSON.parse(localStorage.getItem("userInfo")).email)}
+                        <TextField onChange={handleChange} disabled name="name" id="username-disabled" label="Username" value={`${JSON.parse(localStorage.getItem("userInfo")).name}`} />
+                        <TextField onChange={handleChange} name="password" id="passowrd-input" label="Password" />
+                        <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).isSeller}`} />
+                        <Button style={{ borderBottom: "1px solid #555" }} type="submit">Submit</Button>
+                    </form>
+
+                </Container>
             </section>
-           
         </>
     )
 }
 
 
 const mapStateToProps = (state) => ({
-    user: state.users.userDetail,
+    userInfo: state.users.userDetail,
 });
 
 // const mapDispatchToProps = (dispatch, getState) => ({

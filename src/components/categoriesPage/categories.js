@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { active, getRemoteCategories } from "../../store/categoriesStore/categoriesSlicer";
-import { Link, Typography, Button } from '@material-ui/core'
 import { activeProduct, setsearchProducts } from '../../store/productsStore/productsSlicer'
 import * as actions from '../../store/actionsPC/actions';
-import { Card, CardDeck } from 'react-bootstrap'
-import about3 from '../../assets/about3.jpg'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { NavLink } from 'react-router-dom';
 import { useState } from "react";
 import "./input.css"
 
@@ -60,7 +56,7 @@ const ActiveCategories = props => {
     }, [dispatch]);
 
     let [item, setSearchItem] = useState("");
- 
+
     function handlechange(e) {
         console.log(e.target.value)
         setSearchItem(e.target.value);
@@ -71,7 +67,7 @@ const ActiveCategories = props => {
         props.getSearchProducts(item)
     }
 
-    
+
 
 
 
@@ -93,15 +89,15 @@ const ActiveCategories = props => {
                         <Paper component="form" className={classes.root} style={{ alignItems: "center", backgroundColor: "transparent", border: "1px solid white", marginTop: "-140px" }}>
 
                             <InputBase
-                                  onChange={handlechange}
-                                  onSubmit={handleSearchBarClick}
+                                onChange={handlechange}
+                                onSubmit={handleSearchBarClick}
                                 className={classes.input}
                                 placeholder="Search about?"
                                 inputProps={{ 'aria-label': 'search google maps' }}
                                 style={{ textAlign: "center" }}
                             />
-                            <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                                <SearchIcon onClick={handleSearchBarClick}/>
+                            <IconButton onClick={handleSearchBarClick} type="submit" className={classes.iconButton} aria-label="search">
+                                <SearchIcon />
                             </IconButton>
                             <Divider className={classes.divider} orientation="vertical" />
 
@@ -111,14 +107,14 @@ const ActiveCategories = props => {
 
                         {props.activeOne.categories.map((category, idx) => {
 
-                            return <div className="radiogroup">
-                              <input className="state" type="radio" name="app" id={idx} key={idx} value={category}  onChange={() => { props.activeProduct(category) }}  href="/categories"  />
-                              <label className="label" for={idx}>
-                                <div className="indicator"></div>
-                                <span className="text">{category.toUpperCase()}</span>
-                              </label>
+                            return <div key={idx} className="radiogroup">
+                                <input className="state" type="radio" name="app" id={idx} key={idx} value={category} onChange={() => { props.activeProduct(category) }} href="/categories" />
+                                <label className="label" htmlFor={idx}>
+                                    <div className="indicator"></div>
+                                    <span className="text">{category.toUpperCase()}</span>
+                                </label>
                             </div>
-    
+
                         })}
 
 

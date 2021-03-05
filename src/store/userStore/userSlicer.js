@@ -53,7 +53,7 @@ export const getRemoteData = () => (dispatch) => {
     });
 }
 
-export const getDetailedObj = (id) => (dispatch) => {
+export const getDetailedUserObj = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
     return superagent.get(`${api}/users/${id}`).then(data => {
@@ -64,16 +64,14 @@ export const getDetailedObj = (id) => (dispatch) => {
 
 
 export const updateDetailedObj = (obj) => async (dispatch) => {
-    console.log("inside dispatch of updateDetailedObj!!!! ")
+    console.log("inside dispatch of updateDetailedObj!!!! ",obj)
 
     console.log("obj._id", `${obj._id}`)
 
-    const data = await axios({
-
+    const data = await fetch(`${api}/users/${obj._id}`,{
         method: 'put',
-        url: `${api}/users/${obj._id}`,
         mode: 'cors',
-        data: JSON.stringify(obj),
+        body: JSON.stringify(obj),
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
@@ -82,9 +80,9 @@ export const updateDetailedObj = (obj) => async (dispatch) => {
         }
 
         // .then(data => {
-            //         console.log("we got the data updateUserDetails : data.body =", data.data)
-            //         return dispatch(updateUserDetails(data.data))
-            //     })
+        //         console.log("we got the data updateUserDetails : data.body =", data.data)
+        //         return dispatch(updateUserDetails(data.data))
+        //     })
         })
         // localStorage.clear()
         // localStorage.setItem("userInfo", data.data)

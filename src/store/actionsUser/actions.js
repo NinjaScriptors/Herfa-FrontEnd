@@ -19,7 +19,7 @@ export const getRemoteData = () => (dispatch) => {
 //     });
 // }
 
-export const getDetailedObj = (id) => (dispatch) => {
+export const getDetailedUserObj = (id) => (dispatch) => {
     return superagent.get(`${api}/users/${id}`).then(data => {
         console.log("we got the data : data.body =", data.body)
         dispatch(getDetails(data.body))

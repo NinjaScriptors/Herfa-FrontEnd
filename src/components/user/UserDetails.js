@@ -1,5 +1,6 @@
-import React, { useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { getDetailedUserObj } from "../../store/userStore/userSlicer";
 import { NavLink } from 'react-router-dom';
 import { form, TextField, Button } from '@material-ui/core';
 import { getDetailedObj, getRemoteData } from "../../store/userStore/userSlicer";
@@ -17,18 +18,17 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, 
 
 
 
-const UserForm = props => {
-    const dispatch = useDispatch();
-    const classes = useStyles();
+const UserDetails = props => {
 
-    const [state, setState] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isSeller, setname] = useState(false)
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [name, setName] = useState("");
+
+    // const [state, setState] = useState(false);
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [isSeller, setname] = useState(false)
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [fullName, setFullName] = useState("");
+    // const [name, setName] = useState("");
 
 
     const useStyles = makeStyles((theme) => ({
@@ -36,30 +36,19 @@ const UserForm = props => {
             '& .MuiTextField-root': {
                 margin: theme.spacing(1),
                 width: '25ch',
-                color:'white'
+                color: 'white'
             },
         },
     }));
 
+    const classes = useStyles();
+    const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getDetailedObj(JSON.parse(localStorage.getItem("userInfo"))._id));
+            await dispatch(getDetailedUserObj(JSON.parse(localStorage.getItem("userInfo"))._id));
         };
         fetchData();
     }, [dispatch]);
-
-
-
-
-    
-}
-
-
-
-
-
-    const UserDetails = props => {
-
 
     return (
 
@@ -91,7 +80,7 @@ const UserForm = props => {
                     <MDBCard style={{ maxWidth: '750px', margin: "auto" }}>
                         <MDBRow className='g-0' style={{ display: "flex", alignItems: "center", justifyContent: "space-around", marginTop: "-42px", height: "350px" }}>
                             <MDBCol style={{ marginLeft: -120 }} md='4'>
-                                <MDBCardImage style={{ boxShadow: " 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop: "-35px" }} src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
+                                <MDBCardImage style={{ boxShadow: " 0 7px 9px 0 rgba(0, 0, 0, 0.2)", borderRadius: "50%", marginTop: "-35px" }} src={JSON.parse(localStorage.getItem("userInfo")).image ? JSON.parse(localStorage.getItem("userInfo")).image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} position='top' alt='...' />
                             </MDBCol>
                             <MDBCol md='7'>
                                 <MDBCardBody>
@@ -102,24 +91,31 @@ const UserForm = props => {
                                     <MDBCardText style={{ fontSize: "20px" }}>
                                         email: {JSON.parse(localStorage.getItem("userInfo")).email || "user@user.com"}
                                     </MDBCardText>
+                                    {/* <MDBCardText style={{ fontSize: "20px" }}>
+                                        Ratings: {(localStorage.getItem("userInfo")).seller ? (localStorage.getItem("userInfo")).seller.map(rev => rev.ratings) : 'No ratings yet'}
+                                    </MDBCardText> */}
+                                    {/* <MDBCardText style={{ fontSize: "20px" }}>
+                                        Number of reviews: {JSON.parse(localStorage.getItem("userInfo")).seller ? JSON.parse(localStorage.getItem("userInfo")).seller.map(rev => rev.numReviews) : 'No Reviews'}
+                                    </MDBCardText> */}
 
-                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Edit Profile</NavLink>
+                                    <Button size="large" style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Edit Profile</NavLink>
                                     </Button>{' '}
-                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/add-product`}>Add Products</NavLink>
-                                    </Button>{' '}
+                                    <Button size="large" style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/add-product`}>Add Products</NavLink></Button>
+
                                 </MDBCardBody>
+
                             </MDBCol>
                         </MDBRow>
                     </MDBCard>
 
                 </Container>
-                </main>
-            </>
+            </main>
+        </>
 
-        );
-    }
-    const mapStateToProps = (state) => ({
-        userInfo: state.users.userDetail
-    });
+    );
+}
+const mapStateToProps = (state) => ({
+    userInfo: state.users.userDetail
+});
 
-    export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(UserDetails);

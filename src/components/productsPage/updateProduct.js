@@ -4,7 +4,7 @@ import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
 import { getDetailedObj, updateProductDetails, updateDetaileProductdObj } from "../../store/productsStore/productsSlicer";
-
+import {getDetailedUserObj} from '../../store/userStore/userSlicer';
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
@@ -34,6 +34,7 @@ const ProductFormUpdate = props => {
         const fetchData = async () => {
             setState(!state);
             await dispatch(getDetailedObj(id));
+            await dispatch(getDetailedUserObj(props.product.seller._id));
         };
         fetchData();
     }, [dispatch]);
@@ -51,7 +52,7 @@ const ProductFormUpdate = props => {
     const [numReviews, setNumReviews] = useState(0);
 
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateDetaileProductdObj({_id:props.product._id, seller:props.product.seller, category, countInStock, brand, description, price,name}));
         console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description,props)
@@ -59,7 +60,13 @@ const ProductFormUpdate = props => {
 
     }
 
-    function handleChange(e) {
+    const onChange = e => {
+       
+            setImage(e.target.files[0]);
+       
+     }
+
+    const handleChange= e=> {
         if (e.target.name == "category") {
             let newEmail = e.target.value;
             setCategory(newEmail);
@@ -109,15 +116,15 @@ const ProductFormUpdate = props => {
 
             <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "400px" , color: "white"}}>
 
-                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                {/* <TextField onChange={handleChange} name="rating" id="rating-disabled" label="Rating" value={props.product.rating} /> */}
-                {/* <TextField onChange={handleChange} name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} /> */}
-                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
-                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
-                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
-                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue="" />
-                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
-                {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
+                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name}`} />
+                <TextField onChange={handleChange} disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
+                <TextField onChange={handleChange} disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} />
+                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price}`} />
+                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category}`} />
+                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand}`} />
+                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock}`} />
+                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description}`} />
+                {/* <TextField onChange={onChange} name="image" id="image-input" label="Image" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"  /> */}
 
                 <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>
             </form>
@@ -131,6 +138,7 @@ const ProductFormUpdate = props => {
 const mapStateToProps = (state, ownProps) => ({
     // proId: ownProps.match.params.id,
     product: state.products.productDetail,
+    user: state.users.userDetail
 });
 
 // const mapDispatchToProps = (dispatch, getState) => ({
