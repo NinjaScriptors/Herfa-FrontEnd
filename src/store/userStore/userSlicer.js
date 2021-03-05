@@ -64,16 +64,14 @@ export const getDetailedObj = (id) => (dispatch) => {
 
 
 export const updateDetailedObj = (obj) => async (dispatch) => {
-    console.log("inside dispatch of updateDetailedObj!!!! ")
+    console.log("inside dispatch of updateDetailedObj!!!! ",obj)
 
     console.log("obj._id", `${obj._id}`)
 
-    const data = await axios({
-
+    const data = await fetch(`${api}/users/${obj._id}`,{
         method: 'put',
-        url: `${api}/users/${obj._id}`,
         mode: 'cors',
-        data: JSON.stringify(obj),
+        body: JSON.stringify(obj),
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,

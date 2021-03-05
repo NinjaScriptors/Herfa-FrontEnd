@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom"
 import * as actions from "../../store/actions/signin-actions"
+import { Redirect,Route } from "react-router";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -67,13 +69,13 @@ function SignInSide(props) {
 
   let [username, setUserName] = useState("");
   let [password, setPassword] = useState("");
-
+  let[loggedin, setLoggedin] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
     console.log(username, password)
     props.getSignedUpUserInfo({ username, password })
-    setTimeout(function(){console.log(props.userInfo)}, 4000);
-    
+    setTimeout(function () { console.log(props.userInfo) }, 1000);
+
   }
 
   function handleChange(e) {
@@ -88,10 +90,21 @@ function SignInSide(props) {
     }
   }
 
+// let x =  JSON.parse(localStorage.getItem("userInfo")) ? JSON.parse(localStorage.getItem("userInfo")): "test"
+//   useEffect(() => {
+//     console.log("iiiiiiiiiiiiiiiii")
+  
+// }, x)
+// function test(){
 
-
+// console.log("insideeeeeeeeeeee")
+//   return <Redirect to="/" /> 
+// }
+// if(!JSON.parse(localStorage.getItem("userInfo")) ) return <Redirect to="/" /> 
   return (
+    
     <Grid container component="main" className={classes.root}>
+     
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -132,14 +145,16 @@ function SignInSide(props) {
               label="Remember me"
             />
             {/* <NavLink to='/' variant="body2"> */}
-            <Button 
+            <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
             >
-              Sign In
+             
+                Sign In
+             
             </Button >
             {/* </NavLink> */}
 

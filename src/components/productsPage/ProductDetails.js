@@ -3,84 +3,62 @@ import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDetailedObj } from "../../store/productsStore/productsSlicer"
 
-import { Card, CardDeck } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Rating } from '@material-ui/lab';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import Image from 'react-bootstrap/Image'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { navLink } from "react-router-dom"
 import "../../style/product.scss";
 import { Link } from 'react-router-dom';
 
 
 import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardImage,
-    MDBCardTitle,
-    MDBCardText,
-    MDBRow,
-    MDBCol,
     MDBIcon,
 } from "mdbreact";
-import { CenterFocusStrong } from "@material-ui/icons";
-import { saveCookies } from "superagent";
 import cookie from 'react-cookies';
 
-const labels = {
-    0.5: 'Useless',
-    1: 'Useless +',
-    1.5: 'Poor',
-    2: 'Poor +',
-    2.5: 'Ok',
-    3: 'Ok +',
-    3.5: 'Good',
-    4: 'Good +',
-    4.5: 'Excellent',
-    5: 'Excellent +',
-};
-const action = (
-    <Button color="#333333" size="small">
-        <FavoriteIcon />
-    </Button>
-);
+// const labels = {
+//     0.5: 'Useless',
+//     1: 'Useless +',
+//     1.5: 'Poor',
+//     2: 'Poor +',
+//     2.5: 'Ok',
+//     3: 'Ok +',
+//     3.5: 'Good',
+//     4: 'Good +',
+//     4.5: 'Excellent',
+//     5: 'Excellent +',
+// };
 
-const useStyles = makeStyles({
-    root: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: "center"
-    },
-});
+// const useStyles = makeStyles({
+//     root: {
+//         width: 200,
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: "center"
+//     },
+// });
 
-const useStyleReview = makeStyles((theme) => ({
-    root: {
-        maxWidth: 600,
-        '& > * + *': {
-            marginTop: theme.spacing(2),
+// const useStyleReview = makeStyles((theme) => ({
+//     root: {
+//         maxWidth: 600,
+//         '& > * + *': {
+//             marginTop: theme.spacing(2),
 
-        },
+//         },
 
-    },
-}));
+//     },
+// })
+// );
 
 
 const Details = props => {
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
-    const classes = useStyles();
-    const classRev = useStyleReview();
 
     const { id } = props.match.params;
     cookie.save('pro-id', id);
@@ -142,12 +120,12 @@ const Details = props => {
                             Count in Stock: {props.product.countInStock}
 
 
-                      
-                        <div>
-                            <i class="far fa-edit" style={{margin :"2px"}}>
-                                <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`}>Update</Link>
-                            </i>
-                        </div>
+
+                            <div>
+                                <i className="far fa-edit" style={{ margin: "2px" }}>
+                                    <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`}>Update</Link>
+                                </i>
+                            </div>
                         </div>
                         <br />
 
@@ -156,7 +134,7 @@ const Details = props => {
                         <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
                             <Rating
                                 name="hover-feedback"
-                                value={props.product.rating}
+                                defaultValue={props.product.rating || 5}
                                 precision={0.5}
                                 onChange={(event, newValue) => {
                                     setValue(newValue);
@@ -165,7 +143,7 @@ const Details = props => {
                                     setHover(newHover);
                                 }}
                             />
-                            {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+                            {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
                         </div>
 
                     </Col>
@@ -178,19 +156,19 @@ const Details = props => {
             </Container>
             <Container>
                 {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
-                <ul id="comments-list" class="comments-list" style={{ margin: "auto" }}>
-                    {props.product.reviews ? props.product.reviews.map(rev => {
+                <ul id="comments-list" className="comments-list" style={{ margin: "auto" }}>
+                    {props.product.reviews ? props.product.reviews.map((rev, idx) => {
 
                         console.log("props.user ---> !!", props.user)
-                        return <li style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
-                            <div class="comment-main-level" >
-                                <div class="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
-                                        <i class="fa fa-heart"></i>
+                        return <li key={idx} style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                            <div className="comment-main-level" >
+                                <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
+                                <div className="comment-box">
+                                    <div className="comment-head">
+                                        <h6 className="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
+                                        <i className="fa fa-heart"></i>
                                     </div>
-                                    <div class="comment-content">
+                                    <div className="comment-content">
                                         {rev.comment}
                                     </div>
                                 </div>
