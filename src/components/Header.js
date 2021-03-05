@@ -60,7 +60,7 @@ export default function ButtonAppBar() {
         setOpen(false);
     };
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [setMobileMoreAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -69,6 +69,7 @@ export default function ButtonAppBar() {
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
+        console.log(mobileMoreAnchorEl)
     };
 
     const handleMenuClose = () => {
@@ -122,6 +123,8 @@ export default function ButtonAppBar() {
             document.removeEventListener('scroll', handleScroll)
         }
     }, [])
+
+    
     let test = [];
     test.push(JSON.parse(localStorage.getItem("userInfo")))
     useEffect(() => {

@@ -103,7 +103,6 @@ const mapStateToProps = state => ({
     myProducts: state.products.products,
     filetredProduct: state.products.filetredProduct,
 
-
 });
 
 

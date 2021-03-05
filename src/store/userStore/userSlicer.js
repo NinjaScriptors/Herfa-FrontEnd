@@ -53,7 +53,7 @@ export const getRemoteData = () => (dispatch) => {
     });
 }
 
-export const getDetailedObj = (id) => (dispatch) => {
+export const getDetailedUserObj = (id) => (dispatch) => {
     console.log("inside dispatch of getDetailedObj!!!! ")
 
     return superagent.get(`${api}/users/${id}`).then(data => {
@@ -80,9 +80,9 @@ export const updateDetailedObj = (obj) => async (dispatch) => {
         }
 
         // .then(data => {
-            //         console.log("we got the data updateUserDetails : data.body =", data.data)
-            //         return dispatch(updateUserDetails(data.data))
-            //     })
+        //         console.log("we got the data updateUserDetails : data.body =", data.data)
+        //         return dispatch(updateUserDetails(data.data))
+        //     })
         })
         // localStorage.clear()
         // localStorage.setItem("userInfo", data.data)

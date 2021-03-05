@@ -32,8 +32,8 @@ function App() {
         {/* <Home /> */}
         {/* <UserForm/> */}
 
-        <Route exact path="/chat" component={ChatApp} >
-        </Route>
+        {/* <Route exact path="/chat" component={ChatApp} >
+        </Route> */}
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
@@ -43,11 +43,11 @@ function App() {
         <Route exact path="/add-product" component={ProductForm}>
         </Route>
 
-
+        
         <Route path="/about-us" component={AboutUs} >
         </Route>
         <Route path="/our-team" component={TeamPage} >
-        </Route>
+        </Route> 
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
         <Route exact path="/categories" component={Product} >
@@ -59,7 +59,6 @@ function App() {
 
         <Route path="/details-update/:id" component={ProductFormUpdate} >
         </Route>
-
         <Route path="/details-delete/:id" component={ActiveCategories} >
         </Route>
 
