@@ -55,6 +55,8 @@ function App() {
         <Route exact path="/categories" component={Product} >
 
         </Route>
+        <Route exact path="/add-product" component={ProductForm}>
+        </Route> 
 
         <Route path="/details/:id" component={Details} >
         </Route>

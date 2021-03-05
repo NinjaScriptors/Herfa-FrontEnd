@@ -76,8 +76,10 @@ const useStyleReview = makeStyles((theme) => ({
 
 
 const Details = props => {
+
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
+    
     const classes = useStyles();
     const classRev = useStyleReview();
 

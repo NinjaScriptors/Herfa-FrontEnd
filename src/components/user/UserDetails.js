@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { getDetailedObj } from "../../store/userStore/userSlicer";
+import { getDetailedUserObj } from "../../store/userStore/userSlicer";
 import { NavLink } from 'react-router-dom';
 import {
     Typography,
@@ -30,7 +30,7 @@ const UserDetails = props => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getDetailedObj(JSON.parse(localStorage.getItem("userInfo"))._id));
+            await dispatch(getDetailedUserObj(JSON.parse(localStorage.getItem("userInfo"))._id));
         };
         fetchData();
     }, [dispatch]);
@@ -106,8 +106,10 @@ const UserDetails = props => {
 
                                     <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Edit Profile</NavLink>
                                     </Button>{' '}
+                                    <Button size="lg" active style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}><NavLink style={{ textDecoration: "none", color: "white" }} to={`/add-product`}>Add Products</NavLink></Button>
 
                                 </MDBCardBody>
+                                
                             </MDBCol>
                         </MDBRow>
                     </MDBCard>

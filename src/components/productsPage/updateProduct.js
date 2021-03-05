@@ -4,7 +4,7 @@ import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
 import { getDetailedObj, updateProductDetails, updateDetaileProductdObj } from "../../store/productsStore/productsSlicer";
-
+import {getDetailedUserObj} from '../../store/userStore/userSlicer';
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
@@ -34,6 +34,7 @@ const ProductFormUpdate = props => {
         const fetchData = async () => {
             setState(!state);
             await dispatch(getDetailedObj(id));
+            await dispatch(getDetailedUserObj(props.product.seller._id));
         };
         fetchData();
     }, [dispatch]);
@@ -101,14 +102,14 @@ const ProductFormUpdate = props => {
 
             <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' }}>
 
-                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                {/* <TextField onChange={handleChange} name="rating" id="rating-disabled" label="Rating" value={props.product.rating} /> */}
-                {/* <TextField onChange={handleChange} name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} /> */}
-                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
-                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
-                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
-                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue="" />
-                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
+                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name}`} />
+                <TextField onChange={handleChange} disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
+                <TextField onChange={handleChange} disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} />
+                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price}`} />
+                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category}`} />
+                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand}`} />
+                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock}`} />
+                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description}`} />
                 {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
 
                 <Button type="submit">Submit</Button>
@@ -122,6 +123,7 @@ const ProductFormUpdate = props => {
 const mapStateToProps = (state, ownProps) => ({
     // proId: ownProps.match.params.id,
     product: state.products.productDetail,
+    user: state.users.userDetail
 });
 
 // const mapDispatchToProps = (dispatch, getState) => ({

@@ -2,7 +2,7 @@ import { Container } from '@material-ui/core';
 import React, { useState } from 'react';
 import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getDetailedObj, getRemoteData } from "../../store/userStore/userSlicer";
+import { getDetailedUserObj, getRemoteData } from "../../store/userStore/userSlicer";
 import { updateUserDetails, updateDetailedObj } from "../../store/userStore/userSlicer";
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
@@ -36,7 +36,7 @@ const UserForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateDetailedObj({_id:JSON.parse(localStorage.getItem("userInfo"))._id, fullName, name, email, password, isSeller}))
+        dispatch(updateDetailedObj({_id: JSON.parse(localStorage.getItem("userInfo"))._id, fullName, name, email, password, isSeller}))
         // dispatch(getDetailedObj("603bfe782d208700158ebecd"));
         dispatch(getRemoteData());
         // let fullName = `${firstName} ${lastName}`;
@@ -86,7 +86,7 @@ const UserForm = props => {
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
-            await dispatch(getDetailedObj(JSON.parse(localStorage.getItem("userInfo"))._id));
+            await dispatch(getDetailedUserObj(JSON.parse(localStorage.getItem("userInfo"))._id));
             // await dispatch(updateDetailedObj(props.user));
 
         };
