@@ -52,7 +52,7 @@ const ProductFormUpdate = props => {
     const [numReviews, setNumReviews] = useState(0);
 
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateDetaileProductdObj({_id:props.product._id, seller:props.product.seller, category, countInStock, brand, description, price,name}));
         console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description,props)
@@ -60,7 +60,13 @@ const ProductFormUpdate = props => {
 
     }
 
-    function handleChange(e) {
+    const onChange = e => {
+       
+            setImage(e.target.files[0]);
+       
+     }
+
+    const handleChange= e=> {
         if (e.target.name == "category") {
             let newEmail = e.target.value;
             setCategory(newEmail);
@@ -110,7 +116,7 @@ const ProductFormUpdate = props => {
                 <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand}`} />
                 <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock}`} />
                 <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description}`} />
-                {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
+                <TextField onChange={onChange} name="image" id="image-input" label="Image" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"  />
 
                 <Button type="submit">Submit</Button>
             </form>
