@@ -114,7 +114,7 @@ const Details = props => {
                 <Row style={{ margin: "auto", alignItems: "center", display: "flex", justifyContent: "space-around" }}>
                     <Col xs={6} md={4} >
                         <div style={{ display: "flex", flexDirection: "column " }}>
-                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 300, paddingTop: "15px" }} />
+                            <Image src={`${props.product.image}` || 'https://viexports.in/wp-content/uploads/2020/09/handicraft-delhi4.jpg'} rounded style={{ overflow: "hidden", height: 300, paddingTop: "15px" }} />
                             <span style={{ display: "flex", flexDirection: "row", fontFamily: "Handlee", marginTop: 3 }}>
                                 <Rating
                                     name="hover-feedback"
