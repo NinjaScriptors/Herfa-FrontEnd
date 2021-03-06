@@ -116,7 +116,7 @@ export default function ConversationList(props) {
         conversations.map((user, idx) => {
           // if (idx != conversations.length - 1) {
           return (
-            <Container >
+            <Container key={idx} >
               <Typography className="conversation-title" onClick={props.handleClickedConversation} id={user._id} key={user.name}>{user.name}</Typography>
 
               {/* <Typography className="conversation-title" onClick={props.handleClickedConversation} id="test" key={"test"}>{conversation.name}</Typography> */}
