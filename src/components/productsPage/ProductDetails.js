@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import { getDetailedObj } from "../../store/productsStore/productsSlicer"
-
+import { form, TextField, Button } from '@material-ui/core';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -14,12 +13,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import "../../style/product.scss";
 import { Link } from 'react-router-dom';
-
-
-import {
-    MDBIcon,
-} from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import cookie from 'react-cookies';
+import { Reviews } from "./Review";
 
 // const labels = {
 //     0.5: 'Useless',
@@ -56,8 +52,8 @@ import cookie from 'react-cookies';
 // );
 
 
-const Details = props => {
 
+const Details = props => {
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
 
@@ -74,7 +70,7 @@ const Details = props => {
         fetchData();
     }, [dispatch]);
 
-
+  
     return (
         <>
             <header>
@@ -134,10 +130,12 @@ const Details = props => {
 
                         <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
                             <Rating
+
                                 name="hover-feedback"
                                 defaultValue={props.product.rating || 5}
                                 precision={0.5}
                                 onChange={(event, newValue) => {
+
                                     setValue(newValue);
                                 }}
                                 onChangeActive={(event, newHover) => {
@@ -155,31 +153,8 @@ const Details = props => {
                 {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
 
             </Container>
-            <Container>
-                {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
-                <ul id="comments-list" className="comments-list" style={{ margin: "auto" }}>
-                    {props.product.reviews ? props.product.reviews.map((rev, idx) => {
 
-                        console.log("props.user ---> !!", props.user)
-                        return <li key={idx} style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
-                            <div className="comment-main-level" >
-                                <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
-                                <div className="comment-box">
-                                    <div className="comment-head">
-                                        <h6 className="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
-                                        <i className="fa fa-heart"></i>
-                                    </div>
-                                    <div className="comment-content">
-                                        {rev.comment}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                    }) : " "}
-
-                </ul>
-            </Container>
+            <Reviews id={id} reviews={props.product.reviews} image={props.user.image} rating={value} />
 
         </>
 

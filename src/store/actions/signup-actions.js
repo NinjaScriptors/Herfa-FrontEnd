@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { setSignUpInfo } from "../reducers/profile"
-const usersAPI = ' https://herfa-app.herokuapp.com/api/users';
+const usersAPI = 'https://herfa-app.herokuapp.com/api/users';
 
 
 export const getUserInfo = ({ email, password, name, fullName }) => (dispatch) => {

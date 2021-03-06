@@ -14,6 +14,7 @@ import { Typography } from '@material-ui/core';
 
 export default function ConversationList(props) {
   const [conversations, setConversations] = useState([]);
+  const [flag, setFlag] = useState(true);
   useEffect(() => {
     //   // let socket = io("https://localhost:4000")
     getConversations()
@@ -63,7 +64,6 @@ export default function ConversationList(props) {
   }
   console.log(conversations)
 
-
   return (
     <div className="conversation-list">
       <Toolbar
@@ -78,21 +78,23 @@ export default function ConversationList(props) {
       <ConversationSearch />
       {
 
-        conversations.map(user => {
+        conversations.map((user, idx) => {
           console.log(props)
-          return (
-            <Container >
-              <Typography className="conversation-title" onClick={props.handleClickedConversation} id={user._id} key={user.name}>{user.name}</Typography>
+          if (idx != conversations.length - 1) {
+            return (
+              <Container >
+                <Typography className="conversation-title" onClick={props.handleClickedConversation} id={user._id} key={user.name}>{user.name}</Typography>
 
-              {/* <Typography className="conversation-title" onClick={props.handleClickedConversation} id="test" key={"test"}>{conversation.name}</Typography> */}
+                {/* <Typography className="conversation-title" onClick={props.handleClickedConversation} id="test" key={"test"}>{conversation.name}</Typography> */}
 
-              {/* <ConversationListItem 
+                {/* <ConversationListItem 
             
               key={conversation.name}
               data={conversation}
             /> */}
-            </Container>
-          )
+              </Container>
+            )
+          }
         })
 
 
