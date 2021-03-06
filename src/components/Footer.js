@@ -8,14 +8,16 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 const FooterPage = () => {
   return (
     <MDBFooter style={{ backgroundColor: " #252525", height: "180px" }} className="font-small pt-1 mt-1">
-      <MDBContainer fluid className="text-center text-md-left" style={{ display: "flex", justifyContent: "space-between" }} >
+      <MDBContainer fluid  style={{ display: "flex", justifyContent: "space-between" }} >
+      {/* <MDBContainer fluid className="text-center text-md-left" style={{ display: "flex", justifyContent: "space-between" }} > */}
+
         <MDBRow style={{ height: "140px", width: "100%", margin: "auto" }}>
           <MDBCol md="3" style={{ marginTop: "-20px" }}>
-            < h3 style={{ fontSize: "33px" }} className="title">H E R F A</ h3>
-
+            < h3 style={{ fontSize: "33px"  , color:"#C99A5C"}} className="title">H E R F A</ h3>
+           
           </MDBCol>
           <MDBCol md="3" style={{ marginTop: "-50px" }}>
-            < h4 style={{ marginLeft: "40px", fontSize: "24px" }} className="title">Links</ h4>
+            < h4 style={{ fontSize: "24px" }} className="title">Links</ h4>
             <ul>
               <li className="list-unstyled">
                 <a href="/user-details">Sell Local Products</a>
@@ -30,7 +32,7 @@ const FooterPage = () => {
             </ul>
           </MDBCol>
           <MDBCol md="3" style={{ marginTop: "-50px" }}>
-            < h4 style={{ marginLeft: "40px", fontSize: "24px" }} className="title">Links</ h4>
+            < h4 style={{  fontSize: "24px" }} className="title">Links</ h4>
             <ul>
               <li className="list-unstyled">
                 <a href="/categories">Buy Local Products</a>
@@ -57,7 +59,7 @@ const FooterPage = () => {
 
           <MDBContainer style={{ marginLeft: "36%" }}>
 
-            &copy; {new Date().getFullYear()} Copyright: <a href="/"> H E R F A </a>
+            &copy; {new Date().getFullYear()} Copyright: <a  href="/"> H E R F A </a>
           </MDBContainer>
         </MDBRow>
       </MDBContainer>

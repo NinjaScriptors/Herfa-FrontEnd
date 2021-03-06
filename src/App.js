@@ -44,9 +44,9 @@ function App() {
         </Route>
 
         
-        <Route path="/about-us" component={AboutUs} >
+        <Route exact path="/about-us" component={AboutUs} >
         </Route>
-        <Route path="/our-team" component={TeamPage} >
+        <Route exact path="/our-team" component={TeamPage} >
         </Route> 
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
@@ -54,18 +54,18 @@ function App() {
 
         </Route>
 
-        <Route path="/details/:id" component={Details} >
+        <Route exact path="/details/:id" component={Details} >
         </Route>
 
-        <Route path="/details-update/:id" component={ProductFormUpdate} >
+        <Route exact path="/details-update/:id" component={ProductFormUpdate} >
         </Route>
-        <Route path="/details-delete/:id" component={ActiveCategories} >
-        </Route>
-
-        <Route path="/sign-up" component={SignUp} >
+        <Route exact path="/details-delete/:id" component={ActiveCategories} >
         </Route>
 
-        <Route path="/sign-in" component={Signin} >
+        <Route exact path="/sign-up" component={SignUp} >
+        </Route>
+
+        <Route exact path="/sign-in" component={Signin} >
         </Route>
 
         <StickyFooter />
