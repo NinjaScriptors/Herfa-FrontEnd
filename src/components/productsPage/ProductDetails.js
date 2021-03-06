@@ -67,7 +67,7 @@ const Details = props => {
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
     let [sellerobj, setSellerObj] = React.useState("")
-
+    // let [isSeller, setIsseller] = React.useState("");
     setTimeout(() => {
         setSellerObj(props.product.seller)
     }, 1000)
@@ -111,86 +111,105 @@ const Details = props => {
                     </Col>
                     <Col style={{ width: 380, height: 305, fontFamily: "Roboto" }}>
                         <h1 style={{ textAlign: "left" }}>{props.product.name || <Skeleton />}</h1>
-                    <hr />
-                    <div>
+                        <hr />
+                        <div>
 
-                        <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price || <Skeleton />}</h3>
-                    </div>
-                    <p style={{ fontSize: "18px" }}>
-                        {props.product.description}
-                    </p>
-
-                    <br />
-
-
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "68%" }}>
-                        <div style={{ color: "#252525" }}>
-                            <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
-                            {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
-
+                            <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price || <Skeleton />}</h3>
                         </div>
+                        <p style={{ fontSize: "18px" }}>
+                            {props.product.description}
+                        </p>
+
+                        <br />
+
+
+                        <div style={{ display: "flex", justifyContent: "space-between", width: "68%" }}>
+                            <div style={{ color: "#252525" }}>
+                                <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
+                                {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
+
+                            </div>
 
                             Count in Stock: {props.product.countInStock || <Skeleton />}
 
 
 
-                        <div>
+                            <div>
 
-                            {/* { username !== "Log In" ?  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> 
-                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem> 
-                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/">Log Out</NavLink></MenuItem> </MenuList>
-                                                         :<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList> } */}
-                            <i className="far fa-edit" style={{ margin: "2px" }}>
-                                <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}` || <Skeleton />}>{"Update" || <Skeleton />}</Link>
-                            </i>
+                                {
+                                    (sellerobj ? sellerobj._id : " ") === (JSON.parse(localStorage.getItem("userInfo")) ? JSON.parse(localStorage.getItem("userInfo"))._id : "") ? <i className="far fa-edit" style={{ margin: "2px" }}>
+                                        <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}` || <Skeleton />}>{"Update" || <Skeleton />}</Link>
+                                    </i>
+                                        : ""
+                                }
+
+                            </div>
                         </div>
-                        </div>
-                    <br />
+                        <br />
 
 
 
-                    <div style={{ position: "absolute", display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Roboto", marginTop: 30 }}>
-                        <Rating
+                        <div style={{ position: "absolute", display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Roboto", marginTop: 30 }}>
+                            <Rating
 
-                            name="hover-feedback"
-                            value={props.product.rating || 5}
-                            precision={0.5}
-                            onChange={(event, newValue) => {
+                                name="hover-feedback"
+                                value={props.product.rating || 5}
+                                precision={0.5}
+                                onChange={(event, newValue) => {
 
-                                setValue(newValue);
-                            }}
-                            onChangeActive={(event, newHover) => {
-                                setHover(newHover);
-                            }}
-                        />
-                        {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
-                        <div style={{ position: "relative", left: 106, top: -15 }}>
+                                    setValue(newValue);
+                                }}
+                                onChangeActive={(event, newHover) => {
+                                    setHover(newHover);
+                                }}
+                            />
+                            {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
+                            <div style={{ position: "relative", left: 106, top: -15 }}>
 
-                            {console.log("idddddddddddddddd", sellerobj ? sellerobj._id : "nothing")}
-                            <NavLink to={`/chat/${sellerobj ? sellerobj._id : "nothing"}`}>
-                                <Button
-                                    style={{ backgroundColor: "#252525", color: "white" }}
-                                    variant="contained"
-                                    className={classes.button}
-                                    endIcon={<ForumIcon style={{ width: 30, height: 30, color: "c99a5c", }} />}
-                                >
-                                    Chat With Seller
+                                {console.log("idddddddddddddddd", sellerobj ? sellerobj._id : "nothing")}
+
+                                {JSON.parse(localStorage.getItem("userInfo")) ? <NavLink to={`/chat/${sellerobj ? sellerobj._id : "nothing"}`}>
+                                    <Button
+                                        style={{ backgroundColor: "#252525", color: "white" }}
+                                        variant="contained"
+                                        className={classes.button}
+                                        endIcon={<ForumIcon style={{ width: 30, height: 30, color: "c99a5c", }} />}
+                                    >
+                                        Chat With Seller
                                 </Button>
-                            </NavLink>
+                                </NavLink>
+
+                                    : <NavLink to={`/sign-in`}>
+                                    <Button
+                                        style={{ backgroundColor: "#252525", color: "white" }}
+                                        variant="contained"
+                                        className={classes.button}
+                                        endIcon={<ForumIcon style={{ width: 30, height: 30, color: "c99a5c", }} />}
+                                    >
+                                        Chat With Seller
+                    </Button>
+                                </NavLink>
+
+                                }
+
+
+
+
+
+                            </div>
                         </div>
-                    </div>
 
                     </Col>
 
-        </Row>
-            {/* update */}
+                </Row>
+                {/* update */}
 
-            {/* delete */}
-            {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
+                {/* delete */}
+                {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
 
-        </Container >
+            </Container >
 
-        <Reviews id={id} reviews={props.product.reviews} image={props.user.image} rating={value} />
+            <Reviews id={id} reviews={props.product.reviews} image={props.user.image} rating={value} />
 
         </>
 
