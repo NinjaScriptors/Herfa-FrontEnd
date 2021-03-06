@@ -217,8 +217,8 @@ const ProductFormUpdate = props => {
             <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "400px" , color: "white"}}>
 
                 <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name || <Skeleton/>}`} />
-                <TextField onChange={handleChange} disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
-                <TextField onChange={handleChange} disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews  || <Skeleton/>} />
+                <TextField  disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
+                <TextField  disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews  || <Skeleton/>} />
                 <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price  || <Skeleton/>} `} />
                 <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category  || <Skeleton/>}`} />
                 <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand  || <Skeleton/>}`} />
