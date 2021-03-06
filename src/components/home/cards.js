@@ -4,6 +4,7 @@ import { Container, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 
+
 function Categories(props) {
     console.log(props.state)
     return (
@@ -18,7 +19,7 @@ function Categories(props) {
                             <Card.Title>Handicraft </Card.Title>
                             <Card.Text>Handicrafts are amazing. They are not only beautiful, made with love, handmade with expert skills but also has a great ancient history and interesting facts.</Card.Text>
                         </Card.Body>
-                        <Button id="show"  >View</Button>
+                        <Button id="show"  href='/categories'>View</Button>
                     </Card>
 
                     <Card style={{ width: '18rem' }}>
@@ -27,16 +28,16 @@ function Categories(props) {
                             <Card.Title >Clothes</Card.Title>
                             <Card.Text >local fashion manufacturers are suffering. For a brand to meet the requirements of this value, 80% of its products must be sewn in the country its business is based. </Card.Text>
                         </Card.Body>
-                        <Button id="show"  >View</Button>
+                        <Button id="show" href='/categories' >View</Button>
                     </Card>
 
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="http://www.venturemagazine.me/wp-content/uploads/2017/01/IMG_0327-768x512.jpg" />
+                        <Card.Img variant="top" src="https://www.manusmenu.com/wp-content/uploads/2012/06/1-Labneh-1-1-of-1.jpg" />
                         <Card.Body style={{ textAlign: 'center' }}>
                             <Card.Title >Local Food</Card.Title>
                             <Card.Text >Eating local helps to keep small farmers alive and provides more options to the consumer.</Card.Text>
                         </Card.Body>
-                        <Button id="show"  >View</Button>
+                        <Button id="show" href='/categories' >View</Button>
                     </Card>
                 </CardDeck>
             </Container>

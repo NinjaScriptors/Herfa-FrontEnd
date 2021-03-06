@@ -12,7 +12,7 @@ const users = createSlice({
         users: [],
         filetredUsers: [],
         userDetail: {},
-        
+
     },
     reducers: {
         activeProduct(state, action) {
@@ -64,14 +64,15 @@ export const getDetailedUserObj = (id) => (dispatch) => {
 
 
 export const updateDetailedObj = (obj) => async (dispatch) => {
-    console.log("inside dispatch of updateDetailedObj!!!! ",obj)
+    console.log("inside dispatch of updateDetailedObj!!!! ", obj)
 
     console.log("obj._id", `${obj._id}`)
 
-    const data = await fetch(`${api}/users/${obj._id}`,{
+    const data = await axios({
+        url: `${api}/users/${obj._id}`,
         method: 'put',
         mode: 'cors',
-        body: JSON.stringify(obj),
+        data: JSON.stringify(obj),
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
@@ -83,34 +84,34 @@ export const updateDetailedObj = (obj) => async (dispatch) => {
         //         console.log("we got the data updateUserDetails : data.body =", data.data)
         //         return dispatch(updateUserDetails(data.data))
         //     })
-        })
-        // localStorage.clear()
-        // localStorage.setItem("userInfo", data.data)
-        console.log("we got the data updateUserDetails : data.body------------------------------ =", data.data)
-        return dispatch(updateUserDetails(data.data))
-        
-        
-        // let data = JSON.stringify(obj );
-        // console.log('data', data)
-        
-        // const response = await axios.put(`${api}/users/${obj._id}`,data,{headers:{"Content-Type" : "application/json"}});
-        // console.log("we got the data updateUserDetails : data.data =", response.data)
-        
-                // let newObj = { ...obj}
-                // newObj = JSON.stringify(newObj);
-                // return superagent.put(`${api}/users/${obj._id}`).set({
-                //     "Access-Control-Allow-Origin": "*",
-                //     "Access-Control-Allow-Credentials": true,
-                //     'Content-Type': 'application/json'
-                // }).send(newObj).then(data => {
-                //     console.log("we got the data updateUserDetails : data.body =", data.body)
-                //     if(data.body){
-                        
-                //         dispatch(updateUserDetails(data.body))
-                //     }
-                // });
-    }
-    
-    export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
-    
+    })
+    await localStorage.clear();
+    console.log("we got the data updateUserDetails : data.body------------------------------ =", data.data)
+    localStorage.setItem("userInfo", JSON.stringify(data.data))
+    return await dispatch(updateUserDetails(data.data))
+
+
+    // let data = JSON.stringify(obj );
+    // console.log('data', data)
+
+    // const response = await axios.put(`${api}/users/${obj._id}`,data,{headers:{"Content-Type" : "application/json"}});
+    // console.log("we got the data updateUserDetails : data.data =", response.data)
+
+    // let newObj = { ...obj}
+    // newObj = JSON.stringify(newObj);
+    // return superagent.put(`${api}/users/${obj._id}`).set({
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Credentials": true,
+    //     'Content-Type': 'application/json'
+    // }).send(newObj).then(data => {
+    //     console.log("we got the data updateUserDetails : data.body =", data.body)
+    //     if(data.body){
+
+    //         dispatch(updateUserDetails(data.body))
+    //     }
+    // });
+}
+
+export const { setProducts, setProductDetails, activeProduct, updateUserDetails } = users.actions;
+
 export default users.reducer;

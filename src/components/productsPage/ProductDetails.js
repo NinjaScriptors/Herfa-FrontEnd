@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import { getDetailedObj } from "../../store/productsStore/productsSlicer"
-
+import { form, TextField, Button } from '@material-ui/core';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -13,14 +12,13 @@ import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import "../../style/product.scss";
-import { Link } from 'react-router-dom';
-
-
-import {
-    MDBIcon,
-} from "mdbreact";
+import { Link, NavLink } from 'react-router-dom';
+import { MDBIcon } from "mdbreact";
 import cookie from 'react-cookies';
-
+import { Reviews } from "./Review";
+import ForumIcon from '@material-ui/icons/Forum';
+import { makeStyles } from '@material-ui/core/styles';
+import Skeleton from 'react-loading-skeleton';
 // const labels = {
 //     0.5: 'Useless',
 //     1: 'Useless +',
@@ -55,15 +53,28 @@ import cookie from 'react-cookies';
 // })
 // );
 
+const useStyles = makeStyles((theme) => ({
+    button: {
+        margin: theme.spacing(1),
+    },
+}));
+
+
 
 const Details = props => {
 
+    const classes = useStyles();
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
+    let [sellerobj, setSellerObj] = React.useState("")
 
+    setTimeout(() => {
+        setSellerObj(props.product.seller)
+    }, 1000)
     const { id } = props.match.params;
     cookie.save('pro-id', id);
     console.log('param', props.match.params)
+    console.log("products ..........??? ", props.product)
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -94,92 +105,92 @@ const Details = props => {
                 <Row style={{ margin: "auto", alignItems: "center", display: "flex", justifyContent: "space-around" }}>
                     <Col xs={6} md={4} >
                         <div style={{ display: "flex", flexDirection: "column " }}>
-                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 325, boxShadow: "0 0 20px #232323" }} />
+                            <Image src={props.product.image || <Skeleton circle={true} height={325} width={50} duration={3} />} rounded style={{ overflow: "hidden", height: 325, boxShadow: "0 0 20px #232323" }} />
 
                         </div>
                     </Col>
                     <Col style={{ width: 380, height: 305, fontFamily: "Roboto" }}>
-                        <h1>{props.product.name}</h1>
-                        <hr />
+                        <h1 style={{ textAlign: "left" }}>{props.product.name || <Skeleton />}</h1>
+                    <hr />
+                    <div>
+
+                        <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price || <Skeleton />}</h3>
+                    </div>
+                    <p style={{ fontSize: "18px" }}>
+                        {props.product.description}
+                    </p>
+
+                    <br />
+
+
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "68%" }}>
+                        <div style={{ color: "#252525" }}>
+                            <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
+                            {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
+
+                        </div>
+
+                            Count in Stock: {props.product.countInStock || <Skeleton />}
+
+
+
                         <div>
 
-                            <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price}</h3>
+                            {/* { username !== "Log In" ?  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> 
+                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem> 
+                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/">Log Out</NavLink></MenuItem> </MenuList>
+                                                         :<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList> } */}
+                            <i className="far fa-edit" style={{ margin: "2px" }}>
+                                <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}` || <Skeleton />}>{"Update" || <Skeleton />}</Link>
+                            </i>
                         </div>
-                        <p style={{ fontSize: "18px" }}>
-                            {props.product.description}
-                        </p>
-
-                        <br />
-
-                        <div style={{ display: "flex", justifyContent: "space-between", width: "60%" }}>
-                            <div style={{ color: "#252525" }}>
-                                <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
-                                {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
-
-                            </div>
-
-                            Count in Stock: {props.product.countInStock}
-
-
-
-                            <div>
-                                <i className="far fa-edit" style={{ margin: "2px" }}>
-                                    <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`}>Update</Link>
-                                </i>
-                            </div>
                         </div>
-                        <br />
+                    <br />
 
 
 
-                        <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
-                            <Rating
-                                name="hover-feedback"
-                                defaultValue={props.product.rating || 5}
-                                precision={0.5}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                }}
-                                onChangeActive={(event, newHover) => {
-                                    setHover(newHover);
-                                }}
-                            />
-                            {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
+                    <div style={{ position: "absolute", display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Roboto", marginTop: 30 }}>
+                        <Rating
+
+                            name="hover-feedback"
+                            defaultValue={props.product.rating || 5}
+                            precision={0.5}
+                            onChange={(event, newValue) => {
+
+                                setValue(newValue);
+                            }}
+                            onChangeActive={(event, newHover) => {
+                                setHover(newHover);
+                            }}
+                        />
+                        {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
+                        <div style={{ position: "relative", left: 106, top: -15 }}>
+
+                            {console.log("idddddddddddddddd", sellerobj ? sellerobj._id : "nothing")}
+                            <NavLink to={`/chat/${sellerobj ? sellerobj._id : "nothing"}`}>
+                                <Button
+                                    style={{ backgroundColor: "#252525", color: "white" }}
+                                    variant="contained"
+                                    className={classes.button}
+                                    endIcon={<ForumIcon style={{ width: 30, height: 30, color: "c99a5c", }} />}
+                                >
+                                    Chat With Seller
+                                </Button>
+                            </NavLink>
                         </div>
+                    </div>
 
                     </Col>
-                </Row>
-                {/* update */}
 
-                {/* delete */}
-                {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
+        </Row>
+            {/* update */}
 
-            </Container>
-            <Container>
-                {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
-                <ul id="comments-list" className="comments-list" style={{ margin: "auto" }}>
-                    {props.product.reviews ? props.product.reviews.map((rev, idx) => {
+            {/* delete */}
+            {/* <Link style ={{cursor: "pointer", fontFamily: "Roboto",textAlign:"center", alignItems:"center",  color: "black" , fontSize: "18px" ,}} to={`/details-delete/${props.product._id}`}>Delete Product</Link> */}
 
-                        console.log("props.user ---> !!", props.user)
-                        return <li key={idx} style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
-                            <div className="comment-main-level" >
-                                <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
-                                <div className="comment-box">
-                                    <div className="comment-head">
-                                        <h6 className="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
-                                        <i className="fa fa-heart"></i>
-                                    </div>
-                                    <div className="comment-content">
-                                        {rev.comment}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+        </Container >
 
-                    }) : " "}
-
-                </ul>
-            </Container>
+        <Reviews id={id} reviews={props.product.reviews} image={props.user.image} rating={value} />
 
         </>
 

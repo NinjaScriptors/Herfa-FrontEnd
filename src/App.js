@@ -32,8 +32,10 @@ function App() {
         {/* <Home /> */}
         {/* <UserForm/> */}
 
-        {/* <Route exact path="/chat" component={ChatApp} >
-        </Route> */}
+        <Route exact path="/chat/:id" component={ChatApp} >
+        </Route>
+        <Route exact path="/chat" component={ChatApp} >
+        </Route>
         <Route exact path="/user-details" component={UserDetails} >
         </Route>
         <Route exact path="/user-profile-update/:id" component={UserForm} >
@@ -43,29 +45,29 @@ function App() {
         <Route exact path="/add-product" component={ProductForm}>
         </Route>
 
-        
-        <Route path="/about-us" component={AboutUs} >
+
+        <Route exact path="/about-us" component={AboutUs} >
         </Route>
-        <Route path="/our-team" component={TeamPage} >
-        </Route> 
+        <Route exact path="/our-team" component={TeamPage} >
+        </Route>
         <Route exact path="/categories" component={ActiveCategories} >
         </Route>
         <Route exact path="/categories" component={Product} >
 
         </Route>
 
-        <Route path="/details/:id" component={Details} >
+        <Route exact path="/details/:id" component={Details} >
         </Route>
 
-        <Route path="/details-update/:id" component={ProductFormUpdate} >
+        <Route exact path="/details-update/:id" component={ProductFormUpdate} >
         </Route>
-        <Route path="/details-delete/:id" component={ActiveCategories} >
-        </Route>
-
-        <Route path="/sign-up" component={SignUp} >
+        <Route exact path="/details-delete/:id" component={ActiveCategories} >
         </Route>
 
-        <Route path="/sign-in" component={Signin} >
+        <Route exact path="/sign-up" component={SignUp} >
+        </Route>
+
+        <Route exact path="/sign-in" component={Signin} >
         </Route>
 
         <StickyFooter />
