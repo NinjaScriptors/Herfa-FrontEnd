@@ -61,7 +61,7 @@ const UserDetails = props => {
                     position: "relative",
                     backgroundAttachment: "fixed",
                     backgroundPosition: "center",
-                    fontFamily: 'Handlee',
+                    fontFamily: 'Roboto',
                     fontWeight: "100",
                     alignItems: "center"
                 }}>
