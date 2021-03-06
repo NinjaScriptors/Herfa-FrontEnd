@@ -15,8 +15,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom"
 import * as actions from "../../store/actions/signin-actions"
-import { Redirect,Route } from "react-router";
-
+import { Redirect, Switch } from "react-router";
+import { BrowserRouter } from "react-router-dom"
+import Alert from '@material-ui/lab/Alert';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -59,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  alert: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 
@@ -69,13 +76,12 @@ function SignInSide(props) {
 
   let [username, setUserName] = useState("");
   let [password, setPassword] = useState("");
-  let[loggedin, setLoggedin] = useState("");
+  let [loggedin, setLoggedin] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
+    e.target.reset()
     console.log(username, password)
     props.getSignedUpUserInfo({ username, password })
-    setTimeout(function () { return <Redirect from="/sign-in" to="/"/> }, 2000);
-
   }
 
   function handleChange(e) {
@@ -90,31 +96,33 @@ function SignInSide(props) {
     }
   }
 
-// let x =  JSON.parse(localStorage.getItem("userInfo")) ? JSON.parse(localStorage.getItem("userInfo")): "test"
-//   useEffect(() => {
-//     console.log("iiiiiiiiiiiiiiiii")
-  
-// }, x)
-// function test(){
+  useEffect(() => {
+    if (localStorage.getItem("userInfo")) {
+      setLoggedin("true")
+    }
+  }, localStorage.getItem("userinfo"))
 
-// console.log("insideeeeeeeeeeee")
-//   return <Redirect to="/" /> 
-// }
-// if(!JSON.parse(localStorage.getItem("userInfo")) ) return <Redirect to="/" /> 
+
+
+  if (loggedin === "true") {
+    return <Redirect to="/" />
+  }
   return (
-    
+
     <Grid container component="main" className={classes.root}>
-     
+
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {/* {loggedin != " " ? (loggedin != "true" && loggedin == "false" ? <Alert severity="error">This is an error alert — check it out!</Alert> : <Alert severity="success">logged in successfully !<NavLink to="/"> Go to Homepage</NavLink> </Alert>) : ""} */}
+
+
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               onChange={handleChange}
@@ -144,7 +152,7 @@ function SignInSide(props) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            {/* <NavLink to='/' variant="body2"> */}
+
             <Button
               type="submit"
               fullWidth
@@ -152,11 +160,11 @@ function SignInSide(props) {
               color="primary"
               className={classes.submit}
             >
-             
-                Sign In
-             
+
+              Sign In
+
             </Button >
-            {/* </NavLink> */}
+
 
             <Grid container>
               <Grid item xs>
@@ -176,7 +184,7 @@ function SignInSide(props) {
           </form>
         </div>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }
 

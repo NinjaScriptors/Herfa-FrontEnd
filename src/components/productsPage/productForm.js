@@ -4,11 +4,12 @@ import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
 import { getDetailedObj, addProduct } from "../../store/productsStore/productsSlicer";
-
+import { NavLink } from "react-router-dom"
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
 import { getRemoteData } from '../../store/productsStore/productsSlicer';
+import Alert from '@material-ui/lab/Alert';
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
 import "../../style/productForm.scss"
@@ -36,15 +37,23 @@ const ProductForm = props => {
     const [name, setName] = useState("");
     const [rating, setRating] = useState(0);
     const [numReviews, setNumReviews] = useState(0);
+    let [useless, setUsless] = useState("");
+    let [dataPosted, setDataPosted] = useState(false);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // let fullName = `${firstName} ${lastName}`;
-        console.log('handleSubmit >>>>',price, category, name, brand, countInStock, description, rating, numReviews)
-        dispatch(addProduct({seller:props.product.seller, name, price, category, brand, countInStock, description}))
+        e.target.reset();
+        console.log('handleSubmit >>>>', price, category, name, brand, countInStock, description, rating, numReviews)
+        dispatch(addProduct({ seller: props.product.seller, name, price, category, brand, countInStock, description }))
 
+        setTimeout(() => {
+            setUsless("blablabla")
+        }, 1000)
     }
+    // useEffect(async () => {
+    //     setUsless("true");
+    // }, props.products)
 
     const handleChange = (e) => {
         // console.log(e.target.name)
@@ -78,54 +87,59 @@ const ProductForm = props => {
         }
     }
 
+
     useEffect(() => {
         const fetchData = async () => {
             setState(!state);
             // await dispatch(getDetailedObj(props.product._id));
             await dispatch(getRemoteData());
 
+            // if ()
+
         };
         fetchData();
     }, [dispatch]);
 
+    // if (useless === "true") return <Redirect to="/categories" />
 
     return (
 
 
         <section className="main-product-form">
-                <div className="parallex">
+            <div className="parallex">
+            </div>
+            <div className="row">
+                <div className="title">
+                    {/* <h1>Update Profile</h1> */}
                 </div>
-                <div className="row">
-                    <div className="title">
-                        {/* <h1>Update Profile</h1> */}
-                    </div>
-                </div>
-        <Container className="main-product-form">
-            <h1>Add Product</h1>
+            </div>
+            <Container className="main-product-form">
+                <h1 style={{ marginLeft: "-200px" }}>Add Product</h1>
 
-            <form onSubmit={handleSubmit }style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "330px" , color: "white"}}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: "30%", marginLeft: "330px", color: "white" }}>
+                    {useless === "blablabla" ? <Alert severity="success">Product has been added successfully !  <NavLink to="/categories"> check it out! </NavLink></Alert> : ""}
+                    <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
+                    {/* <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} /> */}
+                    {/* <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} /> */}
+                    <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
+                    <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
+                    <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
+                    <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue="" />
+                    <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
+                    {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
 
-                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue="" />
-                {/* <TextField disabled name="rating" id="rating-disabled" label="Rating" defaultValue={props.product.rating} /> */}
-                {/* <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" defaultValue={props.product.numReviews} /> */}
-                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue="" />
-                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue="" />
-                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue="" />
-                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue="" />
-                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue="" />
-                {/* <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue="" /> */}
-
-                <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>
-            </form>
-        </Container>
+                    <Button type="submit" style={{ borderBottom: "1px solid #555" }} >Submit</Button>
+                </form>
+            </Container>
         </section>
-    
+
     )
 }
 
 
 const mapStateToProps = (state) => ({
     product: state.products.productDetail,
+    products: state.products.products
 });
 
 // const mapDispatchToProps = (dispatch, getState) => ({

@@ -8,7 +8,7 @@ import axios from "axios"
 import cookie from 'react-cookies';
 import { makeStyles } from "@material-ui/core/styles";
 import Skeleton from 'react-loading-skeleton';
-
+import { Redirect } from "react-router-dom";
 
 
 
@@ -22,18 +22,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 export const Reviews = (props) => {
     const classes = useStyles();
 
     let [comment, setComment] = React.useState("");
-    let [uselessVar, setUseless] = React.useState([])
     let [reviews, setRevewis] = React.useState([])
-    // useEffect(() => {
-    //     getReviews()
-    // }, uselessVar)
-
     useEffect(async () => {
         getReviews()
     }, [])
@@ -72,10 +65,12 @@ export const Reviews = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${cookie.load('auth')}`
             }
+        }).then(() => {
+            getReviews()
         })
-        setUseless([0, 2]);
-
     }
+
+
 
     return (
 
@@ -84,7 +79,7 @@ export const Reviews = (props) => {
             <ul id="comments-list" className="comments-list" style={{ margin: "auto" }}>
                 <div>
 
-                    {/* <input> */}
+
 
                 </div>
                 {reviews ? reviews.map((rev, idx) => {
@@ -110,9 +105,9 @@ export const Reviews = (props) => {
             </ul>
             <div>
 
-                <form onSubmit={handleReveiwSubmittion} className={classes.root} noValidate autoComplete="off">
-                    <TextField onChange={(e) => setComment(e.target.value)} id="standard-basic" label="Standard" style={{ margin: "auto" }} />
-                    <Button type="submit" size="large" style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center" }}>Add Review</Button>
+                <form style={{ display: "flex", justifyContent: "space-between", width: "70%", margin: "0px 182px" }} onSubmit={handleReveiwSubmittion} className={classes.root} noValidate autoComplete="off">
+                    <TextField style={{ width: "55%", marginLeft: "20px" }} onChange={(e) => setComment(e.target.value)} id="standard-basic" label="Share Your Experience " />
+                    <Button type="submit" size="large" style={{ backgroundColor: '#C99A5C', color: "white", width: "150px", alignItems: "center", marginRight: "159px" }}>Add Review</Button>
                 </form>
 
 

@@ -12,6 +12,7 @@ import AddCircleOutlineTwoToneIcon from '@material-ui/icons/AddCircleOutlineTwoT
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Skeleton from 'react-loading-skeleton';
+import Alert from '@material-ui/lab/Alert';
 
 
 import "../../style/userForm.scss"
@@ -25,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
             width: '25ch',
-           
+
         },
     },
 }));
-
+let flag = false;
 const UserForm = props => {
     console.log("usreidddddddddddddd", props.user)
 
@@ -43,10 +44,11 @@ const UserForm = props => {
     const [lastName, setLastName] = useState("");
     const [fullName, setFullName] = useState("");
     const [name, setName] = useState("");
-
+    let [useless, setUsless] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // e.target.reset();
         dispatch(updateDetailedObj({ _id: JSON.parse(localStorage.getItem("userInfo"))._id, fullName, name, email, password, isSeller }))
         // dispatch(getDetailedObj("603bfe782d208700158ebecd"));
         dispatch(getRemoteData());
@@ -54,7 +56,11 @@ const UserForm = props => {
         // props.updateDetailedObj(props.user)
         console.log('handleSubmit >>>>', fullName, email, name, password, isSeller)
 
+        setTimeout(() => {
+            setUsless("blablabla")
+        }, 1200)
     }
+
 
 
 
@@ -116,21 +122,21 @@ const UserForm = props => {
 
 
                 <Container className="main-user-form" style={{ color: "gray" }}>
-                    <h1>Update Profile</h1>
+                    <h1 style={{ marginLeft: "600px" }}>Update Profile</h1>
 
 
 
-
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: "30%", marginLeft: "750px"}}>
-                        <TextField onChange={handleChange} name="fullName" id="name-input" label="Name" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).fullName}`  || <Skeleton/>} />
-                        <TextField onChange={handleChange} disabled name="email" id="email-disabled" label="Email" value={`${JSON.parse(localStorage.getItem("userInfo")).email}`  || <Skeleton/>} />
+                    {useless === "blablabla" ? <Alert style={{ width: "40%", backgroundColor: "transparent", marginLeft: "690px" }} severity="success">Profile has been Updated successfully. Please refresh the page !</Alert> : ""}
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: "30%", marginLeft: "750px" }}>
+                        <TextField onChange={handleChange} name="fullName" id="name-input" label="Name" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).fullName}` || <Skeleton />} />
+                        <TextField onChange={handleChange} disabled name="email" id="email-disabled" label="Email" value={`${JSON.parse(localStorage.getItem("userInfo")).email}` || <Skeleton />} />
                         {console.log("props.user.email ", JSON.parse(localStorage.getItem("userInfo")).email)}
-                        <TextField onChange={handleChange} disabled name="name" id="username-disabled" label="Username" value={`${JSON.parse(localStorage.getItem("userInfo")).name}`  || <Skeleton/>} />
+                        <TextField onChange={handleChange} disabled name="name" id="username-disabled" label="Username" value={`${JSON.parse(localStorage.getItem("userInfo")).name}` || <Skeleton />} />
                         <TextField type="password" onChange={handleChange} name="password" id="passowrd-input" label="Password" />
                         <FormControlLabel
-                            control={< Checkbox   style={{ color: "#C99A5C" }}onChange={handleChange} name="isSeller" id="seller-input" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).isSeller}`  || <Skeleton/>}/>}
+                            control={< Checkbox style={{ color: "#C99A5C" }} onChange={handleChange} name="isSeller" id="seller-input" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).isSeller}` || <Skeleton />} />}
                             label="Want to change to a seller account"
-                           
+
 
                         />
 

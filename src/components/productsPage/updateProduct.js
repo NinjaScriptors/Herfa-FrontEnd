@@ -4,7 +4,7 @@ import { form, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import { getDetailedObj, updateUserDetails } from "../../store/userStore/userFormSlicer";
 import { getDetailedObj, updateProductDetails, updateDetaileProductdObj } from "../../store/productsStore/productsSlicer";
-import {getDetailedUserObj} from '../../store/userStore/userSlicer';
+import { getDetailedUserObj } from '../../store/userStore/userSlicer';
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
@@ -16,6 +16,7 @@ import { storage } from "../../firebase";
 import cookie from 'react-cookies';
 import Axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
+import Alert from '@material-ui/lab/Alert';
 
 
 const api = 'https://herfa-app.herokuapp.com/api';
@@ -35,7 +36,7 @@ const ProductFormUpdate = props => {
 
     useEffect(() => {
 
-    // console.log('param', props.match.params)
+        // console.log('param', props.match.params)
 
         const fetchData = async () => {
             setState(!state);
@@ -58,7 +59,7 @@ const ProductFormUpdate = props => {
     const [rating, setRating] = useState(0);
     const [numReviews, setNumReviews] = useState(0);
     const [url, setUrl] = useState("");
-    const [progress, setProgress] = useState(0);
+    let [useless, setUsless] = useState("")
 
     const handleChangeImg = e => {
         if (e.target.files[0]) {
@@ -72,10 +73,7 @@ const ProductFormUpdate = props => {
         uploadTask.on(
             "state_changed",
             snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                setProgress(progress);
+
             },
             error => {
                 console.log(error);
@@ -133,13 +131,16 @@ const ProductFormUpdate = props => {
         dispatch(updateDetaileProductdObj({ _id: props.product._id, seller: props.product.seller, name, price, category, brand, countInStock, description, image }));
         console.log('handleSubmit >>>>', price, category, name, brand, countInStock, description, props)
         dispatch(getRemoteData());
-        
+
+        setTimeout(() => {
+            setUsless("blablabla")
+        }, 1200)
         // const userSignin = useSelector((state) => state.userSignin);
         // const { userInfo } = userSignin;
     }
     const [loadingUpload, setLoadingUpload] = useState(false);
     const [errorUpload, setErrorUpload] = useState('');
-    
+
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
         const bodyFormData = new FormData();
@@ -178,87 +179,87 @@ const ProductFormUpdate = props => {
 
 
 
-    
+
 
 
     return (
 
         <section className="main-update-pro">
-        <div className="parallex">
-        </div>
-        <div className="row">
-            <div className="title">
+            <div className="parallex">
             </div>
-        </div>
+            <div className="row">
+                <div className="title">
+                </div>
+            </div>
 
-        <Container  className="main-update-pro">
-            <h1>Update Product</h1>
+            <Container className="main-update-pro">
+                <h1 style={{ marginLeft: "-40px" }}>Update Product</h1>
+                {useless === "blablabla" ? <Alert style={{ width: "40%", backgroundColor: "transparent", marginLeft: "335px" }} severity="success">Product has been Updated successfully. Please back to the product page !</Alert> : ""}
+                {/* <progress value={progress} max="100" /> */}
 
-            <progress value={progress} max="100" />
+                {console.log('url', url.toString())}
 
-            {console.log('url', url.toString())}
+                {/* onChange={handleChangeImg} */}
+                {/* || `${props.product.image}` || 'https://www.canva.com/design/DAEX0epDirk/wIOC1HFBu3_e_lhprKxKqg/view?utm_content=DAEX0epDirk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink' */}
 
-            {/* onChange={handleChangeImg} */}
-            {/* || `${props.product.image}` || 'https://www.canva.com/design/DAEX0epDirk/wIOC1HFBu3_e_lhprKxKqg/view?utm_content=DAEX0epDirk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink' */}
-            
-            {/* <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} /> */}
-            {/* <Image onChange={handleChange} src={url.toString()} /> */}
-            {/* <button onClick={handleUpload}>Upload</button> */}
-            
-            {/* second way */}
-            {/* <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} />
+                {/* <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} /> */}
+                {/* <Image onChange={handleChange} src={url.toString()} /> */}
+                {/* <button onClick={handleUpload}>Upload</button> */}
+
+                {/* second way */}
+                {/* <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} />
             <Image onChange={handleChange} src={url.toString()} />
             <button onClick={handleUpload}>Upload</button>
             <p>{console.log('type of url', typeof url)}</p>
              */}
-            <p>{console.log('type of url', typeof url)}</p>
-           
-
-            <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "400px" , color: "white"}}>
-
-                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name || <Skeleton/>}`} />
-                <TextField  disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
-                <TextField  disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews  || <Skeleton/>} />
-                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price  || <Skeleton/>} `} />
-                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category  || <Skeleton/>}`} />
-                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand  || <Skeleton/>}`} />
-                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock  || <Skeleton/>}`} />
-                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description  || <Skeleton/>}`} />
-                {/* <TextField onChange={onChange} name="image" id="image-input" label="Image" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"  /> */}
-
-                {url}
-
-                {/* third way */}
-                {/* <TextField type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} name="image" defaultValue={`${url}`} id="seller-input" label="Image" /> */}
-
-             {/* second way */}
-                {/* <input type="text"  onChange={(e) => setImage(e.target.value)} name="image" value={url.toString()} id="seller-input" label="Image" /> */}
-
-                <label htmlFor="image">Image</label>
-                <input
-                    id="image"
-                    type="text"
-                    placeholder="Enter image URL"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                ></input>
+                <p>{console.log('type of url', typeof url)}</p>
 
 
-                <label htmlFor="imageFile">Image File</label>
-                <input
-                    type="file"
-                    id="imageFile"
-                    label="Choose Image"
-                    onChange={uploadFileHandler}
-                ></input>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: "30%", marginLeft: "400px", color: "white" }}>
+
+                    <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name || <Skeleton />}`} />
+                    <TextField disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
+                    <TextField disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews || <Skeleton />} />
+                    <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price || <Skeleton />} `} />
+                    <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category || <Skeleton />}`} />
+                    <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand || <Skeleton />}`} />
+                    <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock || <Skeleton />}`} />
+                    <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description || <Skeleton />}`} />
+                    {/* <TextField onChange={onChange} name="image" id="image-input" label="Image" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"  /> */}
+
+                    {url}
+
+                    {/* third way */}
+                    {/* <TextField type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onChange={handleChangeImg} name="image" defaultValue={`${url}`} id="seller-input" label="Image" /> */}
+
+                    {/* second way */}
+                    {/* <input type="text"  onChange={(e) => setImage(e.target.value)} name="image" value={url.toString()} id="seller-input" label="Image" /> */}
+
+                    <label htmlFor="image">Image</label>
+                    <input
+                        id="image"
+                        type="text"
+                        placeholder="Enter image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    ></input>
 
 
-                <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>
-                
-            </form>
-        </Container>
+                    <label htmlFor="imageFile">Image File</label>
+                    <input
+                        type="file"
+                        id="imageFile"
+                        label="Choose Image"
+                        onChange={uploadFileHandler}
+                    ></input>
+
+
+                    <Button type="submit" style={{ borderBottom: "1px solid #555" }} >Submit</Button>
+
+                </form>
+            </Container>
         </section>
-       
+
     )
 }
 

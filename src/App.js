@@ -19,7 +19,6 @@ import ProductFormUpdate from './components/productsPage/updateProduct'
 import ChatApp from "./components/chatApp/App/index"
 import TeamPage from "./components/team";
 
-
 function App() {
   return (
     <>
@@ -34,6 +33,7 @@ function App() {
 
         <Route exact path="/chat/:id" component={ChatApp} >
         </Route>
+
         <Route exact path="/chat" component={ChatApp} >
         </Route>
         <Route exact path="/user-details" component={UserDetails} >

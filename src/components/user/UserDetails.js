@@ -50,6 +50,7 @@ const UserDetails = props => {
         fetchData();
     }, [dispatch]);
 
+    
     return (
 
         <>
