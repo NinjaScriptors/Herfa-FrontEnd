@@ -45,7 +45,7 @@ export default function MessageList(props) {
       })
 
       console.log("roooom of these two sweet users", room[0]._id);
-      setRoomId(room[0]._id)
+      setRoomId(room[0]._id)  
 
       let userConversation = await axios({
         method: 'get',
