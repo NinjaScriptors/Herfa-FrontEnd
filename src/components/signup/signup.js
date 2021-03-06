@@ -85,23 +85,23 @@ function SignUp(props) {
 
     function handleChange(e) {
         // console.log(e.target.name)
-        if (e.target.name == "email") {
+        if (e.target.name === "email") {
             let newEmail = e.target.value;
             setEmail(newEmail);
         }
-        if (e.target.name == "name") {
+        if (e.target.name === "name") {
             let newname = e.target.value;
             setname(newname);
         }
-        if (e.target.name == "password") {
+        if (e.target.name === "password") {
             let newPass = e.target.value;
             setPassword(newPass)
         }
-        if (e.target.name == "firstName") {
+        if (e.target.name === "firstName") {
             let newFirstName = e.target.value;
             setFirstName(newFirstName)
         }
-        if (e.target.name == "lastName") {
+        if (e.target.name === "lastName") {
             let newLastName = e.target.value;
             setLastName(newLastName)
         }

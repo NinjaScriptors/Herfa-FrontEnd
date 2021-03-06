@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ConversationList from '../ConversationList';
 import MessageList from '../MessageList';
 import './Messenger.css';
-import Toolbar from "../Toolbar/"
-import ToolbarButton from "../ToolbarButton/"
 // import { io } from "socket.io-client";
 
 export default function Messenger(props) {

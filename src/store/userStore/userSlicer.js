@@ -19,7 +19,7 @@ const users = createSlice({
             console.log('from product slicer', action.payload)
             state.users = state.users.filter(user => {
                 console.log('in activeProduct -->', user);
-                if (user.email == action.payload) {
+                if (user.email === action.payload) {
                     return user;
                 }
             });

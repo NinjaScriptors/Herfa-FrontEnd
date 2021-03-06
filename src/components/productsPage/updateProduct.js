@@ -94,19 +94,19 @@ const ProductFormUpdate = props => {
 
 
     function handleChange(e) {
-        if (e.target.name == "category") {
+        if (e.target.name === "category") {
             let newEmail = e.target.value;
             setCategory(newEmail);
         }
-        if (e.target.name == "countInStock") {
+        if (e.target.name === "countInStock") {
             let newSel = e.target.value;
             setCountInStock(newSel);
         }
-        if (e.target.name == "name") {
+        if (e.target.name === "name") {
             let newname = e.target.value;
             setName(newname);
         }
-        if (e.target.name == "image") {
+        if (e.target.name === "image") {
             let newPass = e.target.value;
             setImage(newPass);
         }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ConversationSearch from '../ConversationSearch';
-import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
 import axios from 'axios';
@@ -67,9 +66,9 @@ export default function ConversationList(props) {
       }
     }).then(response => {
       console.log("all rooms of user : >>>", response.data)
-      let newConversations = response.data.map(async (result) => { // loop over each room 
-        let otherUserId = result.userIds.map(id => {
-          if (id != (JSON.parse(localStorage.getItem("userInfo"))._id)) {
+      response.data.map(async (result) => { // loop over each room 
+        result.userIds.map(id => {
+          if (id !== (JSON.parse(localStorage.getItem("userInfo"))._id)) {
             axios(`https://herfa-server.herokuapp.com/api/users/${id}`, {
               method: "get",
               headers: {
@@ -79,7 +78,7 @@ export default function ConversationList(props) {
                 'Authorization': `Bearer ${cookie.load('auth')}`
               }
             }).then(otherUserObject => {
-              let arr = [];
+              
               conversations.push(otherUserObject.data)
               setConversations([...conversations])
               // console.log(conversations)
