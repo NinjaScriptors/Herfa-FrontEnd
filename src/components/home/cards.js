@@ -31,7 +31,7 @@ function Categories(props) {
                     </Card>
 
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="http://www.venturemagazine.me/wp-content/uploads/2017/01/IMG_0327-768x512.jpg" />
+                        <Card.Img variant="top" src="https://www.manusmenu.com/wp-content/uploads/2012/06/1-Labneh-1-1-of-1.jpg" />
                         <Card.Body style={{ textAlign: 'center' }}>
                             <Card.Title >Local Food</Card.Title>
                             <Card.Text >Eating local helps to keep small farmers alive and provides more options to the consumer.</Card.Text>

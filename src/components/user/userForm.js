@@ -7,6 +7,8 @@ import { updateUserDetails, updateDetailedObj } from "../../store/userStore/user
 import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { PinDropSharp } from '@material-ui/icons';
+import { NavLink } from "react-router-dom"
+
 import "../../style/userForm.scss"
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
@@ -118,8 +120,9 @@ const UserForm = props => {
                         <TextField onChange={handleChange} name="password" id="passowrd-input" label="Password" />
                         <TextField onChange={handleChange} name="isSeller" id="seller-input" label="Want to change to a seller account" defaultValue={`${JSON.parse(localStorage.getItem("userInfo")).isSeller}`} />
                         <Button style={{ borderBottom: "1px solid #555" }} type="submit">Submit</Button>
+                        <Button style={{ borderBottom: "1px solid #555" }} type="submit"><NavLink to="/add-product">Add Product</NavLink></Button>
                     </form>
-
+                
                 </Container>
             </section>
         </>
