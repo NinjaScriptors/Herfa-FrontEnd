@@ -9,16 +9,24 @@ import cookie from 'react-cookies';
 import './ConversationList.css';
 import { Container } from 'react-bootstrap';
 import { Typography } from '@material-ui/core';
-
+import { useParams } from "react-router-dom";
 
 
 export default function ConversationList(props) {
   const [conversations, setConversations] = useState([]);
   const [flag, setFlag] = useState(true);
+  const { id } = useParams()
+
   useEffect(() => {
-    //   // let socket = io("https://localhost:4000")
+    addNewChatRoom(id)
     getConversations()
   }, [])
+
+  const addNewChatRoom = (id) => {
+    // console.log("ffffffffffffffffffffffffffffffff",id)
+
+  }
+
 
   const getConversations = async () => {
     console.log("inside get conversations")

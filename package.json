@@ -15,7 +15,7 @@
     "bootstrap": "^4.6.0",
     "bourbon": "^7.0.0",
     "dotenv": "^8.2.0",
-    "firebase": "^8.2.9",
+    "firebase": "^8.2.10",
     "infrastructure-components": "^0.3.11",
     "ionicons": "^5.5.0",
     "jquery": "^3.5.1",

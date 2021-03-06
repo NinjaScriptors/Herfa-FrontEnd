@@ -91,7 +91,7 @@ const FooterPage = () => {
 
           </MDBCol>
           <MDBCol md="3" style={{ marginTop: "-50px" }}>
-            < h4 style={{ marginLeft: "40px", fontSize: "24px" }} className="title">Links</ h4>
+            < h4 style={{ fontSize: "24px" }} className="title">Links</ h4>
             <ul>
               <li className="list-unstyled">
                 <a href="/user-details">Sell Local Products</a>

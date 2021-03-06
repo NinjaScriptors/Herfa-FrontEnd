@@ -24,7 +24,7 @@ function OurStoryGrid() {
                             <b>Selection</b> From your own backyard to half-way across the globe you can find what you want, when you want, and hidden gems you would have missed without the Local Products App.</p>
 
 
-                        <Button id="read" variant="outlined" href="#">MORE !</Button>
+                        <Button id="read" variant="outlined" href="/about-us">MORE !</Button>
                     </Grid>
                     {/* <Grid item xs={3}><p>السبب الرئيسي خلف فكرة حرفة هو دعم فئة كبيرة في مجتمعنا يميزها الابداع و تخطي التحديات</p></Grid>
                     <Grid item xs={3}><Button variant="outlined" color="primary" href="#">Read More</Button></Grid> */}

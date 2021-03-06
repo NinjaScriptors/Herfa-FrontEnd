@@ -190,8 +190,8 @@ export default function MessageList(props) {
       let previous = messages[i - 1];
       let current = messages[i];
       let next = messages[i + 1];
-      console.log(typeof current.auther) // message.postedByUser
-      console.log(typeof myId)
+      // console.log(typeof current.auther) // message.postedByUser
+      // console.log(typeof myId)
 
       let isMine = current.auther == myId ? true : false
       console.log(isMine)

@@ -74,7 +74,7 @@ function SignInSide(props) {
     e.preventDefault();
     console.log(username, password)
     props.getSignedUpUserInfo({ username, password })
-    setTimeout(function () { console.log(props.userInfo) }, 1000);
+    setTimeout(function () { return <Redirect from="/sign-in" to="/"/> }, 2000);
 
   }
 

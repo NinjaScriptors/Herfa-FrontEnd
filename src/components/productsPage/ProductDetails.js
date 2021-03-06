@@ -12,11 +12,12 @@ import Container from '@material-ui/core/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import "../../style/product.scss";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { MDBIcon } from "mdbreact";
 import cookie from 'react-cookies';
 import { Reviews } from "./Review";
-
+import ForumIcon from '@material-ui/icons/Forum';
+import { makeStyles } from '@material-ui/core/styles';
 // const labels = {
 //     0.5: 'Useless',
 //     1: 'Useless +',
@@ -51,12 +52,22 @@ import { Reviews } from "./Review";
 // })
 // );
 
-
+const useStyles = makeStyles((theme) => ({
+    button: {
+        margin: theme.spacing(1),
+    },
+}));
 
 const Details = props => {
+    
+    const classes = useStyles();
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
-
+    let [sellerobj, setSellerObj] =React.useState("")
+    
+    setTimeout(()=>{
+        setSellerObj(props.product.seller)
+    },1000)
     const { id } = props.match.params;
     cookie.save('pro-id', id);
     console.log('param', props.match.params)
@@ -70,7 +81,7 @@ const Details = props => {
         fetchData();
     }, [dispatch]);
 
-  
+
     return (
         <>
             <header>
@@ -95,7 +106,7 @@ const Details = props => {
                         </div>
                     </Col>
                     <Col style={{ width: 380, height: 305, fontFamily: "Roboto" }}>
-                        <h1>{props.product.name}</h1>
+                        <h1 style={{textAlign:"left"}}>{props.product.name}</h1>
                         <hr />
                         <div>
 
@@ -106,8 +117,9 @@ const Details = props => {
                         </p>
 
                         <br />
+                  
 
-                        <div style={{ display: "flex", justifyContent: "space-between", width: "60%" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", width: "68%" }}>
                             <div style={{ color: "#252525" }}>
                                 <MDBIcon icon="comments" className="mr-3" style={{ width: "10px", height: "10px" }} />
                                 {props.product.reviews ? props.product.reviews.length : 'No Reviews'}
@@ -116,7 +128,7 @@ const Details = props => {
 
                             Count in Stock: {props.product.countInStock}
 
-
+{/* // when bringing the id  */}
 
                             <div>
                                 <i className="far fa-edit" style={{ margin: "2px" }}>
@@ -128,7 +140,7 @@ const Details = props => {
 
 
 
-                        <div style={{ display: "flex", flexDirection: "row", fontFamily: "Roboto", marginTop: 3 }}>
+                        <div style={{ position: "absolute", display: "flex", justifyContent: "space-between", flexDirection: "row", fontFamily: "Roboto", marginTop:30 }}>
                             <Rating
 
                                 name="hover-feedback"
@@ -143,9 +155,24 @@ const Details = props => {
                                 }}
                             />
                             {/* {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>} */}
+                            <div style={{ position: "relative", left: 106, top: -15 }}>
+                                
+                                {console.log("idddddddddddddddd",sellerobj?sellerobj._id:"nothing")}
+                            <NavLink to={`/chat/${sellerobj?sellerobj._id:"nothing"}`}>
+                                <Button
+                                    style={{ backgroundColor: "#252525", color: "white" }}
+                                    variant="contained"
+                                    className={classes.button}
+                                    endIcon={<ForumIcon style={{ width: 30, height: 30, color: "c99a5c", }} />}
+                                >
+                                    Chat With Seller
+                                </Button>
+                                </NavLink>
+                            </div>
                         </div>
 
                     </Col>
+
                 </Row>
                 {/* update */}
 

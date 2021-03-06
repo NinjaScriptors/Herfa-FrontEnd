@@ -124,7 +124,7 @@ export default function ButtonAppBar() {
         }
     }, [])
 
-    
+
     let test = [];
     test.push(JSON.parse(localStorage.getItem("userInfo")))
     useEffect(() => {
@@ -172,7 +172,7 @@ export default function ButtonAppBar() {
                                 aria-label="account of current user"
                                 aria-controls={open ? 'menu-list-grow' : undefined}
                                 aria-haspopup="true"
-                                onMouseOver={handleToggle}
+                                onClick={handleToggle}
                                 // onMouseOver={handleProfileMenuOpen}
                                 className={classes[navRef.current]}
                                 color="inherit"
@@ -186,13 +186,13 @@ export default function ButtonAppBar() {
                                             className={classes[navRef.current]}
                                         >
                                             <Paper className={classes[navRef.current]}>
-                                                <ClickAwayListener onMouseOver={handleClose} >
-                                                 
-                                                        { username !== "Log In" ?  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> 
-                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem> 
+                                                <ClickAwayListener onClick={handleClose} >
+
+                                                    {username !== "Log In" ? <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem>
                                                         <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/">Log Out</NavLink></MenuItem> </MenuList>
-                                                         :<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList> }
-                                               
+                                                        : <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList>}
+
                                                 </ClickAwayListener>
                                             </Paper>
                                         </Grow>

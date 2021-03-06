@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
         width: 550,
         color: "white",
         backgroundColor: "#333333",
+      
 
     },
     input: {
