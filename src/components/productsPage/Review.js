@@ -30,9 +30,9 @@ export const Reviews = (props) => {
     let [comment, setComment] = React.useState("");
     let [uselessVar, setUseless] = React.useState([])
     let [reviews, setRevewis] = React.useState([])
-    useEffect(() => {
-        getReviews()
-    }, uselessVar)
+    // useEffect(() => {
+    //     getReviews()
+    // }, uselessVar)
 
     useEffect(async () => {
         getReviews()

@@ -80,11 +80,11 @@ function SignInSide(props) {
 
   function handleChange(e) {
     console.log(e.target.name)
-    if (e.target.name == "username") {
+    if (e.target.name === "username") {
       let newUserName = e.target.value;
       setUserName(newUserName);
     }
-    if (e.target.name == "password") {
+    if (e.target.name === "password") {
       let newPass = e.target.value;
       setPassword(newPass)
     }

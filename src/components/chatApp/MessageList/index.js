@@ -64,9 +64,9 @@ export default function MessageList(props) {
         tempMessages.push({ id: message._id, message: message.message.messageText, auther: message.postedByUser, timestamp: new Date().getTime() })
         return message
       })
-      
+      console.log(msgs)
       setMessages([...tempMessages])
-     
+
       // if (!userRooms) {
       //   let userRooms = await axios({
       //     method: 'post',
@@ -193,7 +193,7 @@ export default function MessageList(props) {
       // console.log(typeof current.auther) // message.postedByUser
       // console.log(typeof myId)
 
-      let isMine = current.auther == myId ? true : false
+      let isMine = current.auther === myId ? true : false
       console.log(isMine)
       let currentMoment = moment(current.timestamp);
       let prevBySameAuthor = false;
@@ -246,7 +246,7 @@ export default function MessageList(props) {
 
   let postMessage = async (message) => {
     console.log("messssssssssssssaaaaaaaaaaaaaaaaaggggggggge", message)
-    let postnewmessage = await fetch(`https://herfa-server.herokuapp.com/room/${roomidd}/message`, {
+    await fetch(`https://herfa-server.herokuapp.com/room/${roomidd}/message`, {
       method: 'post',
       mode: "cors",
       body: JSON.stringify({ messageText: message }),

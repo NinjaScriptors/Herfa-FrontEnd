@@ -48,31 +48,31 @@ const ProductForm = props => {
 
     const handleChange = (e) => {
         // console.log(e.target.name)
-        if (e.target.name == "category") {
+        if (e.target.name === "category") {
             let newEmail = e.target.value;
             setCategory(newEmail);
         }
-        if (e.target.name == "countInStock") {
+        if (e.target.name === "countInStock") {
             let newSel = e.target.value;
             setCountInStock(newSel);
         }
-        if (e.target.name == "name") {
+        if (e.target.name === "name") {
             let newname = e.target.value;
             setName(newname);
         }
-        if (e.target.name == "image") {
+        if (e.target.name === "image") {
             let newPass = e.target.value;
             setImage(newPass)
         }
-        if (e.target.name == "brand") {
+        if (e.target.name === "brand") {
             let newFirstName = e.target.value;
             setBrand(newFirstName)
         }
-        if (e.target.name == "price") {
+        if (e.target.name === "price") {
             let newLastName = e.target.value;
             setPrice(newLastName)
         }
-        if (e.target.name == "description") {
+        if (e.target.name === "description") {
             let newFull = e.target.value;
             setDescription(newFull);
         }

@@ -18,7 +18,7 @@ const products = createSlice({
             console.log('from product slicer', action.payload)
             state.filetredProduct = state.products.filter(product => {
                 console.log('in activeProduct -->', product);
-                if (product.category == action.payload) {
+                if (product.category === action.payload) {
                     return product;
                 }
             });

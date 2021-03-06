@@ -1,6 +1,5 @@
 import React from 'react';
 import { Carousel} from 'react-bootstrap';
-import { Container} from '@material-ui/core';
 
 function SliderHome(){
     return(
