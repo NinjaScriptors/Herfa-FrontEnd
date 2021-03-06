@@ -77,8 +77,8 @@ const FooterPage = () => {
 
     // </section>
 
-    <MDBFooter style={{ backgroundColor: " #252525" }} className="font-small pt-1 mt-1">
-      <MDBContainer fluid className="text-center text-md-left" style={{ display: "flex", justifyContent: "space-between" }} >
+    <MDBFooter style={{ backgroundColor: " #252525" }} className="font-small">
+      <MDBContainer fluid className="text-center text-md-left" style={{ display: "flex", justifyContent: "space-between"  }} >
         <MDBRow style={{ height: "180px", width: "100%" }}>
           {/* 
         <div className="col-lg-5 col-md-10 mb-4 mb-md-0">

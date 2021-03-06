@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Container from '@material-ui/core/Container'
+import Skeleton from 'react-loading-skeleton';
 
 import {
 
@@ -59,10 +60,10 @@ const Product = props => {
                                     src={product.image}
                                 />
                                 <MDBCardBody cascade style={{ fontFamily: "Roboto" }}>
-                                    <MDBCardTitle fontFamily="Roboto">{product.name}</MDBCardTitle>
+                                    <MDBCardTitle fontFamily="Roboto">{product.name ||  <Skeleton /> }</MDBCardTitle>
                                     <hr />
                                     <MDBCardText style={{ height: "50px" }}>
-                                        {product.description}
+                                        {product.description || <Skeleton count={5}/> }
                                     </MDBCardText>
                                 </MDBCardBody>
                                 <div style={{ backgroundColor: "#252525" }} className="rounded-bottom text-center pt-3">

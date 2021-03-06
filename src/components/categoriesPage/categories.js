@@ -10,6 +10,8 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { useState } from "react";
+import Skeleton from 'react-loading-skeleton';
+
 import "./input.css"
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +84,7 @@ const ActiveCategories = props => {
                     </div>
                     <div className="row">
                         <div className="title">
-                            <h1>Categories</h1>
+                            <h1>{"Categories" || <Skeleton/>}</h1>
                         </div>
 
                     </div>
@@ -109,10 +111,10 @@ const ActiveCategories = props => {
                         {props.activeOne.categories.map((category, idx) => {
 
                             return <div key={idx} className="radiogroup">
-                                <input className="state" type="radio" name="app" id={idx} key={idx} value={category} onChange={() => { props.activeProduct(category) }} href="/categories" />
+                                <input className="state" type="radio" name="app" id={idx} key={idx} value={category} onChange={() => { props.activeProduct(category) || <Skeleton/> }} href="/categories" />
                                 <label className="label" htmlFor={idx}>
                                     <div className="indicator"></div>
-                                    <span className="text">{category.toUpperCase()}</span>
+                                    <span className="text">{category.toUpperCase() || <Skeleton/>}</span>
                                 </label>
                             </div>
 

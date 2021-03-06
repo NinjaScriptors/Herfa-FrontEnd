@@ -7,6 +7,7 @@ import "../../style/product.scss";
 import axios from "axios"
 import cookie from 'react-cookies';
 import { makeStyles } from "@material-ui/core/styles";
+import Skeleton from 'react-loading-skeleton';
 
 
 
@@ -91,20 +92,20 @@ export const Reviews = (props) => {
                     // console.log("props.user ---> !!",)
                     return <li key={idx} style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                         <div className="comment-main-level" >
-                            <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.image ? props.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
+                            <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.image ? props.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png' || <Skeleton />} alt="" /></div>
                             <div className="comment-box">
                                 <div className="comment-head">
-                                    <h6 className="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
+                                    <h6 className="comment-name by-author">{rev.name ? rev.name : "user" || <Skeleton />}</h6>
                                     <i className="fa fa-heart"></i>
                                 </div>
                                 <div className="comment-content">
-                                    {rev.comment}
+                                    {rev.comment || <Skeleton />}
                                 </div>
                             </div>
                         </div>
                     </li>
 
-                }) : " "}
+                }) : " " || <Skeleton />}
 
             </ul>
             <div>
