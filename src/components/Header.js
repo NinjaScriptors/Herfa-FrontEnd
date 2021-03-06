@@ -186,14 +186,14 @@ export default function ButtonAppBar() {
                                             className={classes[navRef.current]}
                                         >
                                             <Paper className={classes[navRef.current]}>
-                                                <ClickAwayListener onClick={handleClose} >
+                                                {/* <ClickAwayListener onClick={handleClose} > */}
 
                                                     {username !== "Log In" ? <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                                         <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem>
                                                         <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/">Log Out</NavLink></MenuItem> </MenuList>
                                                         : <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList>}
 
-                                                </ClickAwayListener>
+                                                {/* </ClickAwayListener> */}
                                             </Paper>
                                         </Grow>
                                     )}
