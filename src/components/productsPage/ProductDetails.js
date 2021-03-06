@@ -14,46 +14,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import "../../style/product.scss";
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 
 import {
     MDBIcon,
 } from "mdbreact";
 import cookie from 'react-cookies';
-
-// const labels = {
-//     0.5: 'Useless',
-//     1: 'Useless +',
-//     1.5: 'Poor',
-//     2: 'Poor +',
-//     2.5: 'Ok',
-//     3: 'Ok +',
-//     3.5: 'Good',
-//     4: 'Good +',
-//     4.5: 'Excellent',
-//     5: 'Excellent +',
-// };
-
-// const useStyles = makeStyles({
-//     root: {
-//         width: 200,
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: "center"
-//     },
-// });
-
-// const useStyleReview = makeStyles((theme) => ({
-//     root: {
-//         maxWidth: 600,
-//         '& > * + *': {
-//             marginTop: theme.spacing(2),
-
-//         },
-
-//     },
-// })
-// );
 
 
 const Details = props => {
@@ -64,6 +31,7 @@ const Details = props => {
     const { id } = props.match.params;
     cookie.save('pro-id', id);
     console.log('param', props.match.params)
+    console.log("products ..........??? " , props.product)
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -94,16 +62,16 @@ const Details = props => {
                 <Row style={{ margin: "auto", alignItems: "center", display: "flex", justifyContent: "space-around" }}>
                     <Col xs={6} md={4} >
                         <div style={{ display: "flex", flexDirection: "column " }}>
-                            <Image src={props.product.image} rounded style={{ overflow: "hidden", height: 325, boxShadow: "0 0 20px #232323" }} />
+                            <Image src={props.product.image || <Skeleton circle={true} height={325} width={50} duration ={3}/>} rounded style={{ overflow: "hidden", height: 325, boxShadow: "0 0 20px #232323" }} />
 
                         </div>
                     </Col>
                     <Col style={{ width: 380, height: 305, fontFamily: "Roboto" }}>
-                        <h1>{props.product.name}</h1>
+                        <h1>{props.product.name ||  <Skeleton/>}</h1>
                         <hr />
                         <div>
 
-                            <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price}</h3>
+                            <h3 style={{ color: "#C99A5C" }}> <MDBIcon icon="dollar-sign" className="mr-0" />  {props.product.price  ||  <Skeleton/>}</h3>
                         </div>
                         <p style={{ fontSize: "18px" }}>
                             {props.product.description}
@@ -118,13 +86,18 @@ const Details = props => {
 
                             </div>
 
-                            Count in Stock: {props.product.countInStock}
-
+                            Count in Stock: {props.product.countInStock  ||  <Skeleton/>}
+                            
 
 
                             <div>
+
+                            {/* { username !== "Log In" ?  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> 
+                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to={`/user-profile-update/${JSON.parse(localStorage.getItem("userInfo"))._id}`}>Update Profile {username}</NavLink></MenuItem> 
+                                                        <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/">Log Out</NavLink></MenuItem> </MenuList>
+                                                         :<MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> <MenuItem onClick={handleMenuClose}><NavLink style={{ color: "white" }} to="/sign-up">Sign Up</NavLink></MenuItem> </MenuList> } */}
                                 <i className="far fa-edit" style={{ margin: "2px" }}>
-                                    <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`}>Update</Link>
+                                    <Link style={{ cursor: "pointer", fontFamily: "Roboto", textAlign: "center", color: "#333", fontSize: "16px", }} to={`/details-update/${props.product._id}`|| <Skeleton/> }>{"Update" || <Skeleton/>}</Link>
                                 </i>
                             </div>
                         </div>
@@ -158,25 +131,25 @@ const Details = props => {
             <Container>
                 {/* {props.product.reviews ? props.product.reviews.map(rev => rev.comment) : " "} */}
                 <ul id="comments-list" className="comments-list" style={{ margin: "auto" }}>
-                    {props.product.reviews ? props.product.reviews.map((rev, idx) => {
+                    {props.product.reviews ? props.product.reviews.map((rev, idx)  => {
 
                         console.log("props.user ---> !!", props.user)
                         return <li key={idx} style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                             <div className="comment-main-level" >
-                                <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png'} alt="" /></div>
+                                <div className="comment-avatar" style={{ marginRight: " 20px" }}><img src={props.user.image ? props.user.image : 'https://www.fluidogroup.com/wp-content/uploads/2018/09/user-icon-silhouette-ae9ddcaf4a156a47931d5719ecee17b9.png' || <Skeleton/>} alt="" /></div>
                                 <div className="comment-box">
                                     <div className="comment-head">
-                                        <h6 className="comment-name by-author">{rev.name ? rev.name : "user"}</h6>
+                                        <h6 className="comment-name by-author">{rev.name ? rev.name : "user" || <Skeleton/>}</h6>
                                         <i className="fa fa-heart"></i>
                                     </div>
                                     <div className="comment-content">
-                                        {rev.comment}
+                                        {rev.comment  || <Skeleton/>}
                                     </div>
                                 </div>
                             </div>
                         </li>
 
-                    }) : " "}
+                    }) : " " || <Skeleton/>}
 
                 </ul>
             </Container>

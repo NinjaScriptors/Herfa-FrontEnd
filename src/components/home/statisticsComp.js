@@ -19,7 +19,7 @@ function StatComp(params) {
                     </div>
 
                     <div className="counter col_fourth">
-                        <i className="fa fa-lightbulb-o fa-2x"></i>
+                        <i className="fa fa-lightbulb-o fa-2x" ></i>
                         <h2 className="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
                         <p className="count-text ">SomeText GoesHere</p>
                     </div>

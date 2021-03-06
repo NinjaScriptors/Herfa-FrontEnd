@@ -1,18 +1,19 @@
 import React from 'react';
 import { Container, Grid, Button } from '@material-ui/core';
+import Skeleton from 'react-loading-skeleton';
 
 
 function OurStoryGrid() {
     return (
         <section id="our-story-section">
-            <Container >
+            <Container  >
                 <Grid container item xs={10} spacing={2} style = {{margin: "auto"}}>
                     <Grid item xs={7}><img style={{  boxShadow: "0 0 25px #232323"}} src="https://i1.wp.com/cdn-9.tubefollow.com/photos/l/1444776793352608939/queenrania-love-jo-1444776793352608939.jpg" /></Grid>
                     <Grid item xs={5}>
                         <h3 style={{fontWeight : "400"}}>Why Buy Local ?</h3>
                         <hr />
                         <p>
-                            <b>Quality</b> Nothing compares to fresh local produce and locally crafted goods.
+                            <b>{"Quality" || <Skeleton/>}</b> {"Nothing compares to fresh local produce and locally crafted goods." || <Skeleton count={2}/>}
                         </p>
                         <p>
                             <b>Price</b> Buy directly from the local seller with NO inflated costs like other services charge.

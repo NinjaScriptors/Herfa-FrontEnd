@@ -11,6 +11,8 @@ import { PinDropSharp } from '@material-ui/icons';
 import { getRemoteData } from '../../store/productsStore/productsSlicer';
 // import { Field, reduxForm } from 'redux-form';
 // import * as actions from "../../store/actions/signup-actions"
+import Skeleton from 'react-loading-skeleton';
+
 import "../../style/updatePro.scss"
 
 const useStyles = makeStyles((theme) => ({
@@ -116,14 +118,14 @@ const ProductFormUpdate = props => {
 
             <form onSubmit={handleSubmit } style={{ display: 'flex', flexDirection: 'column' , width : "30%" , marginLeft: "400px" , color: "white"}}>
 
-                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name}`} />
+                <TextField onChange={handleChange} name="name" id="name-input" label="Name" defaultValue={`${props.product.name || <Skeleton/>}`} />
                 <TextField onChange={handleChange} disabled name="rating" id="rating-disabled" label="Rating" value={props.product.rating} />
-                <TextField onChange={handleChange} disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews} />
-                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price}`} />
-                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category}`} />
-                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand}`} />
-                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock}`} />
-                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description}`} />
+                <TextField onChange={handleChange} disabled name="numReviews" id="numReviews-disabled" label="Num of Reviews" value={props.product.numReviews  || <Skeleton/>} />
+                <TextField onChange={handleChange} name="price" id="price-input" label="Price" defaultValue={`${props.product.price  || <Skeleton/>} `} />
+                <TextField onChange={handleChange} name="category" id="category-input" label="Category" defaultValue={`${props.product.category  || <Skeleton/>}`} />
+                <TextField onChange={handleChange} name="brand" id="brand-input" label="Brand" defaultValue={`${props.product.brand  || <Skeleton/>}`} />
+                <TextField onChange={handleChange} name="countInStock" id="countInStock-input" label="Count in Stock" defaultValue={`${props.product.countInStock  || <Skeleton/>}`} />
+                <TextField onChange={handleChange} name="description" id="description-input" label="Description" defaultValue={`${props.product.description  || <Skeleton/>}`} />
                 {/* <TextField onChange={onChange} name="image" id="image-input" label="Image" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"  /> */}
 
                 <Button type="submit" style={{borderBottom: "1px solid #555"}} >Submit</Button>

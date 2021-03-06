@@ -4,6 +4,7 @@ import { Container, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 
+
 function Categories(props) {
     console.log(props.state)
     return (
