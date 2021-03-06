@@ -58,7 +58,7 @@ export const Reviews = (props) => {
         e.target.reset()
         let reviewBody = {
             name: JSON.parse(localStorage.getItem("userInfo")).name,
-            rating: props.rating,
+            rating: props.rating || 5,
             comment: comment
         }
         console.log("ggggggggggggggggggggggggggggggggggggggg", reviewBody)

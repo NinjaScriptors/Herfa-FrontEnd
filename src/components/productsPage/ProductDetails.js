@@ -72,7 +72,7 @@ const Details = props => {
         setSellerObj(props.product.seller)
     }, 1000)
     const { id } = props.match.params;
-    cookie.save('pro-id', id);
+    // cookie.save('pro-id', id);
     console.log('param', props.match.params)
     console.log("products ..........??? ", props.product)
 
@@ -153,7 +153,7 @@ const Details = props => {
                         <Rating
 
                             name="hover-feedback"
-                            defaultValue={props.product.rating || 5}
+                            value={props.product.rating || 5}
                             precision={0.5}
                             onChange={(event, newValue) => {
 
